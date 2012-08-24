@@ -103,7 +103,7 @@ char* fl_find_fontsize(char* name) {
   return r;
 }
 
-const char* fl_encoding = "iso8859-1";
+const char fl_encoding[] = "iso8859-1";
 
 // return true if this matches fl_encoding:
 int fl_correct_encoding(const char* name) {

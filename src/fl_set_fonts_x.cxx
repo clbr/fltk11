@@ -76,7 +76,7 @@ static int attribute(int n, const char *p) {
 }
 
 // return non-zero if the registry-encoding should be used:
-extern const char* fl_encoding;
+extern const char fl_encoding[];
 static int use_registry(const char *p) {
   return *p && *p!='*' && strcmp(p,fl_encoding);
 }
