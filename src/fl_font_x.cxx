@@ -259,7 +259,7 @@ void fl_draw(const char* str, int n, int x, int y) {
   }
   XDrawString(fl_display, fl_window, fl_gc, x, y, str, n);
 }
-  
+
 void fl_draw(const char* str, int n, float x, float y) {
   fl_draw(str, n, (int)x, (int)y);
 }

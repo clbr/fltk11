@@ -888,7 +888,7 @@ Fl_File_Chooser::rescan_keep_filename()
   // and select the chosen file
   char found = 0;
   char *slash = strrchr(pathname, '/');
-  if (slash) 
+  if (slash)
     slash++;
   else
     slash = pathname;
@@ -970,7 +970,7 @@ Fl_File_Chooser::update_favorites()
   favoritesButton->add(add_favorites_label, FL_ALT + 'a', 0);
   favoritesButton->add(manage_favorites_label, FL_ALT + 'm', 0, 0, FL_MENU_DIVIDER);
   favoritesButton->add(filesystems_label, FL_ALT + 'f', 0);
-    
+
   if ((home = getenv("HOME")) != NULL) {
     quote_pathname(menuname, home, sizeof(menuname));
     favoritesButton->add(menuname, FL_ALT + 'h', 0);
@@ -1188,7 +1188,7 @@ Fl_File_Chooser::value(const char *filename)
   fl_filename_absolute(pathname, sizeof(pathname), filename);
 
   if ((slash = strrchr(pathname, '/')) != NULL) {
-    // Yes, change the display to the directory... 
+    // Yes, change the display to the directory...
     if (!fl_filename_isdir(pathname)) *slash++ = '\0';
 
     directory(pathname);

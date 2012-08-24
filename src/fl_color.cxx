@@ -192,7 +192,7 @@ ulong fl_xpixel(Fl_Color i) {
     xmap.r = realcolor(r, fl_redmask);
     xmap.g = realcolor(g, fl_greenmask);
     xmap.b = realcolor(b, fl_bluemask);
-    return xmap.pixel = 
+    return xmap.pixel =
       (((r&fl_redmask) << fl_redshift)+
        ((g&fl_greenmask)<<fl_greenshift)+
        ((b&fl_bluemask)<< fl_blueshift)

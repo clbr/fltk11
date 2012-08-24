@@ -54,7 +54,7 @@ void Fl_Pack::draw() {
   if (horizontal()) {
     rw = -spacing_;
     rh = th;
-    
+
     for (int i = children(); i--;)
       if (child(i)->visible()) {
         if (child(i) != this->resizable()) rw += child(i)->w();
@@ -63,7 +63,7 @@ void Fl_Pack::draw() {
   } else {
     rw = tw;
     rh = -spacing_;
-    
+
     for (int i = children(); i--;)
       if (child(i)->visible()) {
         if (child(i) != this->resizable()) rh += child(i)->h();
@@ -115,7 +115,7 @@ void Fl_Pack::draw() {
       current_position += spacing_;
     }
   }
-  
+
   if (horizontal()) {
     if (maximum_position < tx+tw && box()) {
       fl_color(color());
@@ -129,7 +129,7 @@ void Fl_Pack::draw() {
     }
     th = maximum_position-ty;
   }
-  
+
   tw += Fl::box_dw(box()); if (tw <= 0) tw = 1;
   th += Fl::box_dh(box()); if (th <= 0) th = 1;
   if (tw != w() || th != h()) {

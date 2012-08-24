@@ -95,7 +95,7 @@ void Fl_Tile::resize(int X,int Y,int W,int H) {
     if (*p++ >= OB) yy += dh; else if (yy > NB) yy = NB;
     if (*p++ >= OB) B += dh; else if (B > NB) B = NB;
     o->resize(xx,yy,R-xx,B-yy);
-    // do *not* call o->redraw() here! If you do, and the tile is inside a 
+    // do *not* call o->redraw() here! If you do, and the tile is inside a
     // scroll, it'll set the damage areas wrong for all children!
   }
 }

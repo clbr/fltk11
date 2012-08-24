@@ -172,7 +172,7 @@ void fl_draw(
   }
 
   symtotal = symwidth[0] + symwidth[1];
-  
+
   // figure out vertical position of the first line:
   int xpos;
   int ypos;
@@ -311,7 +311,7 @@ void fl_measure(const char* str, int& w, int& h, int draw_symbols) {
   }
 
   symtotal = symwidth[0] + symwidth[1];
-  
+
   for (p = str, lines=0; p;) {
     e = expand(p, buf, w - symtotal, buflen, width, w != 0, draw_symbols);
     if ((int)ceil(width) > W) W = (int)ceil(width);

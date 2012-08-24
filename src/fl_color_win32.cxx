@@ -161,7 +161,7 @@ HBRUSH fl_brush_action(int action) {
       for (int j=0; j<FL_N_BRUSH; j++) {
 	if (brushes[j].usage>16000)
 	  brushes[j].usage -= 16000;
-	else 
+	else
 	  brushes[j].usage = 0;
       }
     }

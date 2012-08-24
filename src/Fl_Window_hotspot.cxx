@@ -54,7 +54,7 @@ void Fl_Window::hotspot(int X, int Y, int offscreen) {
         left = right = GetSystemMetrics(SM_CXSIZEFRAME);
         top = bottom = GetSystemMetrics(SM_CYSIZEFRAME);
       } else {
-        left = right = GetSystemMetrics(SM_CXFIXEDFRAME); 
+        left = right = GetSystemMetrics(SM_CXFIXEDFRAME);
         top = bottom = GetSystemMetrics(SM_CYFIXEDFRAME);
       }
       top += GetSystemMetrics(SM_CYCAPTION);

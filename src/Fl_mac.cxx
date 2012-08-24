@@ -33,13 +33,13 @@
 // Nine Compiles for Mortal Carbon doomed to die,
 // One Compile for Mach-O Cocoa on its Mach-O throne,
 // in the Land of MacOS X where the Drop-Shadows lie.
-// 
+//
 // One Compile to link them all, One Compile to merge them,
 // One Compile to copy them all and in the bundle bind them,
 // in the Land of MacOS X where the Drop-Shadows lie."
 
 // warning: the Apple Quartz version still uses some Quickdraw calls,
-//          mostly to get around the single active context in QD and 
+//          mostly to get around the single active context in QD and
 //          to implement clipping. This should be changed into pure
 //          Quartz calls in the near future.
 
@@ -129,9 +129,9 @@ static unsigned short macKeyLookUp[128] =
     'u', '[', 'i', 'p', FL_Enter, 'l', 'j', '\'',
     'k', ';', '\\', ',', '/', 'n', 'm', '.',
 
-    FL_Tab, ' ', '`', FL_BackSpace, 
+    FL_Tab, ' ', '`', FL_BackSpace,
     FL_KP_Enter, FL_Escape, 0, 0/*FL_Meta_L*/,
-    0/*FL_Shift_L*/, 0/*FL_Caps_Lock*/, 0/*FL_Alt_L*/, 0/*FL_Control_L*/, 
+    0/*FL_Shift_L*/, 0/*FL_Caps_Lock*/, 0/*FL_Alt_L*/, 0/*FL_Control_L*/,
     0/*FL_Shift_R*/, 0/*FL_Alt_R*/, 0/*FL_Control_R*/, 0,
 
     0, FL_KP+'.', FL_Right, FL_KP+'*', 0, FL_KP+'+', FL_Left, FL_Num_Lock,
@@ -195,7 +195,7 @@ void (*fl_unlock_function)() = nothing;
 //     sending a custom OSX 'FLTK data ready event' to the parent  thread's
 //     RunApplicationLoop(), so that it triggers the data  ready  callbacks
 //     in the parent thread.                               -erco 04/04/04
-//     
+//
 #define POLLIN  1
 #define POLLOUT 4
 #define POLLERR 8
@@ -245,7 +245,7 @@ public:
 
     // Locks
     //    The convention for locks: volatile vars start with '_',
-    //    and must be locked before use. Locked code is prefixed 
+    //    and must be locked before use. Locked code is prefixed
     //    with /*LOCK*/ to make painfully obvious esp. in debuggers. -erco
     //
     void DataLock() { pthread_mutex_lock(&_datalock); }
@@ -273,7 +273,7 @@ void DataReady::AddFD(int n, int events, void (*cb)(int, void*), void *v)
 {
   RemoveFD(n, events);
   int i = nfds++;
-  if (i >= fd_array_size) 
+  if (i >= fd_array_size)
   {
     FD *temp;
     fd_array_size = 2*fd_array_size+1;
@@ -300,7 +300,7 @@ void DataReady::RemoveFD(int n, int events)
   int i,j;
   for (i=j=0; i<nfds; i++)
   {
-    if (fds[i].fd == n) 
+    if (fds[i].fd == n)
     {
       int e = fds[i].events & ~events;
       if (!e) continue; // if no events left, delete this fd
@@ -337,14 +337,14 @@ int DataReady::CheckData(fd_set& r, fd_set& w, fd_set& x)
 // HANDLE DATA READY CALLBACKS
 void DataReady::HandleData(fd_set& r, fd_set& w, fd_set& x)
 {
-  for (int i=0; i<nfds; i++) 
+  for (int i=0; i<nfds; i++)
   {
     int f = fds[i].fd;
     short revents = 0;
     if (FD_ISSET(f, &r)) revents |= POLLIN;
     if (FD_ISSET(f, &w)) revents |= POLLOUT;
     if (FD_ISSET(f, &x)) revents |= POLLERR;
-    if (fds[i].events & revents) 
+    if (fds[i].events & revents)
     {
       DEBUGMSG("DOING CALLBACK: ");
       fds[i].cb(f, fds[i].arg);
@@ -545,9 +545,9 @@ static pascal OSStatus carbonDispatchHandler( EventHandlerCallRef nextHandler, E
     {
       case kEventCommandProcess:
         ret = GetEventParameter( event, kEventParamDirectObject, typeHICommand, NULL, sizeof(HICommand), NULL, &cmd );
-        if (ret == noErr && (cmd.attributes & kHICommandFromMenu) != 0) 
+        if (ret == noErr && (cmd.attributes & kHICommandFromMenu) != 0)
           ret = HandleMenu( &cmd );
-        else 
+        else
           ret = eventNotHandledErr;
         break;
     }
@@ -615,7 +615,7 @@ struct MacTimeout {
     void* data;
     EventLoopTimerRef timer;
     EventLoopTimerUPP upp;
-    char pending; 
+    char pending;
 };
 static MacTimeout* mac_timers;
 static int mac_timer_alloc;
@@ -664,13 +664,13 @@ static pascal void do_timer(EventLoopTimerRef timer, void* data)
 /**
  * This function is the central event handler.
  * It reads events from the event queue using the given maximum time
- * Funny enough, it returns the same time that it got as the argument. 
+ * Funny enough, it returns the same time that it got as the argument.
  */
-static double do_queued_events( double time = 0.0 ) 
+static double do_queued_events( double time = 0.0 )
 {
   static bool been_here = 0;
   static RgnHandle rgn;
-  
+
   // initialize events and a region that enables mouse move events
   if (!been_here) {
     rgn = NewRgn();
@@ -682,7 +682,7 @@ static double do_queued_events( double time = 0.0 )
   }
   OSStatus ret;
   static EventTargetRef target = 0;
-  if ( !target ) 
+  if ( !target )
   {
     target = GetEventDispatcherTarget();
 
@@ -762,13 +762,13 @@ static double do_queued_events( double time = 0.0 )
 
 
 /**
- * This public function handles all events. It wait a maximum of 
+ * This public function handles all events. It wait a maximum of
  * 'time' secods for an event. This version returns 1 if events
  * other than the timeout timer were processed.
  *
  * \todo there is no socket handling in this code whatsoever
  */
-int fl_wait( double time ) 
+int fl_wait( double time )
 {
   do_queued_events( time );
   return (got_events);
@@ -812,9 +812,9 @@ static pascal OSStatus carbonWindowHandler( EventHandlerCallRef nextHandler, Eve
   Rect currentBounds, originalBounds;
   WindowClass winClass;
   static Fl_Window *activeWindow = 0;
-  
+
   fl_lock_function();
-  
+
   switch ( kind )
   {
   case kEventWindowBoundsChanging:
@@ -832,12 +832,12 @@ static pascal OSStatus carbonWindowHandler( EventHandlerCallRef nextHandler, Eve
     int Y = currentBounds.top, H = currentBounds.bottom-Y;
     resize_from_system = window;
     window->resize( X, Y, W, H );
-    if ( ( originalBounds.right - originalBounds.left != W ) 
+    if ( ( originalBounds.right - originalBounds.left != W )
       || ( originalBounds.bottom - originalBounds.top != H ) )
     {
-      if ( window->shown() ) 
+      if ( window->shown() )
         handleUpdateEvent( fl_xid( window ) );
-    } 
+    }
     break; }
   case kEventWindowShown:
     if ( !window->parent() )
@@ -865,7 +865,7 @@ static pascal OSStatus carbonWindowHandler( EventHandlerCallRef nextHandler, Eve
     }
     break;
   case kEventWindowDeactivated:
-    if ( window==activeWindow ) 
+    if ( window==activeWindow )
     {
       Fl::handle( FL_UNFOCUS, window);
       activeWindow = 0;
@@ -931,7 +931,7 @@ static pascal OSStatus carbonMousewheelHandler( EventHandlerCallRef nextHandler,
   }
 
   fl_unlock_function();
-  
+
   return noErr;
 }
 
@@ -941,10 +941,10 @@ static pascal OSStatus carbonMousewheelHandler( EventHandlerCallRef nextHandler,
  */
 static void chord_to_e_state( UInt32 chord )
 {
-  static ulong state[] = 
-  { 
+  static ulong state[] =
+  {
     0, FL_BUTTON1, FL_BUTTON3, FL_BUTTON1|FL_BUTTON3, FL_BUTTON2,
-    FL_BUTTON2|FL_BUTTON1, FL_BUTTON2|FL_BUTTON3, 
+    FL_BUTTON2|FL_BUTTON1, FL_BUTTON2|FL_BUTTON3,
     FL_BUTTON2|FL_BUTTON1|FL_BUTTON3
   };
   Fl::e_state = ( Fl::e_state & 0xff0000 ) | state[ chord & 0x07 ];
@@ -961,7 +961,7 @@ static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, Even
   static char suppressed = 0;
 
   fl_lock_function();
-  
+
   fl_os_event = event;
   Fl_Window *window = (Fl_Window*)userData;
   if ( !window->shown() )
@@ -1007,7 +1007,7 @@ static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, Even
     fl_os_capture = xid;
     sendEvent = FL_PUSH;
     Fl::e_is_click = 1; px = pos.h; py = pos.v;
-    if (clickCount>1) 
+    if (clickCount>1)
       Fl::e_clicks++;
     else
       Fl::e_clicks = 0;
@@ -1019,21 +1019,21 @@ static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, Even
     }
     if ( !window ) break;
     if ( !sendEvent ) {
-      sendEvent = FL_RELEASE; 
+      sendEvent = FL_RELEASE;
     }
     Fl::e_keysym = keysym[ btn ];
     // fall through
   case kEventMouseMoved:
     suppressed = 0;
-    if ( !sendEvent ) { 
-      sendEvent = FL_MOVE; chord = 0; 
+    if ( !sendEvent ) {
+      sendEvent = FL_MOVE; chord = 0;
     }
     // fall through
   case kEventMouseDragged:
     if (suppressed) break;
     if ( !sendEvent ) {
       sendEvent = FL_MOVE; // Fl::handle will convert into FL_DRAG
-      if (abs(pos.h-px)>5 || abs(pos.v-py)>5) 
+      if (abs(pos.h-px)>5 || abs(pos.v-py)>5)
         Fl::e_is_click = 0;
     }
     chord_to_e_state( chord );
@@ -1050,7 +1050,7 @@ static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, Even
     if (GetEventKind(event)==kEventMouseDown && part!=inContent) {
       int used = Fl::handle( sendEvent, window );
       CallNextEventHandler( nextHandler, event ); // let the OS handle this for us
-      if (!used) 
+      if (!used)
         suppressed = 1;
     } else {
       Fl::handle( sendEvent, window );
@@ -1059,7 +1059,7 @@ static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, Even
   }
 
   fl_unlock_function();
-  
+
   return noErr;
 }
 
@@ -1086,7 +1086,7 @@ static unsigned short keycode_to_sym( UInt32 keyCode, UInt32 mods, unsigned shor
 /**
  * handle carbon keyboard events
  */
-pascal OSStatus carbonKeyboardHandler( 
+pascal OSStatus carbonKeyboardHandler(
   EventHandlerCallRef nextHandler, EventRef event, void *userData )
 {
   static char buffer[5];
@@ -1097,21 +1097,21 @@ pascal OSStatus carbonKeyboardHandler(
   static UInt32 prevMods = mods_to_e_state( GetCurrentKeyModifiers() );
 
   fl_lock_function();
-  
+
   int kind = GetEventKind(event);
-  
+
   // get the modifiers for any of the events
-  GetEventParameter( event, kEventParamKeyModifiers, typeUInt32, 
+  GetEventParameter( event, kEventParamKeyModifiers, typeUInt32,
                      NULL, sizeof(UInt32), NULL, &mods );
-  
+
   // get the key code only for key events
   UInt32 keyCode = 0, maskedKeyCode = 0;
   unsigned char key = 0;
   unsigned short sym = 0;
   if (kind!=kEventRawKeyModifiersChanged) {
-    GetEventParameter( event, kEventParamKeyCode, typeUInt32, 
+    GetEventParameter( event, kEventParamKeyCode, typeUInt32,
                        NULL, sizeof(UInt32), NULL, &keyCode );
-    GetEventParameter( event, kEventParamKeyMacCharCodes, typeChar, 
+    GetEventParameter( event, kEventParamKeyMacCharCodes, typeChar,
                        NULL, sizeof(char), NULL, &key );
   }
   maskedKeyCode = keyCode & 0x7f;
@@ -1151,7 +1151,7 @@ pascal OSStatus carbonKeyboardHandler(
       sendEvent = FL_KEYUP;
       Fl::e_state &= 0xbfffffff; // clear the deadkey flag
     }
-    // if the user pressed alt/option, event_key should have the keycap, 
+    // if the user pressed alt/option, event_key should have the keycap,
     // but event_text should generate the international symbol
     sym = macKeyLookUp[ maskedKeyCode ];
     if ( isalpha(key) )
@@ -1183,7 +1183,7 @@ pascal OSStatus carbonKeyboardHandler(
     if ( tMods )
     {
       mods_to_e_keysym( tMods );
-      if ( Fl::e_keysym ) 
+      if ( Fl::e_keysym )
         sendEvent = ( prevMods<mods ) ? FL_KEYBOARD : FL_KEYUP;
       Fl::e_length = 0;
       buffer[0] = 0;
@@ -1194,7 +1194,7 @@ pascal OSStatus carbonKeyboardHandler(
   }
   while (window->parent()) window = window->window();
   if (sendEvent && Fl::handle(sendEvent,window)) {
-    fl_unlock_function();  
+    fl_unlock_function();
     return noErr; // return noErr if FLTK handled the event
   } else {
     fl_unlock_function();
@@ -1235,7 +1235,7 @@ static OSErr OpenAppleEventHandler(const AppleEvent *appleEvt,
 
   // Initialize the document list...
   AECreateDesc(typeNull, NULL, 0, &documents);
- 
+
   // Get the open parameter(s)...
   err = AEGetParamDesc(appleEvt, keyDirectObject, typeAEList, &documents);
   if (err != noErr) {
@@ -1303,7 +1303,7 @@ void fl_open_display() {
   static char beenHereDoneThat = 0;
   if ( !beenHereDoneThat )  {
     beenHereDoneThat = 1;
-    
+
     FlushEvents(everyEvent,0);
 
     MoreMasters(); // \todo Carbon suggests MoreMasterPointers()
@@ -1313,7 +1313,7 @@ void fl_open_display() {
     GetQDGlobalsArrow(&default_cursor);
     default_cursor_ptr = &default_cursor;
     fl_default_cursor  = &default_cursor_ptr;
-    
+
     ClearMenuBar();
     AppendResMenu( GetMenuHandle( 1 ), 'DRVR' );
     DrawMenuBar();
@@ -1415,10 +1415,10 @@ int Fl::h() {
 /**
  * get the current mouse pointer world coordinates
  */
-void Fl::get_mouse(int &x, int &y) 
+void Fl::get_mouse(int &x, int &y)
 {
   fl_open_display();
-  Point loc; 
+  Point loc;
   GetMouse( &loc );
   LocalToGlobal( &loc );
   x = loc.h;
@@ -1429,7 +1429,7 @@ void Fl::get_mouse(int &x, int &y)
 /**
  * convert Mac keystrokes to FLTK
  */
-unsigned short mac2fltk(ulong macKey) 
+unsigned short mac2fltk(ulong macKey)
 {
   unsigned short cc = macKeyLookUp[(macKey>>8)&0x7f];
   if (cc) return cc;
@@ -1439,19 +1439,19 @@ unsigned short mac2fltk(ulong macKey)
 
 /**
  * Initialize the given port for redraw and call the windw's flush() to actually draw the content
- */ 
+ */
 void Fl_X::flush()
 {
   w->flush();
 #ifdef __APPLE_QD__
-  GrafPtr port; 
+  GrafPtr port;
   GetPort( &port );
   if ( port )
     QDFlushPortBuffer( port, 0 );
 #elif defined (__APPLE_QUARTZ__)
-  if (fl_gc) 
+  if (fl_gc)
     CGContextFlush(fl_gc);
-#endif          
+#endif
   SetOrigin( 0, 0 );
 }
 
@@ -1461,8 +1461,8 @@ void Fl_X::flush()
  * There are two different callers for this event:
  * 1: the OS can request a redraw and provides all clipping itself
  * 2: Fl::flush() wants all redraws now
- */    
-void handleUpdateEvent( WindowPtr xid ) 
+ */
+void handleUpdateEvent( WindowPtr xid )
 {
   Fl_Window *window = fl_find( xid );
   if ( !window ) return;
@@ -1490,7 +1490,7 @@ void handleUpdateEvent( WindowPtr xid )
   i->flush();
   window->clear_damage();
   SetPort( oldPort );
-}     
+}
 
 
 /**
@@ -1594,7 +1594,7 @@ int Fl_X::fake_X_wm(const Fl_Window* w,int &X,int &Y, int &bt,int &bx, int &by) 
 }
 
 /**
- * convert a Mac FSSpec structure into a Unix filename 
+ * convert a Mac FSSpec structure into a Unix filename
  */
 static int FSSpec2UnixPath( FSSpec *fs, char *dst )
 {
@@ -1606,7 +1606,7 @@ static int FSSpec2UnixPath( FSSpec *fs, char *dst )
 
 static DragReference currDragRef = 0;
 static char *currDragData = 0L;
-static int currDragSize = 0; 
+static int currDragSize = 0;
 static OSErr currDragErr = noErr;
 Fl_Window *fl_dnd_target_window = 0;
 #include <FL/fl_draw.H>
@@ -1618,17 +1618,17 @@ static OSErr fillCurrentDragData(DragReference dragRef)
 {
   OSErr ret = noErr;
   char *dst = 0L;
-  
+
   // shortcut through this whole procedure if this is still the same drag event
   if (dragRef==currDragRef)
     return currDragErr;
-  
+
   // clear currDrag* for a new drag event
   currDragRef = dragRef;
   if (currDragData) free(currDragData);
   currDragData = 0;
   currDragSize = 0;
-  
+
   // fill currDRag* with ASCII data, if available
   UInt16 i, nItem;
   ItemReference itemRef;
@@ -1678,7 +1678,7 @@ static OSErr fillCurrentDragData(DragReference dragRef)
       GetFlavorData( dragRef, itemRef, 'hfs ', &hfs, &itemSize, 0L );
       itemSize = FSSpec2UnixPath( &hfs.fileSpec, dst );
       dst += itemSize;
-      if ( itemSize>1 && ( hfs.fileType=='fold' || hfs.fileType=='disk' ) ) 
+      if ( itemSize>1 && ( hfs.fileType=='fold' || hfs.fileType=='disk' ) )
         *dst++ = '/';
       *dst++ = '\n'; // add our element seperator
     }
@@ -1699,11 +1699,11 @@ static pascal OSErr dndTrackingHandler( DragTrackingMessage msg, WindowPtr w, vo
   Fl::first_window(target);
   Point mp;
   static int px, py;
-  
+
   fillCurrentDragData(dragRef);
   Fl::e_length = currDragSize;
   Fl::e_text = currDragData;
-  
+
   switch ( msg )
   {
   case kDragTrackingEnterWindow:
@@ -1758,7 +1758,7 @@ static pascal OSErr dndReceiveHandler( WindowPtr w, void *userData, DragReferenc
 {
   Point mp;
   OSErr ret;
-  
+
   Fl_Window *target = fl_dnd_target_window = (Fl_Window*)userData;
   Fl::first_window(target);
   GetDragMouse( dragRef, &mp, 0 );
@@ -1772,14 +1772,14 @@ static pascal OSErr dndReceiveHandler( WindowPtr w, void *userData, DragReferenc
   ret = fillCurrentDragData(dragRef);
   if (ret==userCanceledErr)
     return userCanceledErr;
-  
+
   Fl::e_length = currDragSize;
   Fl::e_text = currDragData;
 //  printf("Sending following text to widget %p:\n%s\n", Fl::belowmouse(), Fl::e_text);
   int old_event = Fl::e_number;
   Fl::belowmouse()->handle(Fl::e_number = FL_PASTE);
   Fl::e_number = old_event;
-  
+
   if (currDragData) {
     free(currDragData);
   }
@@ -1788,7 +1788,7 @@ static pascal OSErr dndReceiveHandler( WindowPtr w, void *userData, DragReferenc
   Fl::e_text = 0L;
   Fl::e_length = 0;
   fl_dnd_target_window = 0L;
-  
+
   breakMacEventLoop();
   return noErr;
 }
@@ -1809,7 +1809,7 @@ void Fl_X::make(Fl_Window* w)
     wRect.left   = w->x();
     wRect.bottom = w->y() + w->h(); if (wRect.bottom<=wRect.top) wRect.bottom = wRect.top+1;
     wRect.right  = w->x() + w->w(); if (wRect.right<=wRect.left) wRect.right = wRect.left+1;
-    // our subwindow needs this structure to know about its clipping. 
+    // our subwindow needs this structure to know about its clipping.
     Fl_X* x = new Fl_X;
     x->other_xid = 0;
     x->region = 0;
@@ -1904,7 +1904,7 @@ void Fl_X::make(Fl_Window* w)
     wRect.right  = w->x() + w->w(); if (wRect.right<=wRect.left) wRect.right = wRect.left+1;
 
     const char *name = w->label();
-    Str255 pTitle; 
+    Str255 pTitle;
     if (name) {
       if (strlen(name) > 255) pTitle[0] = 255;
       else pTitle[0] = strlen(name);
@@ -1945,7 +1945,7 @@ void Fl_X::make(Fl_Window* w)
     x->wait_for_expose = 1;
     x->next = Fl_X::first;
     Fl_X::first = x;
-    { // Install Carbon Event handlers 
+    { // Install Carbon Event handlers
       OSStatus ret;
       EventHandlerUPP mousewheelHandler = NewEventHandlerUPP( carbonMousewheelHandler ); // will not be disposed by Carbon...
       static EventTypeSpec mousewheelEvents[] = {
@@ -1985,20 +1985,20 @@ void Fl_X::make(Fl_Window* w)
     }
 
     if ( ! Fl_X::first->next ) // if this is the first window, we need to bring the application to the front
-    { 
+    {
       ProcessSerialNumber psn;
       OSErr err = GetCurrentProcess( &psn );
       if ( err==noErr ) SetFrontProcess( &psn );
     }
-    
+
     if (w->size_range_set) w->size_range_();
-    
+
     if (winclass != kHelpWindowClass) {
       Fl_Tooltip::enter(0);
     }
     if (w->size_range_set) w->size_range_();
     ShowWindow(x->xid);
-    if (fl_show_iconic) { 
+    if (fl_show_iconic) {
       fl_show_iconic = 0;
       CollapseWindow( x->xid, true ); // \todo Mac ; untested
     } else {
@@ -2014,7 +2014,7 @@ void Fl_X::make(Fl_Window* w)
     w->handle(Fl::e_number = FL_SHOW);
     Fl::e_number = old_event;
     w->redraw(); // force draw to happen
-    
+
     if (w->modal()) { Fl::modal_ = w; fl_fix_focus(); }
   }
 }
@@ -2035,13 +2035,13 @@ void Fl_Window::size_range_() {
 /**
  * returns pointer to the filename, or null if name ends with ':'
  */
-const char *fl_filename_name( const char *name ) 
+const char *fl_filename_name( const char *name )
 {
   const char *p, *q;
   if (!name) return (0);
-  for ( p = q = name ; *p ; ) 
+  for ( p = q = name ; *p ; )
   {
-    if ( ( p[0] == ':' ) && ( p[1] == ':' ) ) 
+    if ( ( p[0] == ':' ) && ( p[1] == ':' ) )
     {
       q = p+2;
       p++;
@@ -2121,7 +2121,7 @@ void Fl_Window::resize(int X,int Y,int W,int H) {
       Rect dim; dim.left=X; dim.top=Y; dim.right=X+W; dim.bottom=Y+H;
       SetWindowBounds(i->xid, kWindowContentRgn, &dim);
       Rect all; all.top=-32000; all.bottom=32000; all.left=-32000; all.right=32000;
-      InvalWindowRect( i->xid, &all );    
+      InvalWindowRect( i->xid, &all );
     } else {
       MoveWindow(i->xid, X, Y, 0);
     }
@@ -2129,11 +2129,11 @@ void Fl_Window::resize(int X,int Y,int W,int H) {
   resize_from_system = 0;
   if (is_a_resize) {
     Fl_Group::resize(X,Y,W,H);
-    if (shown()) { 
-      redraw(); 
+    if (shown()) {
+      redraw();
     }
   } else {
-    x(X); y(Y); 
+    x(X); y(Y);
   }
 }
 
@@ -2141,7 +2141,7 @@ void Fl_Window::resize(int X,int Y,int W,int H) {
 /**
  * make all drawing go into this window (called by subclass flush() impl.)
  */
-void Fl_Window::make_current() 
+void Fl_Window::make_current()
 {
 #ifdef __APPLE_QUARTZ__
   OSStatus err;
@@ -2156,7 +2156,7 @@ void Fl_Window::make_current()
 
   int xp = 0, yp = 0;
   Fl_Window *win = this;
-  while ( win ) 
+  while ( win )
   {
     if ( !win->window() )
       break;
@@ -2165,24 +2165,24 @@ void Fl_Window::make_current()
     win = (Fl_Window*)win->window();
   }
   SetOrigin( -xp, -yp );
-  
+
   SetRectRgn( fl_window_region, 0, 0, w(), h() );
-  
+
   // \todo for performance reasons: we don't have to create this unless the child windows moved
   for ( Fl_X *cx = i->xidChildren; cx; cx = cx->xidNext )
   {
     Fl_Window *cw = cx->w;
     if (!cw->visible_r()) continue;
     Fl_Region r = NewRgn();
-    SetRectRgn( r, cw->x() - xp, cw->y() - yp, 
+    SetRectRgn( r, cw->x() - xp, cw->y() - yp,
                    cw->x() + cw->w() - xp, cw->y() + cw->h() - yp );
     DiffRgn( fl_window_region, r, fl_window_region );
     DisposeRgn( r );
   }
- 
+
 #ifdef __APPLE_QUARTZ__
   err = QDBeginCGContext(GetWindowPort(i->xid), &i->gc);
-  if (err!=noErr) 
+  if (err!=noErr)
     fprintf(stderr, "Error %d in QDBeginCGContext\n", (int)err);
   fl_gc = i->gc;
   CGContextSaveGState(fl_gc);
@@ -2206,7 +2206,7 @@ void Fl_X::q_fill_context() {
   if (!fl_gc) return;
   int hgt = 0;
   if (fl_window) {
-    Rect portRect; 
+    Rect portRect;
     GetPortBounds(GetWindowPort( fl_window ), &portRect);
     hgt = portRect.bottom-portRect.top;
   } else {
@@ -2374,7 +2374,7 @@ void Fl::add_timeout(double time, Fl_Timeout_Handler cb, void* data)
         t.upp      = timerUPP;
         t.pending  = 1;
     } else {
-        if (timerRef) 
+        if (timerRef)
             RemoveEventLoopTimer(timerRef);
         if (timerUPP)
             DisposeEventLoopTimerUPP(timerUPP);
@@ -2432,7 +2432,7 @@ int MacUnlinkWindow(Fl_X *ip, Fl_X *start) {
       if (MacUnlinkWindow(ip, pc))
         return 1;
     }
-  }  
+  }
   return 0;
 }
 
@@ -2464,9 +2464,9 @@ void MacMapWindow(Fl_Window *w, WindowPtr p) {
 }
 
 void MacUnmapWindow(Fl_Window *w, WindowPtr p) {
-  if (w && !w->parent() && p) 
+  if (w && !w->parent() && p)
     HideWindow(p);
-  if (w && Fl_X::i(w)) 
+  if (w && Fl_X::i(w))
     MacUnlinkWindow(Fl_X::i(w));
 }
 

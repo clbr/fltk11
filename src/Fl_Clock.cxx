@@ -167,7 +167,7 @@ int Fl_Clock::handle(int event) {
   }
   return Fl_Clock_Output::handle(event);
 }
-  
+
 Fl_Clock::~Fl_Clock() {
   Fl::remove_timeout(tick, this);
 }

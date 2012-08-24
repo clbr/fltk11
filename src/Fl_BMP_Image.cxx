@@ -402,7 +402,7 @@ Fl_BMP_Image::Fl_BMP_Image(const char *bmp) // I - File to read
 	    getc(fp);
 	  }
           break;
-		  
+
       case 32 : // 32-bit RGBA
          for (x = w(); x > 0; x --, ptr += bDepth) {
             ptr[2] = (uchar)getc(fp);
@@ -413,7 +413,7 @@ Fl_BMP_Image::Fl_BMP_Image(const char *bmp) // I - File to read
           break;
     }
   }
-  
+
   if (havemask) {
     for (y = h() - 1; y >= 0; y --) {
       ptr = (uchar *)array + y * w() * d() + 3;

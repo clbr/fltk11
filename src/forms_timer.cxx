@@ -36,7 +36,7 @@
 #  ifdef __MWERKS__
 #    include <time.h>
 #  else
-#    include <sys/types.h> 
+#    include <sys/types.h>
 #    include <sys/timeb.h>
 #  endif
 #else

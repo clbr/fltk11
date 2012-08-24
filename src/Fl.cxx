@@ -26,7 +26,7 @@
 //
 
 // warning: the Apple Quartz version still uses some Quickdraw calls,
-//          mostly to get around the single active context in QD and 
+//          mostly to get around the single active context in QD and
 //          to implement clipping. This should be changed into pure
 //          Quartz calls in the near future.
 
@@ -134,7 +134,7 @@ int Fl::event_inside(const Fl_Widget *o) /*const*/ {
 ////////////////////////////////////////////////////////////////
 // Timeouts are stored in a sorted list, so only the first one needs
 // to be checked to see if any should be called.
-  
+
 struct Timeout {
   double time;
   void (*cb)(void*);
@@ -191,7 +191,7 @@ void Fl::repeat_timeout(double time, Fl_Timeout_Handler cb, void *argp) {
   t->cb = cb;
   t->arg = argp;
   // insert-sort the new timeout:
-  Timeout** p = &first_timeout; 
+  Timeout** p = &first_timeout;
   while (*p && (*p)->time <= time) p = &((*p)->next);
   t->next = *p;
   *p = t;
@@ -261,7 +261,7 @@ void Fl::remove_check(Fl_Timeout_Handler cb, void *argp) {
 }
 
 /**
- * Return 1, if a check with the same handler and data pointer 
+ * Return 1, if a check with the same handler and data pointer
  * is pending, 0 otherwise.
  */
 int Fl::has_check(Fl_Timeout_Handler cb, void *argp) {
@@ -801,12 +801,12 @@ int Fl::handle(int e, Fl_Window* window)
     return 1;
 
   case FL_KEYUP:
-    // Send the key-up to the current focus. This is not 
+    // Send the key-up to the current focus. This is not
     // always the same widget that received the corresponding
     // FL_KEYBOARD event because focus may have changed.
     // Sending the KEYUP to the right KEYDOWN is possible, but
-    // would require that we track the KEYDOWN for every possible 
-    // key stroke (users may hold down multiple keys!) and then 
+    // would require that we track the KEYDOWN for every possible
+    // key stroke (users may hold down multiple keys!) and then
     // make sure that the widget still exists before sending
     // a KEYUP there. I believe that the current solution is
     // "close enough".
@@ -1007,7 +1007,7 @@ void Fl_Window::hide() {
 # endif
   XDestroyWindow(fl_display, ip->xid);
 #endif
-  
+
 #ifdef WIN32
   // Try to stop the annoying "raise another program" behavior
   if (non_modal() && Fl::first_window() && Fl::first_window()->shown())
@@ -1180,7 +1180,7 @@ void Fl_Widget::damage(uchar fl, int X, int Y, int W, int H) {
       CombineRgn(i->region, i->region, R, RGN_OR);
       XDestroyRegion(R);
 #elif defined(__APPLE_QD__)
-      Fl_Region R = NewRgn(); 
+      Fl_Region R = NewRgn();
       SetRectRgn(R, X, Y, X+W, Y+H);
       UnionRgn(R, i->region, i->region);
       DisposeRgn(R);
@@ -1262,7 +1262,7 @@ static Fl_Widget ***widget_watch = 0;
 static int num_widget_watch = 0;
 static int max_widget_watch = 0;
 
-void Fl::watch_widget_pointer(Fl_Widget *&w) 
+void Fl::watch_widget_pointer(Fl_Widget *&w)
 {
   Fl_Widget **wp = &w;
   int i;
@@ -1294,7 +1294,7 @@ void Fl::release_widget_pointer(Fl_Widget *&w)
   }
 }
 
-void Fl::clear_widget_pointer(Fl_Widget const *w) 
+void Fl::clear_widget_pointer(Fl_Widget const *w)
 {
   if (w==0L) return;
   int i;

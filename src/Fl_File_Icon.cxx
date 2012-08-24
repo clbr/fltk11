@@ -308,7 +308,7 @@ Fl_File_Icon::draw(int      x,		// I - Upper-lefthand X
 	      case OUTLINEPOLYGON :
 		  fl_end_complex_polygon();
 
-        	  oc = (Fl_Color)((((unsigned short *)prim)[1] << 16) | 
+        	  oc = (Fl_Color)((((unsigned short *)prim)[1] << 16) |
 	                	  ((unsigned short *)prim)[2]);
                   if (active)
 		  {
@@ -344,7 +344,7 @@ Fl_File_Icon::draw(int      x,		// I - Upper-lefthand X
 	  break;
 
       case COLOR :
-          c = (Fl_Color)((((unsigned short *)d)[1] << 16) | 
+          c = (Fl_Color)((((unsigned short *)d)[1] << 16) |
 	                   ((unsigned short *)d)[2]);
 
           if (c == FL_ICON_COLOR)
@@ -410,7 +410,7 @@ Fl_File_Icon::draw(int      x,		// I - Upper-lefthand X
       case OUTLINEPOLYGON :
 	  fl_end_polygon();
 
-          oc = (Fl_Color)((((unsigned short *)prim)[1] << 16) | 
+          oc = (Fl_Color)((((unsigned short *)prim)[1] << 16) |
 	                  ((unsigned short *)prim)[2]);
           if (active)
 	  {

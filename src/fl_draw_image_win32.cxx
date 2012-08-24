@@ -122,7 +122,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
 #endif
 
   if (depth==0) depth = 3;
-  if (indexed || !fl_can_do_alpha_blending()) 
+  if (indexed || !fl_can_do_alpha_blending())
     depth = (depth-1)|1;
 
   if (!linedelta) linedelta = W*delta;
@@ -171,7 +171,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
     pixelsize = 4;
   }
   int linesize = (pixelsize*w+3)&~3;
-  
+
   static U32* buffer;
   int blocking = h;
   {int size = linesize*h;
@@ -212,7 +212,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
       if (indexed) {
 	if (depth<3)
 	  monodither(to, from, w, delta);
-	else 
+	else
 	  dither(to, from, w, delta);
 	to += w;
       } else
@@ -220,7 +220,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
       {
         int i;
         switch (depth) {
-          case 1: 
+          case 1:
             for (i=w; i--; from += delta) *to++ = *from;
             break;
           case 2:
@@ -240,7 +240,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
 	      to[1] = from[1];
 	      to[2] = r;
             }
-            break;          
+            break;
           case 4:
 	    for (i=w; i--; from += delta, to += 4) {
               uchar a = from[3];
@@ -250,8 +250,8 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
 	      to[2] = (r*a)>>8;
 	      to[3] = from[3];
             }
-            break;          
-        }            
+            break;
+        }
       }
     }
     SetDIBitsToDevice(fl_gc, x, y+j-k, w, k, 0, 0, 0, k,

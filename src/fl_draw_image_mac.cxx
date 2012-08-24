@@ -80,7 +80,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
             if ( cb )
             {
               uchar *tmpBuf = new uchar[ W*delta ];
-              if ( mono ) delta -= 1; else delta -= 3; 
+              if ( mono ) delta -= 1; else delta -= 3;
               for ( int i=0; i<H; i++ )
               {
                 uchar *src = tmpBuf;
@@ -98,7 +98,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
             }
             else
             {
-              if ( mono ) delta -= 1; else delta -= 3; 
+              if ( mono ) delta -= 1; else delta -= 3;
               for ( int i=0; i<H; i++ )
               {
                 const uchar *src = buf+i*linedelta;
@@ -112,7 +112,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
                 }
               }
             }
-          
+
             fl_copy_offscreen( X, Y, W, H, gw, 0, 0 );
             direct = 1;
           }
@@ -139,7 +139,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
       cb( userdata, 0, i, W, tmpBuf );
       for ( int j=0; j<W; j++ )
       {
-        if ( mono )          
+        if ( mono )
           { fl_color( src[0], src[0], src[0] ); src++; }
         else
           { fl_color( src[0], src[1], src[2] ); src+=3; }
@@ -156,7 +156,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
       const uchar *src = buf+i*linedelta;
       for ( int j=0; j<W; j++ )
       {
-        if ( mono )          
+        if ( mono )
           fl_color( src[0], src[0], src[0] );
         else
           fl_color( src[0], src[1], src[2] );
@@ -179,7 +179,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
   }
   // create an image context
   CGColorSpaceRef   lut = 0;
-  if (delta<=2) 
+  if (delta<=2)
     lut = CGColorSpaceCreateDeviceGray();
   else
     lut = CGColorSpaceCreateDeviceRGB();

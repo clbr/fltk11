@@ -86,15 +86,15 @@ void fl_line_style(int style, int width, char* dashes) {
   if (style > 2) style = 2;
   PenPat(styles + style);
 #elif defined(__APPLE_QUARTZ__)
-  static enum CGLineCap Cap[4] = { kCGLineCapButt, kCGLineCapButt, 
+  static enum CGLineCap Cap[4] = { kCGLineCapButt, kCGLineCapButt,
                                    kCGLineCapRound, kCGLineCapSquare };
-  static enum CGLineJoin Join[4] = { kCGLineJoinMiter, kCGLineJoinMiter, 
+  static enum CGLineJoin Join[4] = { kCGLineJoinMiter, kCGLineJoinMiter,
                                     kCGLineJoinRound, kCGLineJoinBevel };
   if (width<1) width = 1;
-  fl_quartz_line_width_ = (float)width; 
+  fl_quartz_line_width_ = (float)width;
   fl_quartz_line_cap_ = Cap[(style>>8)&3];
   fl_quartz_line_join_ = Join[(style>>12)&3];
-  char *d = dashes; 
+  char *d = dashes;
   static float pattern[16];
   if (d && *d) {
     float *p = pattern;
@@ -106,7 +106,7 @@ void fl_line_style(int style, int width, char* dashes) {
     // adjust lengths to account for cap:
     if (style & 0x200) {
       dash = char(2*width);
-      dot = 1; 
+      dot = 1;
       gap = char(2*width-1);
     } else {
       dash = char(3*width);
@@ -152,7 +152,7 @@ void fl_line_style(int style, int width, char* dashes) {
   }
   static int Cap[4] = {CapButt, CapButt, CapRound, CapProjecting};
   static int Join[4] = {JoinMiter, JoinMiter, JoinRound, JoinBevel};
-  XSetLineAttributes(fl_display, fl_gc, width, 
+  XSetLineAttributes(fl_display, fl_gc, width,
 		     ndashes ? LineOnOffDash : LineSolid,
 		     Cap[(style>>8)&3], Join[(style>>12)&3]);
   if (ndashes) XSetDashes(fl_display, fl_gc, 0, dashes, ndashes);

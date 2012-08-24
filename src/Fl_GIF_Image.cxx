@@ -118,7 +118,7 @@ Fl_GIF_Image::Fl_GIF_Image(const char *infname) : Fl_Pixmap((char *const*)0) {
   char has_transparent = 0;
   uchar Red[256], Green[256], Blue[256]; /* color map */
   if (HasColormap) {
-    for (int i=0; i < ColorMapSize; i++) {	
+    for (int i=0; i < ColorMapSize; i++) {
       Red[i] = NEXTBYTE;
       Green[i] = NEXTBYTE;
       Blue[i] = NEXTBYTE;
@@ -137,7 +137,7 @@ Fl_GIF_Image::Fl_GIF_Image(const char *infname) : Fl_Pixmap((char *const*)0) {
     int i = NEXTBYTE;
     if (i<0) {
       fclose(GifFile);
-      Fl::error("Fl_GIF_Image: %s - unexpected EOF",infname); 
+      Fl::error("Fl_GIF_Image: %s - unexpected EOF",infname);
       return;
     }
     int blocklen;
@@ -172,10 +172,10 @@ Fl_GIF_Image::Fl_GIF_Image(const char *infname) : Fl_Pixmap((char *const*)0) {
       GETSHORT(Height);
       ch = NEXTBYTE;
       Interlace = ((ch & 0x40) != 0);
-      if (ch&0x80) { 
+      if (ch&0x80) {
 	// read local color map
 	int n = 2<<(ch&7);
-	for (i=0; i < n; i++) {	
+	for (i=0; i < n; i++) {
 	  Red[i] = NEXTBYTE;
 	  Green[i] = NEXTBYTE;
 	  Blue[i] = NEXTBYTE;

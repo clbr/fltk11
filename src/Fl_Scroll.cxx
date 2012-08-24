@@ -275,7 +275,7 @@ void Fl_Scroll::scrollbar_cb(Fl_Widget* o, void*) {
 }
 
 Fl_Scroll::Fl_Scroll(int X,int Y,int W,int H,const char* L)
-  : Fl_Group(X,Y,W,H,L), 
+  : Fl_Group(X,Y,W,H,L),
     scrollbar(X+W-Fl::scrollbar_size(),Y,
               Fl::scrollbar_size(),H-Fl::scrollbar_size()),
     hscrollbar(X,Y+H-Fl::scrollbar_size(),

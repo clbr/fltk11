@@ -40,7 +40,7 @@
 
 #ifdef __APPLE__
 #include <config.h>
-#endif 
+#endif
 
 void Fl_Window::border(int b) {
   if (b) {
@@ -73,7 +73,7 @@ void Fl_Window::fullscreen() {
   Fl::screen_xywh(sx, sy, sw, sh, x()+w()/2, y()+h()/2);
   // if we are on the main screen, we will leave the system menu bar unobstructed
   if (Fl::x()>=sx && Fl::y()>=sy && Fl::x()+Fl::w()<=sx+sw && Fl::y()+Fl::h()<=sy+sh) {
-    sx = Fl::x(); sy = Fl::y(); 
+    sx = Fl::x(); sy = Fl::y();
     sw = Fl::w(); sh = Fl::h();
   }
   if (x()==sx) x(sx+1); // make sure that we actually execute the resize

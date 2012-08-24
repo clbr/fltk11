@@ -80,7 +80,7 @@ static int fl_free_font = FL_FREE_FONT;
 Fl_Font Fl::set_fonts(const char* xstarname) {
 #pragma unused ( xstarname )
 #ifdef __APPLE_QD__
-  if (fl_free_font != FL_FREE_FONT) 
+  if (fl_free_font != FL_FREE_FONT)
     return (Fl_Font)fl_free_font;
   static char styleLU[] = " BIP";
   FMFontFamilyInstanceIterator ffiIterator;
@@ -90,11 +90,11 @@ Fl_Font Fl::set_fonts(const char* xstarname) {
   FMFontStyle style; // bits 0..6: bold, italic underline, outline, shadow, condens, extended (FLTK supports 0 and 1 )
   FMFontSize size;
   //FMFilter filter; // do we need to set a specific (or multiple) filter(s) to get ALL fonts?
-  
+
   Str255 buf;
   //filter.format = kFMCurrentFilterFormat;
   //filter.selector = kFMGenerationFilterSelector;
-  //filter.filter.generationFilter = 
+  //filter.filter.generationFilter =
   FMCreateFontFamilyIterator( NULL, NULL, kFMUseGlobalScopeOption, &ffIterator );
   OSStatus listFamilies, listInstances;
   for (;;)
@@ -129,7 +129,7 @@ Fl_Font Fl::set_fonts(const char* xstarname) {
   return (Fl_Font)fl_free_font;
 #elif defined(__APPLE_QUARTZ__)
   ATSFontIterator it;
-  ATSFontIteratorCreate(kATSFontContextGlobal, 0L, 0L, kATSOptionFlagsRestrictedScope, &it);  
+  ATSFontIteratorCreate(kATSFontContextGlobal, 0L, 0L, kATSOptionFlagsRestrictedScope, &it);
   for (;;) {
     ATSFontRef font;
     CFStringRef fname = 0;
@@ -170,10 +170,10 @@ int Fl::get_font_sizes(Fl_Font fnum, int*& sizep) {
     default :
       fStyle=0;
       break;
-    case 'B' : 
+    case 'B' :
       fStyle=1;
       break;
-    case 'I' : 
+    case 'I' :
       fStyle=2;
       break;
     case 'P' :
@@ -190,7 +190,7 @@ int Fl::get_font_sizes(Fl_Font fnum, int*& sizep) {
     if ( listInstances != 0 ) break;
     if ( style==fStyle )
     {
-      if ( size>pSize ) 
+      if ( size>pSize )
       {
         array[ cnt++ ] = size;
         pSize = size;
@@ -199,7 +199,7 @@ int Fl::get_font_sizes(Fl_Font fnum, int*& sizep) {
   }
   FMDisposeFontFamilyInstanceIterator( &ffiIterator );
 #elif defined(__APPLE_QUARTZ__)
-  // ATS supports all font size 
+  // ATS supports all font size
   array[0] = 0;
   sizep = array;
   cnt = 1;

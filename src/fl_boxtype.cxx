@@ -201,7 +201,7 @@ static struct {
   int set;
 } fl_box_table[256] = {
 // must match list in Enumerations.H!!!
-  {fl_no_box,		0,0,0,0,1},		
+  {fl_no_box,		0,0,0,0,1},
   {fl_rectf,		0,0,0,0,1}, // FL_FLAT_BOX
   {fl_up_box,		D1,D1,D2,D2,1},
   {fl_down_box,		D1,D1,D2,D2,1},

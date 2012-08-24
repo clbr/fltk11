@@ -51,7 +51,7 @@ static const char* const compose_pairs =
 #else
 
 static const char* const compose_pairs =
-"=E  _'f _\"..+ ++^ %%^S< OE  ^Z    ^''^^\"\"^-*- --~ TM^s> oe  ^z:Y" 
+"=E  _'f _\"..+ ++^ %%^S< OE  ^Z    ^''^^\"\"^-*- --~ TM^s> oe  ^z:Y"
 "  ! % # $ y=| & : c a <<~ - r _ * +-2 3 ' u p . , 1 o >>141234? "
 "`A'A^A~A:A*AAE,C`E'E^E:E`I'I^I:I-D~N`O'O^O~O:Ox O/`U'U^U:U'YTHss"
 "`a'a^a~a:a*aae,c`e'e^e:e`i'i^i:i-d~n`o'o^o~o:o-:o/`u'u^u:u'yth:y";
@@ -131,7 +131,7 @@ int Fl::compose(int& del) {
     }
 
     // see if it is either character of any pair:
-    for (const char *p = compose_pairs; *p; p += 2) 
+    for (const char *p = compose_pairs; *p; p += 2)
       if (p[0] == ascii || p[1] == ascii) {
 	if (p[1] == ' ') e_text[0] = (p-compose_pairs)/2+0x80;
 	compose_state = ascii;

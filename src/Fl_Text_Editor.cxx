@@ -447,7 +447,7 @@ int Fl_Text_Editor::handle(int event) {
       return 1;
 
     case FL_KEYBOARD:
-      if (active_r() && window() && this == Fl::belowmouse()) 
+      if (active_r() && window() && this == Fl::belowmouse())
         window()->cursor(FL_CURSOR_NONE);
       return handle_key();
 

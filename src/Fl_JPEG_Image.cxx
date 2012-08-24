@@ -126,7 +126,7 @@ Fl_JPEG_Image::Fl_JPEG_Image(const char *jpeg)	// I - File to load
   if (setjmp(jerr.errhand_))
   {
     // JPEG error handling...
-    // if any of the cleanup routines hits another error, we would end up 
+    // if any of the cleanup routines hits another error, we would end up
     // in a loop. So instead, we decrement max_err for some upper cleanup limit.
     if ( ((*max_finish_decompress_err)-- > 0) && array)
       jpeg_finish_decompress(&dinfo);
@@ -147,7 +147,7 @@ Fl_JPEG_Image::Fl_JPEG_Image(const char *jpeg)	// I - File to load
 
     free(max_destroy_decompress_err);
     free(max_finish_decompress_err);
-    
+
     return;
   }
 
@@ -162,7 +162,7 @@ Fl_JPEG_Image::Fl_JPEG_Image(const char *jpeg)	// I - File to load
 
   jpeg_calc_output_dimensions(&dinfo);
 
-  w(dinfo.output_width); 
+  w(dinfo.output_width);
   h(dinfo.output_height);
   d(dinfo.output_components);
 

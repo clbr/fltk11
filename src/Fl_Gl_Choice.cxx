@@ -50,15 +50,15 @@ static Fl_Gl_Choice *first;
 // the list later...
 Fl_Gl_Choice *Fl_Gl_Choice::find(int m, const int *alistp) {
   Fl_Gl_Choice *g;
-  
+
   for (g = first; g; g = g->next)
-    if (g->mode == m && g->alist == alistp) 
+    if (g->mode == m && g->alist == alistp)
       return g;
 
 #  ifdef __APPLE_QD__
   const int *blist;
   int list[32];
-    
+
   if (alistp)
     blist = alistp;
   else {
@@ -108,7 +108,7 @@ Fl_Gl_Choice *Fl_Gl_Choice::find(int m, const int *alistp) {
   // warning: the Quartz version should probably use Core GL (CGL) instead of AGL
   const int *blist;
   int list[32];
-   
+
   if (alistp)
     blist = alistp;
   else {
@@ -153,12 +153,12 @@ Fl_Gl_Choice *Fl_Gl_Choice::find(int m, const int *alistp) {
   fl_open_display();
   AGLPixelFormat fmt = aglChoosePixelFormat(NULL, 0, (GLint*)blist);
   if (!fmt) return 0;
-  
-#  elif !defined(WIN32)    
+
+#  elif !defined(WIN32)
 
   const int *blist;
   int list[32];
-    
+
   if (alistp)
     blist = alistp;
   else {
@@ -204,7 +204,7 @@ Fl_Gl_Choice *Fl_Gl_Choice::find(int m, const int *alistp) {
     list[n] = 0;
     blist = list;
   }
-    
+
   fl_open_display();
   XVisualInfo *visp = glXChooseVisual(fl_display, fl_screen, (int *)blist);
   if (!visp) {
@@ -296,7 +296,7 @@ static void add_context(GLContext ctx) {
 }
 
 static void del_context(GLContext ctx) {
-  int i; 
+  int i;
   for (i=0; i<nContext; i++) {
     if (context_list[i]==ctx) {
       memmove(context_list+i, context_list+i+1,
@@ -324,7 +324,7 @@ GLContext fl_create_gl_context(Fl_Window* window, const Fl_Gl_Choice* g, int lay
   GLContext context =
     layer ? wglCreateLayerContext(hdc, layer) : wglCreateContext(hdc);
   if (context) {
-    if (context_list && nContext) 
+    if (context_list && nContext)
       wglShareLists(context_list[0], context);
     add_context(context);
   }
@@ -340,7 +340,7 @@ GLContext fl_create_gl_context(Fl_Window* window, const Fl_Gl_Choice* g, int lay
     add_context((GLContext)context);
     if ( window->parent() ) {
       Rect wrect; GetWindowPortBounds( fl_xid(window), &wrect );
-      GLint rect[] = { window->x(), wrect.bottom-window->h()-window->y(), window->w(), window->h() }; 
+      GLint rect[] = { window->x(), wrect.bottom-window->h()-window->y(), window->w(), window->h() };
       aglSetInteger( (GLContext)context, AGL_BUFFER_RECT, rect );
       aglEnable( (GLContext)context, AGL_BUFFER_RECT );
     }
@@ -393,7 +393,7 @@ void fl_set_gl_context(Fl_Window* w, GLContext context) {
       aglSetInteger( context, AGL_BUFFER_RECT, rect );
       aglEnable( context, AGL_BUFFER_RECT );
     }
-    aglSetDrawable(context, GetWindowPort( fl_xid(w) ) ); 
+    aglSetDrawable(context, GetWindowPort( fl_xid(w) ) );
     aglSetCurrentContext(context);
 #  elif defined(__APPLE_QUARTZ__)
     // warning: the Quartz version should probably use Core GL (CGL) instead of AGL
@@ -418,12 +418,12 @@ void fl_no_gl_context() {
   wglMakeCurrent(0, 0);
 #  elif defined(__APPLE_QD__)
   AGLContext ctx = aglGetCurrentContext();
-  if (ctx) aglSetDrawable(ctx, NULL);    
+  if (ctx) aglSetDrawable(ctx, NULL);
   aglSetCurrentContext(0);
 #  elif defined(__APPLE_QUARTZ__)
   // warning: the Quartz version should probably use Core GL (CGL) instead of AGL
   AGLContext ctx = aglGetCurrentContext();
-  if (ctx) aglSetDrawable(ctx, NULL);    
+  if (ctx) aglSetDrawable(ctx, NULL);
   aglSetCurrentContext(0);
 #  else
   glXMakeCurrent(fl_display, 0, 0);

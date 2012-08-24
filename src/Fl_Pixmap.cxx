@@ -137,7 +137,7 @@ void Fl_Pixmap::draw(int XP, int YP, int WP, int HP, int cx, int cy) {
     rgb.red = 0x0000; rgb.green = 0x0000; rgb.blue = 0x0000;
     RGBForeColor(&rgb);
     CopyMask(GetPortBitMapForCopyBits((GrafPtr)id),
-	     GetPortBitMapForCopyBits((GrafPtr)mask), 
+	     GetPortBitMapForCopyBits((GrafPtr)mask),
 	     GetPortBitMapForCopyBits(GetWindowPort(fl_window)),
              &src, &src, &dst);
     RGBBackColor(&oldbg);
@@ -203,7 +203,7 @@ void Fl_Pixmap::copy_data() {
   int		i,		// Looping var
 		ncolors,	// Number of colors in image
 		chars_per_pixel,// Characters per color
-		chars_per_line;	// Characters per line 
+		chars_per_line;	// Characters per line
 
   // Figure out how many colors there are, and how big they are...
   sscanf(data()[0],"%*d%*d%d%d", &ncolors, &chars_per_pixel);
@@ -241,7 +241,7 @@ void Fl_Pixmap::copy_data() {
 
   // Update pointers...
   data((const char **)new_data, h() + ncolors + 1);
-  alloc_data = 1;  
+  alloc_data = 1;
 }
 
 Fl_Image *Fl_Pixmap::copy(int W, int H) {
@@ -256,7 +256,7 @@ Fl_Image *Fl_Pixmap::copy(int W, int H) {
   }
   if (W <= 0 || H <= 0) return 0;
 
-  // OK, need to resize the image data; allocate memory and 
+  // OK, need to resize the image data; allocate memory and
   char		**new_data,	// New array for image data
 		**new_row,	// Pointer to row in image data
 		*new_ptr,	// Pointer into new array
@@ -271,7 +271,7 @@ Fl_Image *Fl_Pixmap::copy(int W, int H) {
 		xstep, ystep;	// X & Y step increments
   int		ncolors,	// Number of colors in image
 		chars_per_pixel,// Characters per color
-		chars_per_line;	// Characters per line 
+		chars_per_line;	// Characters per line
 
   // Figure out how many colors there are, and how big they are...
   sscanf(data()[0],"%*d%*d%d%d", &ncolors, &chars_per_pixel);

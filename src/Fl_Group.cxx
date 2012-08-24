@@ -467,7 +467,7 @@ void Fl_Group::resize(int X, int Y, int W, int H) {
   int dy = Y-y();
   int dw = W-w();
   int dh = H-h();
-  
+
   short *p = sizes(); // save initial sizes and positions
 
   Fl_Widget::resize(X,Y,W,H); // make new xywh values visible for children
@@ -570,7 +570,7 @@ void Fl_Group::draw() {
 void Fl_Group::update_child(Fl_Widget& widget) const {
   if (widget.damage() && widget.visible() && widget.type() < FL_WINDOW &&
       fl_not_clipped(widget.x(), widget.y(), widget.w(), widget.h())) {
-    widget.draw();	
+    widget.draw();
     widget.clear_damage();
   }
 }

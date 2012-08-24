@@ -394,7 +394,7 @@ void Fl_Gl_Window::context(void* v, int destroy_flag) {
   context_ = (GLContext)v;
   if (destroy_flag) mode_ &= ~NON_LOCAL_CONTEXT;
   else mode_ |= NON_LOCAL_CONTEXT;
-}    
+}
 
 void Fl_Gl_Window::hide() {
   context(0);

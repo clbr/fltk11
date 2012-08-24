@@ -618,7 +618,7 @@ Fl_File_Icon::load_system_icons(void) {
 		  VERTEX, 7000, 5000, END, LINE, VERTEX, 3000, 4000,
 		  VERTEX, 7000, 4000, END, LINE, VERTEX, 3000, 3000,
 		  VERTEX, 7000, 3000, END, LINE, VERTEX, 3000, 2000,
-		  VERTEX, 7000, 2000, END, 
+		  VERTEX, 7000, 2000, END,
 		  END
 		};
   static short	image[] = {	// Image file icon

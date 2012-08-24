@@ -55,7 +55,7 @@ void fl_push_matrix() {
 void fl_pop_matrix() {
   if (sptr==0)
     Fl::error("fl_pop_matrix(): matrix stack underflow.");
-  else 
+  else
     m = stack[--sptr];
 }
 
@@ -153,10 +153,10 @@ void fl_end_points() {
 #ifdef WIN32
   for (int i=0; i<n; i++) SetPixel(fl_gc, p[i].x, p[i].y, fl_RGB());
 #elif defined(__APPLE_QD__)
-  for (int i=0; i<n; i++) { MoveTo(p[i].x, p[i].y); Line(0, 0); } 
+  for (int i=0; i<n; i++) { MoveTo(p[i].x, p[i].y); Line(0, 0); }
 #elif defined(__APPLE_QUARTZ__)
   if (fl_quartz_line_width_==1.0f) CGContextSetShouldAntialias(fl_gc, false);
-  for (int i=0; i<n; i++) { 
+  for (int i=0; i<n; i++) {
     CGContextMoveToPoint(fl_gc, p[i].x, p[i].y);
     CGContextAddLineToPoint(fl_gc, p[i].x, p[i].y);
     CGContextStrokePath(fl_gc);
@@ -221,7 +221,7 @@ void fl_end_polygon() {
 #elif defined(__APPLE_QUARTZ__)
   if (n<=1) return;
   CGContextMoveToPoint(fl_gc, p[0].x, p[0].y);
-  for (int i=1; i<n; i++) 
+  for (int i=1; i<n; i++)
     CGContextAddLineToPoint(fl_gc, p[i].x, p[i].y);
   CGContextClosePath(fl_gc);
   CGContextFillPath(fl_gc);
@@ -304,9 +304,9 @@ void fl_circle(double x, double y,double r) {
 #ifdef WIN32
   if (what==POLYGON) {
     SelectObject(fl_gc, fl_brush());
-    Pie(fl_gc, llx, lly, llx+w, lly+h, 0,0, 0,0); 
+    Pie(fl_gc, llx, lly, llx+w, lly+h, 0,0, 0,0);
   } else
-    Arc(fl_gc, llx, lly, llx+w, lly+h, 0,0, 0,0); 
+    Arc(fl_gc, llx, lly, llx+w, lly+h, 0,0, 0,0);
 #elif defined(__APPLE_QD__)
   Rect rt; rt.left=llx; rt.right=llx+w; rt.top=lly; rt.bottom=lly+h;
   (what == POLYGON ? PaintOval : FrameOval)(&rt);

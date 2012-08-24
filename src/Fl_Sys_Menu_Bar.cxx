@@ -28,8 +28,8 @@
 /**
  * This code is a quick hack! It was written as a proof of concept.
  * It has been tested on the "menubar" sample program and provides
- * basic functionality. 
- * 
+ * basic functionality.
+ *
  * To use the System Menu Bar, simply replace the main Fl_Menu_Bar
  * in an application with Fl_Sys_Menu_Bar.
  *
@@ -41,7 +41,7 @@
  * - no font sizes
  * - Shortcut Characters should be English alphanumeric only, no modifiers yet
  * - no disable main menus
- * - changes to menubar in run-time don't update! 
+ * - changes to menubar in run-time don't update!
  *     (disable, etc. - toggle and readio button do!)
  *
  * No care was taken to clean up the menu bar after destruction!
@@ -72,11 +72,11 @@ typedef const Fl_Menu_Item *pFl_Menu_Item;
 static void catMenuText( const char *src, char *dst )
 {
   char c;
-  while ( *dst ) 
+  while ( *dst )
     dst++;
-  if ( *src == '-' ) 
+  if ( *src == '-' )
     src++;
-  while ( ( c = *src++ ) ) 
+  while ( ( c = *src++ ) )
   {
     if ( !strchr( "&(<;^!", c )  )
       *dst++ = c;
@@ -90,18 +90,18 @@ static void catMenuText( const char *src, char *dst )
  */
 static void catMenuFont( const Fl_Menu_Item *m, char *dst )
 {
-  if ( !m->labeltype_ && !m->labelfont_ ) 
+  if ( !m->labeltype_ && !m->labelfont_ )
     return;
-  while ( *dst ) 
+  while ( *dst )
     dst++;
-    
+
   if ( m->labelfont_ & FL_BOLD )
     strcat( dst, "<B" );
   if ( m->labelfont_ & FL_ITALIC )
     strcat( dst, "<I" );
   //if ( m->labelfont_ & FL_UNDERLINE )
   //  strcat( dst, "<U" );
-  
+
   if ( m->labeltype_ == FL_EMBOSSED_LABEL )
       strcat( dst, "<U" );
   else if ( m->labeltype_ == FL_ENGRAVED_LABEL )
@@ -121,11 +121,11 @@ enum {
   kMenuOptionModifier = (1 << 1),
   kMenuControlModifier = (1 << 2),
   kMenuNoCommandModifier = (1 << 3)
-}; 
+};
  */
 static void setMenuShortcut( MenuHandle mh, int miCnt, const Fl_Menu_Item *m )
 {
-  if ( !m->shortcut_ ) 
+  if ( !m->shortcut_ )
     return;
   if ( m->flags & FL_SUBMENU )
     return;
@@ -134,13 +134,13 @@ static void setMenuShortcut( MenuHandle mh, int miCnt, const Fl_Menu_Item *m )
   char key = m->shortcut_ & 0xff;
   if ( !isalnum( key ) )
     return;
-  
+
   long macMod = kMenuNoCommandModifier;
   if ( m->shortcut_ & FL_META ) macMod = kMenuNoModifiers;
   if ( m->shortcut_ & FL_SHIFT || isupper(key) ) macMod |= kMenuShiftModifier;
   if ( m->shortcut_ & FL_ALT ) macMod |= kMenuOptionModifier;
   if ( m->shortcut_ & FL_CTRL ) macMod |= kMenuControlModifier;
-  
+
   //SetMenuItemKeyGlyph( mh, miCnt, key );
   SetItemCmd( mh, miCnt, toupper(key) );
   SetMenuItemModifiers( mh, miCnt, macMod );
@@ -150,12 +150,12 @@ static void setMenuShortcut( MenuHandle mh, int miCnt, const Fl_Menu_Item *m )
 // this function needs to be verified before we compile it back in.
 static void catMenuShortcut( const Fl_Menu_Item *m, char *dst )
 {
-  if ( !m->shortcut_ ) 
+  if ( !m->shortcut_ )
     return;
   char c = m->shortcut_ & 0xff;
   if ( !isalnum( c & 0xff ) )
     return;
-  while ( *dst ) 
+  while ( *dst )
     dst++;
   if ( m->shortcut_ & FL_CTRL )
   {
@@ -178,7 +178,7 @@ static void setMenuFlags( MenuHandle mh, int miCnt, const Fl_Menu_Item *m )
 
 static void catMenuFlags( const Fl_Menu_Item *m, char *dst )
 {
-  if ( !m->flags ) 
+  if ( !m->flags )
     return;
   if ( m->flags & FL_MENU_INACTIVE )
     strcat( dst, "(" );
@@ -229,7 +229,7 @@ static void createSubMenu( MenuHandle mh, int &cnt, pFl_Menu_Item &mm )
   }
   InsertMenu( mh, -1 );
 }
- 
+
 
 /**
  * create a system menu bar using the given list of menu structs
@@ -238,7 +238,7 @@ static void createSubMenu( MenuHandle mh, int &cnt, pFl_Menu_Item &mm )
  *
  * @param m list of Fl_Menu_Item
  */
-void Fl_Sys_Menu_Bar::menu(const Fl_Menu_Item *m) 
+void Fl_Sys_Menu_Bar::menu(const Fl_Menu_Item *m)
 {
   fl_open_display();
   Fl_Menu_Bar::menu( m );
@@ -279,12 +279,12 @@ void Fl_Sys_Menu_Bar::menu(const Fl_Menu_Item *m)
 /*
 const Fl_Menu_Item* Fl_Sys_Menu_Bar::picked(const Fl_Menu_Item* v) {
   Fl_menu_Item *ret = Fl_Menu_Bar::picked( v );
-  
+
   if ( m->flags & FL_MENU_TOGGLE )
   {
     SetItemMark( mh, miCnt, ( m->flags & FL_MENU_VALUE ) ? 0x12 : 0 );
   }
-  
+
   return ret;
 }
 */

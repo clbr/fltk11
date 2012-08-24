@@ -93,9 +93,9 @@ const char* Fl_Input_::expand(const char* p, char* buf) const {
     // this is commented out since most X11 seems to use MSWindows Latin-1
     //} else if (c >= 128 && c < 0xA0) {
       // these codes are not defined in ISO code, so we output the octal code instead
-    //  *o++ = '\\'; 
-    //  *o++ = ((c>>6)&0x03) + '0'; 
-    //  *o++ = ((c>>3)&0x07) + '0'; 
+    //  *o++ = '\\';
+    //  *o++ = ((c>>6)&0x03) + '0';
+    //  *o++ = ((c>>3)&0x07) + '0';
     //  *o++ = (c&0x07) + '0';
     } else if (c == 0xA0) { // nbsp
       *o++ = ' ';
@@ -615,7 +615,7 @@ int Fl_Input_::replace(int b, int e, const char* text, int ilen) {
   if (wrap()) {
     // if there is a space in the pasted text, the whole line may have rewrapped
     int i;
-    for (i=0; i<ilen; i++) 
+    for (i=0; i<ilen; i++)
       if (text[i]==' ') break;
     if (i==ilen)
       while (b > 0 && !isspace(index(b) & 255) && index(b)!='\n') b--;
@@ -819,7 +819,7 @@ void Fl_Input_::put_in_buffer(int len) {
   }
   if (!bufsize) {
     if (len > size_) len += 9; // let a few characters insert before realloc
-    bufsize = len+1; 
+    bufsize = len+1;
     buffer = (char*)malloc(bufsize);
   } else if (bufsize <= len) {
     // we may need to move old value in case it points into buffer:

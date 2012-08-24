@@ -212,7 +212,7 @@ void Fl_Gl_Window::make_overlay_current() {
   make_overlay();
 #ifdef __APPLE__
   // this is not very useful, but unfortunatly, Apple decided
-  // that front buffer drawing can no longer (OS X 10.4) be 
+  // that front buffer drawing can no longer (OS X 10.4) be
   // supported on their platforms.
   make_current();
 #else

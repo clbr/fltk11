@@ -72,13 +72,13 @@ int Fl_Input::shift_up_down_position(int p) {
 // List of characters that are legal in a floating point input field.
 // This text string is created at run-time to take the current locale
 // into account (for example, continental Europe uses a comma instead
-// of a decimal point). For back compatibility reasons, we always 
+// of a decimal point). For back compatibility reasons, we always
 // allow the decimal point.
 #ifdef HAVE_LOCALECONV
-static const char *standard_fp_chars = ".eE+-"; 
+static const char *standard_fp_chars = ".eE+-";
 static const char *legal_fp_chars = 0L;
 #else
-static const char *legal_fp_chars = ".eE+-"; 
+static const char *legal_fp_chars = ".eE+-";
 #endif
 
 int Fl_Input::handle_key() {
@@ -122,12 +122,12 @@ int Fl_Input::handle_key() {
       // find the insert position
       int ip = position()<mark() ? position() : mark();
       // This is complex to allow "0xff12" hex to be typed:
-      if (!ip && (ascii == '+' || ascii == '-') 
-          || (ascii >= '0' && ascii <= '9') 
-          || (ip==1 && index(0)=='0' && (ascii=='x' || ascii == 'X')) 
+      if (!ip && (ascii == '+' || ascii == '-')
+          || (ascii >= '0' && ascii <= '9')
+          || (ip==1 && index(0)=='0' && (ascii=='x' || ascii == 'X'))
           || (ip>1 && index(0)=='0' && (index(1)=='x'||index(1)=='X')
-             && (ascii>='A'&& ascii<='F' || ascii>='a'&& ascii<='f')) 
-          || input_type()==FL_FLOAT_INPUT && ascii && strchr(legal_fp_chars, ascii)) 
+             && (ascii>='A'&& ascii<='F' || ascii>='a'&& ascii<='f'))
+          || input_type()==FL_FLOAT_INPUT && ascii && strchr(legal_fp_chars, ascii))
       {
 	if (readonly()) fl_beep();
 	else replace(position(), mark(), &ascii, 1);
@@ -151,7 +151,7 @@ int Fl_Input::handle_key() {
   case FL_Delete:
     if (Fl::event_state() & FL_SHIFT) ascii = ctrl('X');
     else ascii = ctrl('D');
-    break;    
+    break;
   case FL_Left:
     ascii = ctrl('B'); break;
   case FL_Right:
@@ -181,7 +181,7 @@ int Fl_Input::handle_key() {
       return 1;
     }
     ascii = ctrl('E'); break;
-    
+
   case FL_BackSpace:
     ascii = ctrl('H'); break;
   case FL_Enter:
@@ -192,7 +192,7 @@ int Fl_Input::handle_key() {
       return 1;
     } else if (input_type() == FL_MULTILINE_INPUT && !readonly())
       return replace(position(), mark(), "\n", 1);
-    else 
+    else
       return 0;	// reserved for shortcuts
   case FL_Tab:
     if (Fl::event_state(FL_CTRL|FL_SHIFT) || input_type()!=FL_MULTILINE_INPUT || readonly()) return 0;
@@ -254,7 +254,7 @@ int Fl_Input::handle_key() {
   case ctrl('N'):
     i = position();
     if (line_end(i) >= size()) return NORMAL_INPUT_MOVE;
-    while (repeat_num--) {  
+    while (repeat_num--) {
       i = line_end(i);
       if (i >= size()) break;
       i++;
@@ -353,7 +353,7 @@ int Fl_Input::handle(int event) {
         position(position());
       return (1);
     } else {
-      if (active_r() && window() && this == Fl::belowmouse()) 
+      if (active_r() && window() && this == Fl::belowmouse())
         window()->cursor(FL_CURSOR_NONE);
       return handle_key();
     }
@@ -365,7 +365,7 @@ int Fl_Input::handle(int event) {
       Fl_Input_::handle_mouse(
 	x()+Fl::box_dx(b), y()+Fl::box_dy(b),
 	w()-Fl::box_dw(b), h()-Fl::box_dh(b), 0);
-      newpos = position(); 
+      newpos = position();
       position( oldpos, oldmark );
       if (Fl::focus()==this && !Fl::event_state(FL_SHIFT) && input_type()!=FL_SECRET_INPUT &&
 	  (newpos >= mark() && newpos < position() ||
@@ -429,7 +429,7 @@ int Fl_Input::handle(int event) {
       handle(FL_FOCUS);
     }
     // fall through:
-  case FL_DND_DRAG: 
+  case FL_DND_DRAG:
     //int p = mouse_position(X, Y, W, H);
 #if DND_OUT_XXXX
     if (Fl::focus()==this && (p>=dnd_save_position && p<=dnd_save_mark ||

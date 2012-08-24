@@ -86,8 +86,8 @@ public:
     if( !pDataObj ) return E_INVALIDARG;
     // set e_modifiers here from grfKeyState, set e_x and e_root_x
     // check if FLTK handles this drag and return if it can't (i.e. BMP drag without filename)
-    POINT ppt; 
-    Fl::e_x_root = ppt.x = pt.x; 
+    POINT ppt;
+    Fl::e_x_root = ppt.x = pt.x;
     Fl::e_y_root = ppt.y = pt.y;
     HWND hWnd = WindowFromPoint( ppt );
     Fl_Window *target = fl_find( hWnd );
@@ -110,7 +110,7 @@ public:
     return S_OK;
   }
   HRESULT STDMETHODCALLTYPE DragOver( DWORD /*grfKeyState*/, POINTL pt, DWORD *pdwEffect) {
-    if ( px==pt.x && py==pt.y ) 
+    if ( px==pt.x && py==pt.y )
     {
       *pdwEffect = lastEffect;
       return S_OK;
@@ -121,7 +121,7 @@ public:
       return S_OK;
     }
     // set e_modifiers here from grfKeyState, set e_x and e_root_x
-    Fl::e_x_root = pt.x; 
+    Fl::e_x_root = pt.x;
     Fl::e_y_root = pt.y;
     if (fl_dnd_target_window) {
       Fl::e_x = Fl::e_x_root-fl_dnd_target_window->x();
@@ -131,7 +131,7 @@ public:
       // Fl_Group will change DND_DRAG into DND_ENTER and DND_LEAVE if needed
       if ( Fl::handle( FL_DND_DRAG, fl_dnd_target_window ) )
         *pdwEffect = DROPEFFECT_MOVE|DROPEFFECT_COPY; //|DROPEFFECT_LINK;
-      else 
+      else
         *pdwEffect = DROPEFFECT_NONE;
     } else {
       *pdwEffect = DROPEFFECT_NONE;
@@ -154,7 +154,7 @@ public:
       return S_OK;
     Fl_Window *target = fl_dnd_target_window;
     fl_dnd_target_window = 0;
-    Fl::e_x_root = pt.x; 
+    Fl::e_x_root = pt.x;
     Fl::e_y_root = pt.y;
     if (target) {
       Fl::e_x = Fl::e_x_root-target->x();
@@ -163,7 +163,7 @@ public:
     // tell FLTK that the user released an object on this widget
     if ( !Fl::handle( FL_DND_RELEASE, target ) )
       return S_OK;
-    
+
     Fl_Widget *w = target;
     while (w->parent()) w = w->window();
     HWND hwnd = fl_xid( (Fl_Window*)w );
@@ -181,7 +181,7 @@ private:
 
   static IDataObject *currDragRef;
   static char *currDragData;
-  static int currDragSize; 
+  static int currDragSize;
   static char currDragResult;
 
   static void clearCurrentDragData() {
@@ -193,7 +193,7 @@ private:
   }
   static char fillCurrentDragData(IDataObject *data) {
     // shortcut through this whole procedure if there is no fresh data
-    if (!data) 
+    if (!data)
       return currDragResult;
     // shortcut through this whole procedure if this is still the same drag event
     // (* this is safe, because 'currDragRef' is cleared on Leave and Drop events)
@@ -255,7 +255,7 @@ IDropTarget *flIDropTarget = &flDropTarget;
 
 IDataObject *FLDropTarget::currDragRef = 0;
 char *FLDropTarget::currDragData = 0;
-int FLDropTarget::currDragSize = 0; 
+int FLDropTarget::currDragSize = 0;
 char FLDropTarget::currDragResult = 0;
 
 /**
@@ -285,10 +285,10 @@ public:
     return nTemp;
   }
   STDMETHODIMP GiveFeedback( ulong ) { return DRAGDROP_S_USEDEFAULTCURSORS; }
-  STDMETHODIMP QueryContinueDrag( BOOL esc, DWORD keyState ) { 
-    if ( esc ) 
+  STDMETHODIMP QueryContinueDrag( BOOL esc, DWORD keyState ) {
+    if ( esc )
       return DRAGDROP_S_CANCEL;
-    if ( !(keyState & (MK_LBUTTON|MK_MBUTTON|MK_RBUTTON)) ) 
+    if ( !(keyState & (MK_LBUTTON|MK_MBUTTON|MK_RBUTTON)) )
       return DRAGDROP_S_DROP;
     return S_OK;
   }
@@ -330,7 +330,7 @@ public:
       HGLOBAL gh = GlobalAlloc( GHND, fl_selection_length[0]+1 );
       char *pMem = (char*)GlobalLock( gh );
       memmove( pMem, fl_selection_buffer[0], fl_selection_length[0] );
-      pMem[ fl_selection_length[0] ] = 0;      
+      pMem[ fl_selection_length[0] ] = 0;
       pmedium->tymed	      = TYMED_HGLOBAL;
       pmedium->hGlobal	      = gh;
       pmedium->pUnkForRelease = NULL;
@@ -345,8 +345,8 @@ public:
         (pformatetc->tymed & TYMED_HGLOBAL) &&
         (pformatetc->cfFormat == CF_TEXT))
       return S_OK;
-    return DV_E_FORMATETC;	
-  }  
+    return DV_E_FORMATETC;
+  }
   // all the following methods are not really needed for a DnD object
   HRESULT STDMETHODCALLTYPE GetDataHere( FORMATETC* /*pformatetcIn*/, STGMEDIUM* /*pmedium*/) { return E_NOTIMPL; }
   HRESULT STDMETHODCALLTYPE GetCanonicalFormatEtc( FORMATETC* /*in*/, FORMATETC* /*out*/) { return E_NOTIMPL; }
@@ -361,7 +361,7 @@ public:
 
 /**
  * drag and drop whatever is in the cut-copy-paste buffer
- * - create a selection first using: 
+ * - create a selection first using:
  *     Fl::copy(const char *stuff, int len, 0)
  */
 int Fl::dnd()

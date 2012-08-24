@@ -32,7 +32,7 @@
 #include <FL/fl_draw.H>
 #include <FL/math.h>
 
-// avoid problems with some platforms that don't 
+// avoid problems with some platforms that don't
 // implement hypot.
 static double _fl_hypot(double x, double y) {
   return sqrt(x*x + y*y);
@@ -42,28 +42,28 @@ static double _fl_hypot(double x, double y) {
 void fl_arc(double x, double y, double r, double start, double end) {
 
   // draw start point accurately:
-  
+
   double A = start*(M_PI/180);		// Initial angle (radians)
   double X =  r*cos(A);			// Initial displacement, (X,Y)
   double Y = -r*sin(A);			//   from center to initial point
   fl_vertex(x+X,y+Y);			// Insert initial point
 
   // Maximum arc length to approximate with chord with error <= 0.125
-  
+
   double epsilon; {
     double r1 = _fl_hypot(fl_transform_dx(r,0), // Horizontal "radius"
 		          fl_transform_dy(r,0));
     double r2 = _fl_hypot(fl_transform_dx(0,r), // Vertical "radius"
 		          fl_transform_dy(0,r));
-		      
+
     if (r1 > r2) r1 = r2;		// r1 = minimum "radius"
     if (r1 < 2.) r1 = 2.;		// radius for circa 9 chords/circle
-    
+
     epsilon = 2*acos(1.0 - 0.125/r1);	// Maximum arc angle
   }
   A = end*(M_PI/180) - A;		// Displacement angle (radians)
   int i = int(ceil(fabs(A)/epsilon));	// Segments in approximation
-  
+
   if (i) {
     epsilon = A/i;			// Arc length for equal-size steps
     double cos_e = cos(epsilon);	// Rotation coefficients

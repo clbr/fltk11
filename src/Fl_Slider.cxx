@@ -54,14 +54,14 @@ void Fl_Slider::slider_size(double v) {
   if (v <  0) v = 0;
   if (v > 1) v = 1;
   if (slider_size_ != float(v)) {
-    slider_size_ = float(v); 
+    slider_size_ = float(v);
     damage(FL_DAMAGE_EXPOSE);
   }
 }
 
 void Fl_Slider::bounds(double a, double b) {
   if (minimum() != a || maximum() != b) {
-    Fl_Valuator::bounds(a, b); 
+    Fl_Valuator::bounds(a, b);
     damage(FL_DAMAGE_EXPOSE);
   }
 }

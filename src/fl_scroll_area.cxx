@@ -77,7 +77,7 @@ void fl_scroll(int X, int Y, int W, int H, int dx, int dy,
   static fl_GetRandomRgn_func fl_GetRandomRgn = 0L;
   static char first_time = 1;
 
-  // We will have to do some Region magic now, so let's see if the 
+  // We will have to do some Region magic now, so let's see if the
   // required function is available (and it should be staring w/Win95)
   if (first_time) {
     HMODULE hMod = GetModuleHandle("GDI32.DLL");
@@ -88,14 +88,14 @@ void fl_scroll(int X, int Y, int W, int H, int dx, int dy,
   }
 
   // Now check if the source scrolling area is fully visible.
-  // If it is, we will do a quick scroll and just update the 
-  // newly exposed area. If it is not, we go the safe route and 
+  // If it is, we will do a quick scroll and just update the
+  // newly exposed area. If it is not, we go the safe route and
   // re-render the full area instead.
   // Note 1: we could go and find the areas that are actually
   // obscured and recursively call fl_scroll for the newly found
-  // rectangles. However, this practice would rely on the 
+  // rectangles. However, this practice would rely on the
   // elements of the undocumented Rgn structure.
-  // Note 2: although this method should take care of most 
+  // Note 2: although this method should take care of most
   // multi-screen solutions, it will not solve issues scrolling
   // from a different resolution screen onto another.
   // Note 3: this has been tested with image maps, too.
@@ -103,14 +103,14 @@ void fl_scroll(int X, int Y, int W, int H, int dx, int dy,
     // get the DC region minus all overlapping windows
     HRGN sys_rgn = CreateRectRgn(0, 0, 0, 0);
     fl_GetRandomRgn(fl_gc, sys_rgn, 4);
-    // now get the source scrolling rectangle 
+    // now get the source scrolling rectangle
     HRGN src_rgn = CreateRectRgn(src_x, src_y, src_x+src_w, src_y+src_h);
     POINT offset = { 0, 0 };
     if (GetDCOrgEx(fl_gc, &offset)) {
       OffsetRgn(src_rgn, offset.x, offset.y);
     }
     // see if all source pixels are available in the system region
-    // Note: we could be a bit more merciful and subtract the 
+    // Note: we could be a bit more merciful and subtract the
     // scroll destination region as well.
     HRGN dst_rgn = CreateRectRgn(0, 0, 0, 0);
     int r = CombineRgn(dst_rgn, src_rgn, sys_rgn, RGN_DIFF);

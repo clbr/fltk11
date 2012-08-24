@@ -26,7 +26,7 @@
 //
 
 // The Fl_Window is a window in the fltk library.
-// This is the system-independent portions.  The huge amount of 
+// This is the system-independent portions.  The huge amount of
 // crap you need to do to communicate with X is in Fl_x.cxx, the
 // equivalent (but totally different) crap for MSWindows is in Fl_win32.cxx
 

@@ -63,7 +63,7 @@ static Fl_Window *makeform() {
    message_form->size(410,103);
    return message_form;
  }
- // make sure that the dialog does not become the child of some 
+ // make sure that the dialog does not become the child of some
  // current group
  Fl_Group *previously_current_group = Fl_Group::current();
  Fl_Group::current(0);
@@ -205,7 +205,7 @@ static int innards(const char* fmt, va_list ap,
 
   resizeform();
 
-  if (button[1]->visible() && !input->visible()) 
+  if (button[1]->visible() && !input->visible())
     button[1]->take_focus();
   message_form->hotspot(button[0]);
   if (b0 && Fl_Widget::label_shortcut(b0))

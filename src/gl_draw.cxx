@@ -56,7 +56,7 @@ void  gl_font(int fontid, int size) {
     int count = fl_fontsize->metr.tmLastChar-base+1;
     HFONT oldFid = (HFONT)SelectObject(fl_gc, fl_fontsize->fid);
     fl_fontsize->listbase = glGenLists(256);
-    wglUseFontBitmaps(fl_gc, base, count, fl_fontsize->listbase+base); 
+    wglUseFontBitmaps(fl_gc, base, count, fl_fontsize->listbase+base);
     SelectObject(fl_gc, oldFid);
 #elif defined(__APPLE_QD__)
     // undefined characters automatically receive an empty GL list in aglUseFont
@@ -65,8 +65,8 @@ void  gl_font(int fontid, int size) {
                fl_fontsize->size, 0, 256, fl_fontsize->listbase);
 #elif defined(__APPLE_QUARTZ__)
     short font, face, size;
-    uchar fn[256]; 
-    fn[0]=strlen(fl_fontsize->q_name); 
+    uchar fn[256];
+    fn[0]=strlen(fl_fontsize->q_name);
     strcpy((char*)(fn+1), fl_fontsize->q_name);
     GetFNum(fn, &font);
     face = 0;
@@ -197,7 +197,7 @@ void gl_color(Fl_Color i) {
       else glIndexi(i);
     } else {
       glIndexi(i ? i : FL_GRAY_RAMP);
-    }    
+    }
     return;
   }
 #else
@@ -208,7 +208,7 @@ void gl_color(Fl_Color i) {
   Fl::get_color(i, red, green, blue);
   glColor3ub(red, green, blue);
 }
-  
+
 void gl_draw_image(const uchar* b, int x, int y, int w, int h, int d, int ld) {
   if (!ld) ld = w*d;
   glPixelStorei(GL_UNPACK_ROW_LENGTH, ld/d);

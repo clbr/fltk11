@@ -362,7 +362,7 @@ char Fl_Preferences::get( const char *key, char *&text, const char *defaultValue
   {
     text = decodeText( v );
     return 1;
-  }    
+  }
   if ( !v ) v = defaultValue;
   if ( v )
     text = strdup( v );
@@ -383,13 +383,13 @@ char Fl_Preferences::set( const char *key, const char *text )
   if ( ns )
   {
     char *buffer = (char*)malloc( n+ns+1 ), *d = buffer;
-    for ( s=text; *s; ) 
-    { 
+    for ( s=text; *s; )
+    {
       char c = *s;
       if ( c=='\\' ) { *d++ = '\\'; *d++ = '\\'; s++; }
       else if ( c=='\n' ) { *d++ = '\\'; *d++ = 'n'; s++; }
       else if ( c=='\r' ) { *d++ = '\\'; *d++ = 'r'; s++; }
-      else if ( c<32 || c==0x7f ) 
+      else if ( c<32 || c==0x7f )
 	{ *d++ = '\\'; *d++ = '0'+((c>>6)&3); *d++ = '0'+((c>>3)&7); *d++ = '0'+(c&7);  s++; }
       else *d++ = *s++;
     }
@@ -441,7 +441,7 @@ char Fl_Preferences::get( const char *key, void *data, const void *defaultValue,
     memmove( data, w, dsize>maxSize?maxSize:dsize );
     free( w );
     return 1;
-  }    
+  }
   if ( defaultValue )
     memmove( data, defaultValue, defaultSize>maxSize?maxSize:defaultSize );
   return 0;
@@ -461,7 +461,7 @@ char Fl_Preferences::get( const char *key, void *&data, const void *defaultValue
     int dsize;
     data = decodeHex( v, dsize );
     return 1;
-  }    
+  }
   if ( defaultValue )
   {
     data = (void*)malloc( defaultSize );
@@ -505,7 +505,7 @@ int Fl_Preferences::size( const char *key )
 
 /**
  * creates a path that is related to the preferences file
- * and that is usable for application data beyond what is covered 
+ * and that is usable for application data beyond what is covered
  * by Fl_Preferences.
  * - 'getUserdataPath' actually creates the directory
  * - 'path' must be large enough to receive a complete file path
@@ -678,7 +678,7 @@ Fl_Preferences::RootNode::RootNode( Fl_Preferences *prefs, Root root, const char
 			1, &spec.vRefNum, &spec.parID );
       break;
     case USER:
-      err = FindFolder( kUserDomain, kPreferencesFolderType, 
+      err = FindFolder( kUserDomain, kPreferencesFolderType,
 			1, &spec.vRefNum, &spec.parID );
       break;
   }
@@ -744,7 +744,7 @@ Fl_Preferences::RootNode::~RootNode()
 {
   if ( prefs_->node->dirty() )
     write();
-  if ( filename_ ) { 
+  if ( filename_ ) {
     free( filename_ );
     filename_ = 0L;
   }
@@ -779,7 +779,7 @@ int Fl_Preferences::RootNode::read()
       buf[ end+1 ] = 0;
       nd = prefs_->node->find( buf+1 );
     }
-    else if ( buf[0]=='+' ) // 
+    else if ( buf[0]=='+' ) //
     { // value of previous name/value pair spans multiple lines
       int end = strcspn( buf+1, "\n\r" );
       if ( end != 0 ) // if entry is not empty
@@ -1054,7 +1054,7 @@ Fl_Preferences::Node *Fl_Preferences::Node::find( const char *path )
   int len = strlen( path_ );
   if ( strncmp( path, path_, len ) == 0 )
   {
-    if ( path[ len ] == 0 ) 
+    if ( path[ len ] == 0 )
       return this;
     if ( path[ len ] == '/' )
     {
@@ -1106,13 +1106,13 @@ Fl_Preferences::Node *Fl_Preferences::Node::search( const char *path, int offset
     }
     offset = strlen( path_ ) + 1;
   }
-  
+
   int len = strlen( path_ );
   if ( len < offset-1 ) return 0;
   len -= offset;
   if ( ( len <= 0 ) || ( strncmp( path, path_+offset, len ) == 0 ) )
   {
-    if ( len > 0 && path[ len ] == 0 ) 
+    if ( len > 0 && path[ len ] == 0 )
       return this;
     if ( len <= 0 || path[ len ] == '/' )
     {
@@ -1163,9 +1163,9 @@ char Fl_Preferences::Node::remove()
     {
       if ( nd == this )
       {
-	if ( np ) 
-	  np->next_ = nd->next_; 
-	else 
+	if ( np )
+	  np->next_ = nd->next_;
+	else
 	  parent_->child_ = nd->next_;
 	break;
       }

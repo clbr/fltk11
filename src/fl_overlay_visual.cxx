@@ -88,7 +88,7 @@ XVisualInfo *fl_find_overlay_visual() {
     }
     if (v) {
       fl_overlay_visual = v;
-      fl_overlay_colormap = 
+      fl_overlay_colormap =
 	XCreateColormap(fl_display, RootWindow(fl_display, fl_screen),
 			v->visual, AllocNone);
     }

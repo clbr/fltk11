@@ -89,7 +89,7 @@ void glutStrokeCharacter(void* fontID, int character) {
   if (!schar) return;
 
   strip = schar->Strips;
-  
+
   for (i = 0; i < schar->Number; i++, strip++)
   {
     glBegin(GL_LINE_STRIP);
@@ -108,7 +108,7 @@ void glutStrokeString(void* fontID, const unsigned char *string) {
   Fl_Glut_StrokeFont* font = (Fl_Glut_StrokeFont *)fontID;
 
   if (!string || ! *string) return;
-  
+
  /*
   * Step through the string, drawing each character.
   * A newline will simply translate the next character's insertion

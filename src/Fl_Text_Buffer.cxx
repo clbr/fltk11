@@ -344,7 +344,7 @@ void Fl_Text_Buffer::copy( Fl_Text_Buffer *fromBuf, int fromStart,
 }
 
 /*
-** remove text according to the undo variables or insert text 
+** remove text according to the undo variables or insert text
 ** from the undo buffer
 */
 int Fl_Text_Buffer::undo(int *cursorPos) {
@@ -588,10 +588,10 @@ char * Fl_Text_Buffer::text_in_rectangle( int start, int end,
 void Fl_Text_Buffer::tab_distance( int tabDist ) {
   const char * deletedText;
 
-    /* First call the pre-delete callbacks with the previous tab setting 
+    /* First call the pre-delete callbacks with the previous tab setting
        still active. */
   call_predelete_callbacks( 0, mLength );
-    
+
   /* Change the tab setting */
   mTabDist = tabDist;
 
@@ -810,7 +810,7 @@ void Fl_Text_Buffer::add_predelete_callback(Fl_Text_Predelete_Cb bufPreDeleteCB,
     Fl_Text_Predelete_Cb *newPreDeleteProcs;
     void **newCBArgs;
     int i;
-    
+
     newPreDeleteProcs = new Fl_Text_Predelete_Cb[ mNPredeleteProcs + 1 ];
     newCBArgs = new void * [ mNPredeleteProcs + 1 ];
     for ( i = 0; i < mNPredeleteProcs; i++ ) {
@@ -836,7 +836,7 @@ void Fl_Text_Buffer::remove_predelete_callback(
 
     /* find the matching callback to remove */
     for ( i = 0; i < mNPredeleteProcs; i++) {
-    	if (mPredeleteProcs[i] == bufPreDeleteCB && 
+    	if (mPredeleteProcs[i] == bufPreDeleteCB &&
 	       mPredeleteCbArgs[i] == cbArg) {
     	    toRemove = i;
     	    break;
@@ -846,7 +846,7 @@ void Fl_Text_Buffer::remove_predelete_callback(
     	Fl::error("Fl_Text_Buffer::remove_predelete_callback(): Can't find pre-delete CB to remove");
     	return;
     }
-    
+
     /* Allocate new lists for remaining callback procs and args (if
        any are left) */
     mNPredeleteProcs--;
@@ -860,7 +860,7 @@ void Fl_Text_Buffer::remove_predelete_callback(
     }
     newPreDeleteProcs = new Fl_Text_Predelete_Cb [ mNPredeleteProcs ];
     newCBArgs = new void * [ mNPredeleteProcs ];
-    
+
     /* copy out the remaining members and free the old lists */
     for ( i = 0; i < toRemove; i++) {
     	newPreDeleteProcs[i] = mPredeleteProcs[i];
@@ -1395,7 +1395,7 @@ void Fl_Text_Buffer::remove_( int start, int end ) {
       undobuffersize( undocut+end-start+1 );
       memmove( undobuffer+end-start, undobuffer, undocut );
       undocut += end-start;
-    } 
+    }
     else {
       undocut = end-start;
       undobuffersize(undocut);
@@ -2041,12 +2041,12 @@ void Fl_Text_Buffer::call_modify_callbacks( int pos, int nDeleted,
 }
 
 /*
-** Call the stored pre-delete callback procedure(s) for this buffer to update 
+** Call the stored pre-delete callback procedure(s) for this buffer to update
 ** the changed area(s) on the screen and any other listeners.
 */
 void Fl_Text_Buffer::call_predelete_callbacks(int pos, int nDeleted) {
     int i;
-    
+
     for (i=0; i<mNPredeleteProcs; i++)
     	(*mPredeleteProcs[i])(pos, nDeleted, mPredeleteCbArgs[i]);
 }

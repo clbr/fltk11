@@ -41,7 +41,7 @@ extern int fl_selection_length;
 
 /**
  * drag and drop whatever is in the cut-copy-paste buffer
- * - create a selection first using: 
+ * - create a selection first using:
  *     Fl::copy(const char *stuff, int len, 0)
  */
 int Fl::dnd()
@@ -50,10 +50,10 @@ int Fl::dnd()
   DragReference dragRef;
   result = NewDrag( &dragRef );
   if ( result != noErr ) return false;
-  
+
   result = AddDragItemFlavor( dragRef, 1, 'TEXT', fl_selection_buffer, fl_selection_length, 0 );
   if ( result != noErr ) { DisposeDrag( dragRef ); return false; }
-  
+
   Point mp;
   GetMouse(&mp);
   LocalToGlobal( &mp );
@@ -78,12 +78,12 @@ int Fl::dnd()
   }
 
   if ( result != noErr ) { DisposeRgn( region ); DisposeDrag( dragRef ); return false; }
-  
+
   DisposeRgn( region );
   DisposeDrag( dragRef );
   return true;
 }
-  
+
 
 //
 // End of "$Id: fl_dnd_mac.cxx 5190 2006-06-09 16:16:34Z mike $".

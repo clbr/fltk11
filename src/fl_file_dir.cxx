@@ -107,9 +107,9 @@ fl_file_chooser(const char *message,	// I - Message in titlebar
       }
     } else if (!*fname) { // empty filename reuses directory with empty name
       const char *fcv = fc->value();
-      if (fcv) 
+      if (fcv)
         strlcpy(retname, fc->value(), sizeof(retname));
-      else 
+      else
         *retname = 0;
       const char *n = fl_filename_name(retname);
       if (n) *((char*)n) = 0;

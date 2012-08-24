@@ -64,8 +64,8 @@ int fl_filename_expand(char *to,int tolen, const char *from) {
 #ifndef WIN32
       } else {	// another user's directory
 	struct passwd *pwd;
-	char t = *e; *(char *)e = 0; 
-        pwd = getpwnam(a+1); 
+	char t = *e; *(char *)e = 0;
+        pwd = getpwnam(a+1);
         *(char *)e = t;
 	    if (pwd) value = pwd->pw_dir;
 #endif

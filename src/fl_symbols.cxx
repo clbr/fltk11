@@ -95,7 +95,7 @@ int fl_add_symbol(const char *name, void (*drawit)(Fl_Color), int scalable)
 int fl_return_arrow(int x,int y,int w,int h);
 
 // provided for back compatability:
-int fl_draw_symbol(const char *label,int x,int y,int w,int h,Fl_Color col) {  
+int fl_draw_symbol(const char *label,int x,int y,int w,int h,Fl_Color col) {
   const char *p = label;
   if (*p++ != '@') return 0;
   fl_init_symbols();
@@ -187,7 +187,7 @@ static void rectangle(double x,double y,double x2,double y2,Fl_Color col) {
 
 /* The drawing routines */
 
-static void draw_fltk(Fl_Color col) 
+static void draw_fltk(Fl_Color col)
 {
   fl_color(col);
   // F fill
@@ -221,7 +221,7 @@ static void draw_fltk(Fl_Color col)
   vv(1.3, 0.15); vv(1.3, 0.5); vv(1.1, 0.5); EC;
 }
 
-static void draw_search(Fl_Color col) 
+static void draw_search(Fl_Color col)
 {
   fl_color(col);
   BP; vv(-.4, .13); vv(-1.0, .73); vv(-.73, 1.0); vv(-.13, .4); EP;
@@ -296,9 +296,9 @@ static void draw_bararrow(Fl_Color col)
   BC; vv(-0.5,0.8); vv(-0.1,0.8); vv(-0.1,-0.8); vv(-0.5,-0.8); EC;
 }
 
-static void draw_doublebar(Fl_Color col) { 
+static void draw_doublebar(Fl_Color col) {
   rectangle(-0.6,-0.8,-.1,.8,col);
-  rectangle(.1,-0.8,.6,.8,col); 
+  rectangle(.1,-0.8,.6,.8,col);
 }
 
 static void draw_arrow01(Fl_Color col)

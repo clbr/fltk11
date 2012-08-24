@@ -45,17 +45,17 @@ Fl_Bitmask fl_create_bitmask(int w, int h, const uchar *array) {
   Fl_Bitmask gw;
   NewGWorld( &gw, 1, &srcRect, 0L, 0L, 0 );
   PixMapHandle pm = GetGWorldPixMap( gw );
-  if ( pm ) 
+  if ( pm )
   {
     LockPixels( pm );
-    if ( *pm ) 
+    if ( *pm )
     {
       uchar *base = (uchar*)GetPixBaseAddr( pm );
-      if ( base ) 
+      if ( base )
       {
         PixMapPtr pmp = *pm;
         // verify the parameters for direct memory write
-        if ( pmp->pixelType == 0 || pmp->pixelSize == 1 || pmp->cmpCount == 1 || pmp->cmpSize == 1 ) 
+        if ( pmp->pixelType == 0 || pmp->pixelSize == 1 || pmp->cmpCount == 1 || pmp->cmpSize == 1 )
         {
           static uchar reverse[16] =	/* Bit reversal lookup table */
           { 0x00, 0x88, 0x44, 0xcc, 0x22, 0xaa, 0x66, 0xee, 0x11, 0x99, 0x55, 0xdd, 0x33, 0xbb, 0x77, 0xff };
@@ -82,7 +82,7 @@ void fl_delete_bitmask(Fl_Bitmask id) {
 #elif defined(__APPLE_QUARTZ__)
 Fl_Bitmask fl_create_bitmask(int w, int h, const uchar *array) {
   static uchar reverse[16] =    /* Bit reversal lookup table */
-    { 0x00, 0x88, 0x44, 0xcc, 0x22, 0xaa, 0x66, 0xee, 
+    { 0x00, 0x88, 0x44, 0xcc, 0x22, 0xaa, 0x66, 0xee,
       0x11, 0x99, 0x55, 0xdd, 0x33, 0xbb, 0x77, 0xff };
   int rowBytes = (w+7)>>3 ;
   uchar *bmask = (uchar*)malloc(rowBytes*h), *dst = bmask;
@@ -248,17 +248,17 @@ Fl_Bitmask fl_create_alphamask(int w, int h, int d, int ld, const uchar *array) 
   Fl_Bitmask gw;
   NewGWorld( &gw, 8, &srcRect, 0L, 0L, 0 );
   PixMapHandle pm = GetGWorldPixMap( gw );
-  if ( pm ) 
+  if ( pm )
   {
     LockPixels( pm );
-    if ( *pm ) 
+    if ( *pm )
     {
       uchar *base = (uchar*)GetPixBaseAddr( pm );
-      if ( base ) 
+      if ( base )
       {
         PixMapPtr pmp = *pm;
         // verify the parameters for direct memory write
-        if ( pmp->pixelType == 0 || pmp->pixelSize == 8 || pmp->cmpCount == 1 || pmp->cmpSize == 8 ) 
+        if ( pmp->pixelType == 0 || pmp->pixelSize == 8 || pmp->cmpCount == 1 || pmp->cmpSize == 8 )
         {
 	  // Copy alpha values from the source array to the pixmap...
 	  array += d - 1;
@@ -451,7 +451,7 @@ Fl_Image *Fl_Bitmap::copy(int W, int H) {
   }
   if (W <= 0 || H <= 0) return 0;
 
-  // OK, need to resize the image data; allocate memory and 
+  // OK, need to resize the image data; allocate memory and
   uchar		*new_ptr,	// Pointer into new array
 		new_bit,	// Bit for new array
 		old_bit;	// Bit for old array

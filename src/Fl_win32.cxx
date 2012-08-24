@@ -69,7 +69,7 @@
 //
 // Now (Dec. 2008) we can assume that current Cygwin/MinGW versions
 // support the TrackMouseEvent() function, but WinCE obviously doesn't
-// support it (STR 2095). Therefore, USE_TRACK_MOUSE is enabled by 
+// support it (STR 2095). Therefore, USE_TRACK_MOUSE is enabled by
 // default, but you can disable it by defining NO_TRACK_MOUSE.
 //
 // TrackMouseEvent is only used to support window leave notifications
@@ -96,7 +96,7 @@ static Fl_Window *track_mouse_win=0;	// current TrackMouseEvent() window
 // USE_CAPTURE_MOUSE_WIN - this must be defined for TrackMouseEvent to work
 // correctly with subwindows - otherwise a single mouse click and release
 // (without a move) would generate phantom leave events.
-// This defines, if the current mouse window (maybe a subwindow) or the 
+// This defines, if the current mouse window (maybe a subwindow) or the
 // main window should get mouse events after pushing (and holding) a mouse
 // button, i.e. when dragging the mouse. This is done by calling SetCapture
 // (see below).
@@ -257,7 +257,7 @@ int fl_wait(double time_to_wait) {
     Fl::idle();
     in_idle = 0;
   }
-  
+
 #ifndef USE_ASYNC_SELECT
   if (nfds) {
     // For WIN32 we need to poll for socket input FIRST, since
@@ -288,7 +288,7 @@ int fl_wait(double time_to_wait) {
   }
 #endif // USE_ASYNC_SELECT
 
-  if (Fl::idle || Fl::damage()) 
+  if (Fl::idle || Fl::damage())
     time_to_wait = 0.0;
 
   // if there are no more windows and this timer is set
@@ -488,7 +488,7 @@ void Fl::paste(Fl_Widget &receiver, int clipboard) {
     // Convert \r\n -> \n
     char *i = fl_selection_buffer[clipboard];
     if (i==0L) {
-      Fl::e_text = 0; 
+      Fl::e_text = 0;
       return;
     }
     Fl::e_text = new char[fl_selection_length[clipboard]+1];
@@ -1059,7 +1059,7 @@ int Fl_X::fake_X_wm(const Fl_Window* w,int &X,int &Y, int &bt,int &bx, int &by) 
     if (hwnd) {
       // The block below calculates the window borders by requesting the
       // required decorated window rectangle for a desired client rectangle.
-      // If any part of the function above fails, we will drop to a 
+      // If any part of the function above fails, we will drop to a
       // fallback to get the best guess which is always available.
       HWND hwnd = fl_xid(w);
       // request the style flags of this window, as WIN32 sees them
@@ -1142,7 +1142,7 @@ int Fl_X::fake_X_wm(const Fl_Window* w,int &X,int &Y, int &bt,int &bx, int &by) 
 ////////////////////////////////////////////////////////////////
 
 void Fl_Window::resize(int X,int Y,int W,int H) {
-  UINT flags = SWP_NOSENDCHANGING | SWP_NOZORDER 
+  UINT flags = SWP_NOSENDCHANGING | SWP_NOZORDER
              | SWP_NOACTIVATE | SWP_NOOWNERZORDER;
   int is_a_resize = (W != w() || H != h());
   int resize_from_program = (this != resize_bug_fix);
@@ -1156,8 +1156,8 @@ void Fl_Window::resize(int X,int Y,int W,int H) {
   if (is_a_resize) {
     Fl_Group::resize(X,Y,W,H);
     if (visible_r()) {
-      redraw(); 
-      // only wait for exposure if this window has a size - a window 
+      redraw();
+      // only wait for exposure if this window has a size - a window
       // with no width or height will never get an exposure event
       if (i && W>0 && H>0)
         i->wait_for_expose = 1;
@@ -1189,17 +1189,17 @@ void Fl_Window::resize(int X,int Y,int W,int H) {
 ////////////////////////////////////////////////////////////////
 
 /*
- * This silly little class remembers the name of all window classes 
- * we register to avoid double registration. It has the added bonus 
+ * This silly little class remembers the name of all window classes
+ * we register to avoid double registration. It has the added bonus
  * of freeing everything on application colse as well.
  */
 class NameList {
 public:
   NameList() { name = (char**)malloc(sizeof(char**)); NName = 1; nName = 0; }
-  ~NameList() { 
+  ~NameList() {
     int i;
     for (i=0; i<nName; i++) free(name[i]);
-    if (name) free(name); 
+    if (name) free(name);
   }
   void add_name(const char *n) {
     if (NName==nName) {
@@ -1456,7 +1456,7 @@ void Fl::repeat_timeout(double time, Fl_Timeout_Handler cb, void* data)
                                     0, 0, 0, 0,
                                     NULL, NULL, fl_display, NULL);
         // just in case this OS won't let us create a 0x0 size window:
-        if (!s_TimerWnd) 
+        if (!s_TimerWnd)
           s_TimerWnd = CreateWindowEx(WS_EX_LEFT | WS_EX_TOOLWINDOW,
                                     timer_class, "",
                                     WS_POPUP,
@@ -1627,7 +1627,7 @@ void Fl_Window::make_current() {
   fl_clip_region(0);
 }
 
-/* Make sure that all allocated fonts are released. This works only if 
+/* Make sure that all allocated fonts are released. This works only if
    Fl::run() is allowed to exit by closing all windows. Calling 'exit(int)'
    will not automatically free any fonts. */
 void fl_free_fonts(void)
@@ -1660,13 +1660,13 @@ void fl_free_fonts(void)
 //  it is important to control GDI leaks, which are much more important than memory
 //  leaks. The following struct, global variable, and routines help implement
 //  the above protocol for those cases where the GetDC and RestoreDC are not in
-//  the same routine. For each GetDC, fl_save_dc is used to create an entry in 
+//  the same routine. For each GetDC, fl_save_dc is used to create an entry in
 //  a linked list that saves the window handle, the DC handle, and the initial
 //  state. When the DC is to be released, 'fl_release_dc' is called. It restores
 //  the initial state and releases the DC. When the program exits, 'fl_cleanup_dc_list'
 //  frees any remaining nodes in the list.
 
-struct Win_DC_List {      // linked list 
+struct Win_DC_List {      // linked list
   HWND    window;         // window handle
   HDC     dc;             // device context handle
   int     saved_dc;       // initial state of DC

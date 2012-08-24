@@ -167,7 +167,7 @@ GWorldPtr fl_create_offscreen(int w, int h) {
   QDErr err = NewGWorld(&gw, 0, &bounds, 0L, 0L, 0); // 'useTempMem' should not be used (says the Carbon port manual)
   if ( err == -108 )
     { }
-//    fl_message( "The application memory is low. Please increase the initial memory assignment.\n" ); 
+//    fl_message( "The application memory is low. Please increase the initial memory assignment.\n" );
   if (err!=noErr || gw==0L) return 0L;
   return gw;
 }
@@ -292,7 +292,7 @@ void fl_begin_offscreen(Fl_Offscreen ctx) {
   if (stack_ix<stack_max) {
     stack_gc[stack_ix] = fl_gc;
     stack_window[stack_ix] = fl_window;
-  } else 
+  } else
     fprintf(stderr, "FLTK CGContext Stack overflow error\n");
   stack_ix++;
 
@@ -345,7 +345,7 @@ void Fl_Double_Window::flush(int eraseoverlay) {
     } else
 #endif
 #ifdef __APPLE_QD__
-    if ( ( !QDIsPortBuffered( GetWindowPort(myi->xid) ) ) 
+    if ( ( !QDIsPortBuffered( GetWindowPort(myi->xid) ) )
         || force_doublebuffering_ ) {
       myi->other_xid = fl_create_offscreen(w(), h());
       clear_damage(FL_DAMAGE_ALL);
@@ -399,7 +399,7 @@ void Fl_Double_Window::flush(int eraseoverlay) {
 #elif defined(__APPLE__)
     if ( myi->other_xid ) {
       fl_begin_offscreen( myi->other_xid );
-      fl_clip_region( 0 );   
+      fl_clip_region( 0 );
       draw();
       fl_end_offscreen();
     } else {

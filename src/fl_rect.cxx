@@ -43,7 +43,7 @@ extern float fl_quartz_line_width_;
 void fl_rect(int x, int y, int w, int h) {
   if (w<=0 || h<=0) return;
 #ifdef WIN32
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x+w-1, y);
   LineTo(fl_gc, x+w-1, y+h-1);
   LineTo(fl_gc, x, y+h-1);
@@ -66,7 +66,7 @@ void fl_rectf(int x, int y, int w, int h) {
   if (w<=0 || h<=0) return;
 #ifdef WIN32
   RECT rect;
-  rect.left = x; rect.top = y;  
+  rect.left = x; rect.top = y;
   rect.right = x + w; rect.bottom = y + h;
   FillRect(fl_gc, &rect, fl_brush());
 #elif defined(__APPLE_QD__)
@@ -103,11 +103,11 @@ void fl_xyline(int x, int y, int x1, int y2) {
 #ifdef WIN32
   if (y2 < y) y2--;
   else y2++;
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x1, y);
   LineTo(fl_gc, x1, y2);
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); 
+  MoveTo(x, y);
   LineTo(x1, y);
   LineTo(x1, y2);
 #elif defined(__APPLE_QUARTZ__)
@@ -129,12 +129,12 @@ void fl_xyline(int x, int y, int x1, int y2, int x3) {
 #ifdef WIN32
   if(x3 < x1) x3--;
   else x3++;
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x1, y);
   LineTo(fl_gc, x1, y2);
   LineTo(fl_gc, x3, y2);
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); 
+  MoveTo(x, y);
   LineTo(x1, y);
   LineTo(x1, y2);
   LineTo(x3, y2);
@@ -177,11 +177,11 @@ void fl_yxline(int x, int y, int y1, int x2) {
 #ifdef WIN32
   if (x2 > x) x2++;
   else x2--;
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x, y1);
   LineTo(fl_gc, x2, y1);
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); 
+  MoveTo(x, y);
   LineTo(x, y1);
   LineTo(x2, y1);
 #elif defined(__APPLE_QUARTZ__)
@@ -203,12 +203,12 @@ void fl_yxline(int x, int y, int y1, int x2, int y3) {
 #ifdef WIN32
   if(y3<y1) y3--;
   else y3++;
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x, y1);
   LineTo(fl_gc, x2, y1);
   LineTo(fl_gc, x2, y3);
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); 
+  MoveTo(x, y);
   LineTo(x, y1);
   LineTo(x2, y1);
   LineTo(x2, y3);
@@ -231,13 +231,13 @@ void fl_yxline(int x, int y, int y1, int x2, int y3) {
 
 void fl_line(int x, int y, int x1, int y1) {
 #ifdef WIN32
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x1, y1);
   // Draw the last point *again* because the GDI line drawing
   // functions will not draw the last point ("it's a feature!"...)
   SetPixel(fl_gc, x1, y1, fl_RGB());
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); 
+  MoveTo(x, y);
   LineTo(x1, y1);
 #elif defined(__APPLE_QUARTZ__)
   if (fl_quartz_line_width_==1.0f ) CGContextSetShouldAntialias(fl_gc, false);
@@ -252,14 +252,14 @@ void fl_line(int x, int y, int x1, int y1) {
 
 void fl_line(int x, int y, int x1, int y1, int x2, int y2) {
 #ifdef WIN32
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x1, y1);
   LineTo(fl_gc, x2, y2);
   // Draw the last point *again* because the GDI line drawing
   // functions will not draw the last point ("it's a feature!"...)
   SetPixel(fl_gc, x2, y2, fl_RGB());
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); 
+  MoveTo(x, y);
   LineTo(x1, y1);
   LineTo(x2, y2);
 #elif defined(__APPLE_QUARTZ__)
@@ -280,12 +280,12 @@ void fl_line(int x, int y, int x1, int y1, int x2, int y2) {
 
 void fl_loop(int x, int y, int x1, int y1, int x2, int y2) {
 #ifdef WIN32
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x1, y1);
   LineTo(fl_gc, x2, y2);
   LineTo(fl_gc, x, y);
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); 
+  MoveTo(x, y);
   LineTo(x1, y1);
   LineTo(x2, y2);
   LineTo(x, y);
@@ -307,13 +307,13 @@ void fl_loop(int x, int y, int x1, int y1, int x2, int y2) {
 
 void fl_loop(int x, int y, int x1, int y1, int x2, int y2, int x3, int y3) {
 #ifdef WIN32
-  MoveToEx(fl_gc, x, y, 0L); 
+  MoveToEx(fl_gc, x, y, 0L);
   LineTo(fl_gc, x1, y1);
   LineTo(fl_gc, x2, y2);
   LineTo(fl_gc, x3, y3);
   LineTo(fl_gc, x, y);
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); 
+  MoveTo(x, y);
   LineTo(x1, y1);
   LineTo(x2, y2);
   LineTo(x3, y3);
@@ -405,7 +405,7 @@ void fl_point(int x, int y) {
 #ifdef WIN32
   SetPixel(fl_gc, x, y, fl_RGB());
 #elif defined(__APPLE_QD__)
-  MoveTo(x, y); Line(0, 0); 
+  MoveTo(x, y); Line(0, 0);
 #elif defined(__APPLE_QUARTZ__)
   if (fl_quartz_line_width_==1.0f) CGContextSetShouldAntialias(fl_gc, false);
   CGContextMoveToPoint(fl_gc, x, y);
@@ -462,13 +462,13 @@ void fl_restore_clip() {
     if ( port ) { // port will be NULL if we are using a GWorld (and fl_window_region is invalid)
       RgnHandle portClip = NewRgn();
       CopyRgn( fl_window_region, portClip ); // changed
-      if ( r ) 
+      if ( r )
         SectRgn( portClip, r, portClip );
       SetPortClipRegion( port, portClip );
       DisposeRgn( portClip );
     }
   } else {
-    if (r) 
+    if (r)
       SetClip(r);
     else {
       Rect rect; rect.left=0; rect.top=0; rect.right=0x7fff; rect.bottom=0x7fff;
@@ -486,7 +486,7 @@ void fl_restore_clip() {
   if ( fl_window ) // clipping for a true window
   {
     GrafPtr port = GetWindowPort( fl_window );
-    if ( port ) { 
+    if ( port ) {
       RgnHandle portClip = NewRgn();
       CopyRgn( fl_window_region, portClip ); // changed
       if ( r )
@@ -537,7 +537,7 @@ void fl_push_clip(int x, int y, int w, int h) {
 #ifdef WIN32
       CombineRgn(r,r,current,RGN_AND);
 #elif defined(__APPLE_QD__)
-      SectRgn(r, current, r); 
+      SectRgn(r, current, r);
 #elif defined(__APPLE_QUARTZ__)
       SectRgn(r, current, r);
 #else
@@ -551,7 +551,7 @@ void fl_push_clip(int x, int y, int w, int h) {
 #ifdef WIN32
     r = CreateRectRgn(0,0,0,0);
 #elif defined(__APPLE_QD__)
-    r = NewRgn(); 
+    r = NewRgn();
     SetEmptyRgn(r);
 #elif defined(__APPLE_QUARTZ__)
     r = NewRgn();

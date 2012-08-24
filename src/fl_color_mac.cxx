@@ -67,7 +67,7 @@ void fl_color(Fl_Color i) {
     b = c>> 8;
   }
 #ifdef __APPLE_QD__
-  RGBColor rgb; 
+  RGBColor rgb;
   rgb.red   = (r<<8)|r;
   rgb.green = (g<<8)|g;
   rgb.blue  = (b<<8)|b;
@@ -87,7 +87,7 @@ void fl_color(Fl_Color i) {
 void fl_color(uchar r, uchar g, uchar b) {
   fl_color_ = fl_rgb_color(r, g, b);
 #ifdef __APPLE_QD__
-  RGBColor rgb; 
+  RGBColor rgb;
   rgb.red   = (r<<8)|r;
   rgb.green = (g<<8)|g;
   rgb.blue  = (b<<8)|b;

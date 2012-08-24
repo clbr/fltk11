@@ -155,7 +155,7 @@ int Fl_Tabs::handle(int event) {
     o = which(Fl::event_x(), Fl::event_y());
     if (event == FL_RELEASE) {
       push(0);
-      if (o && Fl::visible_focus() && Fl::focus()!=this) { 
+      if (o && Fl::visible_focus() && Fl::focus()!=this) {
         Fl::focus(this);
         redraw_tabs();
       }
@@ -176,7 +176,7 @@ int Fl_Tabs::handle(int event) {
       return ret;
     else if ( (H<0) && (Fl::event_y() < y()+h()+H) )
       return ret;
-    else { 
+    else {
       n = which(Fl::event_x(), Fl::event_y());
       if (!n) n = this;
     }
@@ -351,7 +351,7 @@ void Fl_Tabs::draw_tab(int x1, int x2, int W, int H, Fl_Widget* o, int what) {
     Fl_Color oc = o->labelcolor();
 
     // Draw the label using the current color...
-    o->labelcolor(sel ? labelcolor() : o->labelcolor());    
+    o->labelcolor(sel ? labelcolor() : o->labelcolor());
     o->draw_label(x1, y() + yofs, W, H - yofs, FL_ALIGN_CENTER);
 
     // Restore the original label color...

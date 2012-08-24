@@ -37,19 +37,19 @@ Fl_FontSize::Fl_FontSize(const char* name, int size) {
   }
   fid = CreateFont(
     -size, // negative makes it use "char size"
-    0,	            // logical average character width 
-    0,	            // angle of escapement 
-    0,	            // base-line orientation angle 
+    0,	            // logical average character width
+    0,	            // angle of escapement
+    0,	            // base-line orientation angle
     weight,
     italic,
-    FALSE,	        // underline attribute flag 
-    FALSE,	        // strikeout attribute flag 
-    DEFAULT_CHARSET,    // character set identifier 
-    OUT_DEFAULT_PRECIS,	// output precision 
-    CLIP_DEFAULT_PRECIS,// clipping precision 
-    DEFAULT_QUALITY,	// output quality 
-    DEFAULT_PITCH,	// pitch and family 
-    name	        // pointer to typeface name string 
+    FALSE,	        // underline attribute flag
+    FALSE,	        // strikeout attribute flag
+    DEFAULT_CHARSET,    // character set identifier
+    OUT_DEFAULT_PRECIS,	// output precision
+    CLIP_DEFAULT_PRECIS,// clipping precision
+    DEFAULT_QUALITY,	// output quality
+    DEFAULT_PITCH,	// pitch and family
+    name	        // pointer to typeface name string
     );
   if (!fl_gc) fl_GetDC(0);
   SelectObject(fl_gc, fid);

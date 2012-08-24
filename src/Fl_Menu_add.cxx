@@ -102,7 +102,7 @@ static int compare(const char* a, const char* b) {
 int Fl_Menu_Item::add(
   const char *mytext,
   int sc,
-  Fl_Callback *cb,	
+  Fl_Callback *cb,
   void *data,
   int myflags
 ) {

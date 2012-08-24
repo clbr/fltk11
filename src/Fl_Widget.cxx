@@ -83,7 +83,7 @@ Fl_Widget *Fl::readqueue() {
 static void cleanup_readqueue(Fl_Widget *w) {
 
   if (obj_tail==obj_head) return;
-  
+
   // Read the entire queue and copy over all valid entries.
   // The new head will be determined after the last copied entry.
 

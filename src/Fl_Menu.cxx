@@ -263,7 +263,7 @@ menutitle::menutitle(int X, int Y, int W, int H, const Fl_Menu_Item* L) :
 }
 
 menuwindow::menuwindow(const Fl_Menu_Item* m, int X, int Y, int Wp, int Hp,
-		       const Fl_Menu_Item* picked, const Fl_Menu_Item* t, 
+		       const Fl_Menu_Item* picked, const Fl_Menu_Item* t,
 		       int menubar, int menubar_title, int right_edge)
   : Fl_Menu_Window(X, Y, Wp, Hp, 0)
 {
@@ -338,7 +338,7 @@ menuwindow::menuwindow(const Fl_Menu_Item* m, int X, int Y, int Wp, int Hp,
     // it above the menubar instead. We will not adjust any menu
     // that has a selected item.
     if (Y+h()>scr_y+scr_h && Y-h()>=scr_y) {
-      if (Hp>1) 
+      if (Hp>1)
         // if we know the height of the Fl_Menu_, use it
         Y = Y-Hp-h();
       else if (t)
@@ -451,7 +451,7 @@ void menuwindow::draw() {
       drawentry(menu->next(drawn_selected), drawn_selected, 1);
       drawentry(menu->next(selected), selected, 1);
     }
-  }	    
+  }
   drawn_selected = selected;
 }
 
@@ -560,7 +560,7 @@ static void setitem(int m, int n) {
 static int forward(int menu) { // go to next item in menu menu if possible
   menustate &pp = *p;
   // Fl_Menu_Button can geberate menu=-1. This line fixes it and selectes the first item.
-  if (menu==-1) 
+  if (menu==-1)
     menu = 0;
   menuwindow &m = *(pp.p[menu]);
   int item = (menu == pp.menu_number) ? pp.item_number : m.selected;
@@ -603,7 +603,7 @@ int menuwindow::handle(int e) {
       menuwindow *mw = pp.p[--i];
       if (mw) {
         mw->hide();
-        if (mw->title) 
+        if (mw->title)
           mw->title->hide();
       }
     }
@@ -695,7 +695,7 @@ int menuwindow::early_hide_handle(int e) {
     }
     for (mymenu = pp.nummenus-1; ; mymenu--) {
       item = pp.p[mymenu]->find_selected(mx, my);
-      if (item >= 0) 
+      if (item >= 0)
         break;
       if (mymenu <= 0) {
         // buttons in menubars must be deselected if we move outside of them!

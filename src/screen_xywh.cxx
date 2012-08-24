@@ -44,7 +44,7 @@ static int num_screens = 0;
 // functions from the USER32.DLL . If these functions are not available, we
 // will gracefully fall back to single monitor support.
 //
-// If we were to insist on the existence of "EnumDisplayMonitors" and 
+// If we were to insist on the existence of "EnumDisplayMonitors" and
 // "GetMonitorInfoA", it would be impossible to use FLTK on Windows 2000
 // before SP2 or earlier.
 

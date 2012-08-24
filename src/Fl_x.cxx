@@ -1210,12 +1210,12 @@ void Fl_X::make_xid(Fl_Window* win, XVisualInfo *visual, Colormap colormap)
       XSetTransientForHint(fl_display, xp->xid, fl_xid(wp));
       if (!wp->visible()) showit = 0; // guess that wm will not show it
     }
-   
+
     // Make sure that borderless windows do not show in the task bar
     if (!win->border()) {
       Atom net_wm_state = XInternAtom (fl_display, "_NET_WM_STATE", 0);
       Atom net_wm_state_skip_taskbar = XInternAtom (fl_display, "_NET_WM_STATE_SKIP_TASKBAR", 0);
-      XChangeProperty (fl_display, xp->xid, net_wm_state, XA_ATOM, 32, 
+      XChangeProperty (fl_display, xp->xid, net_wm_state, XA_ATOM, 32,
           PropModeAppend, (unsigned char*) &net_wm_state_skip_taskbar, 1);
     }
 
@@ -1351,7 +1351,7 @@ void Fl_Window::label(const char *name,const char *iname) {
     XChangeProperty(fl_display, i->xid, XA_WM_NAME,
 		    XA_STRING, 8, 0, (uchar*)name, strlen(name));
     if (!iname) iname = fl_filename_name(name);
-    XChangeProperty(fl_display, i->xid, XA_WM_ICON_NAME, 
+    XChangeProperty(fl_display, i->xid, XA_WM_ICON_NAME,
 		    XA_STRING, 8, 0, (uchar*)iname, strlen(iname));
   }
 }

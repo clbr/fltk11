@@ -390,7 +390,7 @@ int glutGet(GLenum type) {
     else
       return 0;
 //case GLUT_WINDOW_NUM_CHILDREN:
-//case GLUT_WINDOW_CURSOR: return 
+//case GLUT_WINDOW_CURSOR: return
   case GLUT_SCREEN_WIDTH: return Fl::w();
   case GLUT_SCREEN_HEIGHT: return Fl::h();
 //case GLUT_SCREEN_WIDTH_MM:
@@ -481,7 +481,7 @@ int glutExtensionSupported( const char* extension )
 
   const char *extensions, *start;
   const int len = strlen( extension );
-  
+
   start = extensions = (const char *) glGetString(GL_EXTENSIONS);
 
   if (!extensions) return 0;

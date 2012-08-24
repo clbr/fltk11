@@ -533,7 +533,7 @@ int Fl_Browser_::select(void* l, int i, int docallbacks) {
       redraw_line(l);
       display(l);
     }
-  }	    
+  }
   if (docallbacks) {
     set_changed();
     do_callback();
@@ -585,7 +585,7 @@ int Fl_Browser_::handle(int event) {
           while ((l = item_prev(l))) if (item_height(l)>0) {
             select_only(l, when()); break;}
           return 1;
-        } 
+        }
       } else  {
         switch (Fl::event_key()) {
         case FL_Enter:
@@ -623,7 +623,7 @@ J1:
       }
     }
   }
-  
+
   if (Fl_Group::handle(event)) return 1;
   int X, Y, W, H; bbox(X, Y, W, H);
   int my;
@@ -766,7 +766,7 @@ J1:
     } else {
       if (when() & FL_WHEN_NOT_CHANGED) do_callback();
     }
-    
+
     // double click calls the callback: (like Enter Key)
     if (Fl::event_clicks() && (when() & FL_WHEN_ENTER_KEY)) {
       set_changed();

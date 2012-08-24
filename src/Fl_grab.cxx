@@ -67,7 +67,7 @@ void Fl::grab(Fl_Window* win) {
 		   ButtonPressMask|ButtonReleaseMask|
 		   ButtonMotionMask|PointerMotionMask,
 		   GrabModeAsync,
-		   GrabModeAsync, 
+		   GrabModeAsync,
 		   None,
 		   0,
 		   fl_event_time);
@@ -75,7 +75,7 @@ void Fl::grab(Fl_Window* win) {
 		    fl_xid(first_window()),
 		    1,
 		    GrabModeAsync,
-		    GrabModeAsync, 
+		    GrabModeAsync,
 		    fl_event_time);
 #endif
     }

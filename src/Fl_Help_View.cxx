@@ -251,7 +251,7 @@ void Fl_Help_View::hv_draw(const char *t, int x, int y)
     Fl_Color c = fl_color();
     fl_color(hv_selection_color);
     int w = (int)fl_width(t);
-    if (current_pos+(int)strlen(t)<selection_last) 
+    if (current_pos+(int)strlen(t)<selection_last)
       w += (int)fl_width(' ');
     fl_rectf(x, y+fl_descent()-fl_height(), w, fl_height());
     fl_color(hv_selection_text_color);
@@ -722,7 +722,7 @@ Fl_Help_View::draw()
             if (strcasecmp(buf, "LI") == 0)
 	    {
 #ifdef __APPLE_QUARTZ__
-              fl_font(FL_SYMBOL, fsize); 
+              fl_font(FL_SYMBOL, fsize);
               hv_draw("\245", xx - fsize + x() - leftline_, yy + y());
 #else
               fl_font(FL_SYMBOL, fsize);
@@ -1464,7 +1464,7 @@ Fl_Help_View::format()
 	    xx       = margins.pop();
 	    block->h += fsize + 2;
 	  }
-          else if (strcasecmp(buf, "/TABLE") == 0) 
+          else if (strcasecmp(buf, "/TABLE") == 0)
           {
 	    block->h += fsize + 2;
             xx       = margins.current();
@@ -2873,9 +2873,9 @@ static unsigned int command(const char *cmd)
 
 #define CMD(a, b, c, d) ((a<<24)|(b<<16)|(c<<8)|d)
 
-void Fl_Help_View::end_selection(int clipboard) 
+void Fl_Help_View::end_selection(int clipboard)
 {
-  if (!selected || current_view!=this) 
+  if (!selected || current_view!=this)
     return;
   // convert the select part of our html text into some kind of somewhat readable ASCII
   // and store it in the selection buffer

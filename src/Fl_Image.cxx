@@ -178,7 +178,7 @@ Fl_Image *Fl_RGB_Image::copy(int W, int H) {
   }
   if (W <= 0 || H <= 0) return 0;
 
-  // OK, need to resize the image data; allocate memory and 
+  // OK, need to resize the image data; allocate memory and
   uchar		*new_ptr;	// Pointer into new array
   const uchar	*old_ptr;	// Pointer into old array
   int		c,		// Channel number
@@ -466,7 +466,7 @@ void Fl_RGB_Image::draw(int XP, int YP, int WP, int HP, int cx, int cy) {
     RGBForeColor(&rgb);
 
     CopyMask(GetPortBitMapForCopyBits((GrafPtr)id),
-	     GetPortBitMapForCopyBits((GrafPtr)mask), 
+	     GetPortBitMapForCopyBits((GrafPtr)mask),
 	     GetPortBitMapForCopyBits(GetWindowPort(fl_window)),
              &src, &src, &dst);
   } else if (id) fl_copy_offscreen(X, Y, W, H, (Fl_Offscreen)id, cx, cy);
