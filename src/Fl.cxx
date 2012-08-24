@@ -150,7 +150,7 @@ static int first_timeout_count, free_timeout_count;
 // timeouts by setting this flag instead of getting the time.
 // In this case calling elapse_timeouts() does nothing, but records
 // the current time, and the next call will actualy elapse time.
-static char reset_clock = 1;
+static uchar reset_clock = 1;
 
 static void elapse_timeouts() {
   static struct timeval prevclock;
