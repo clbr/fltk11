@@ -3354,7 +3354,7 @@ Fl_Help_View::value(const char *v)	// I - Text to view
 static int			// O - Code or -1 on error
 quote_char(const char *p) {	// I - Quoted string
   int	i;			// Looping var
-  static struct {
+  static const struct {
     const char	*name;
     int		namelen;
     int		code;
