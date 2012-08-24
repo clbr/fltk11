@@ -51,7 +51,7 @@ typedef struct {
       used. Should be prime. */
 
 static SYMBOL symbols[MAXSYMBOL];      /* The symbols */
-static int symbnumb = -1;              /* Their number */
+static int symbnumb = 0;              /* Their number */
 
 static int find(const char *name) {
 // returns hash entry if it exists, or first empty slot:
