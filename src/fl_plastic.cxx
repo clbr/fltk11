@@ -44,7 +44,7 @@
 //#define USE_OLD_PLASTIC_BOX
 #define USE_OLD_PLASTIC_COLOR
 
-extern uchar *fl_gray_ramp();
+extern const uchar *fl_gray_ramp();
 
 inline Fl_Color shade_color(uchar gc, Fl_Color bc) {
 #ifdef USE_OLD_PLASTIC_COLOR
@@ -80,7 +80,7 @@ inline Fl_Color shade_color(uchar gc, Fl_Color bc) {
 
 
 static void frame_rect(int x, int y, int w, int h, const char *c, Fl_Color bc) {
-  uchar *g = fl_gray_ramp();
+  const uchar *g = fl_gray_ramp();
   int b = strlen(c) / 4 + 1;
 
   for (x += b, y += b, w -= 2 * b, h -= 2 * b; b > 1; b --)
@@ -100,7 +100,7 @@ static void frame_rect(int x, int y, int w, int h, const char *c, Fl_Color bc) {
 
 
 static void frame_round(int x, int y, int w, int h, const char *c, Fl_Color bc) {
-  uchar *g = fl_gray_ramp();
+  const uchar *g = fl_gray_ramp();
   int b = strlen(c) / 4 + 1;
 
   if (w==h) {
@@ -154,7 +154,7 @@ static void frame_round(int x, int y, int w, int h, const char *c, Fl_Color bc) 
 
 
 static void shade_rect(int x, int y, int w, int h, const char *c, Fl_Color bc) {
-  uchar		*g = fl_gray_ramp();
+  const uchar	*g = fl_gray_ramp();
   int		i, j;
   int		clen = strlen(c) - 1;
   int		chalf = clen / 2;
@@ -226,7 +226,7 @@ static void shade_rect(int x, int y, int w, int h, const char *c, Fl_Color bc) {
 }
 
 static void shade_round(int x, int y, int w, int h, const char *c, Fl_Color bc) {
-  uchar		*g = fl_gray_ramp();
+  const uchar	*g = fl_gray_ramp();
   int		i;
   int		clen = strlen(c) - 1;
   int		chalf = clen / 2;
@@ -286,7 +286,7 @@ static void up_frame(int x, int y, int w, int h, Fl_Color c) {
 
 static void narrow_thin_box(int x, int y, int w, int h, Fl_Color c) {
   if (h<=0 || w<=0) return;
-  uchar *g = fl_gray_ramp();
+  const uchar *g = fl_gray_ramp();
   fl_color(shade_color(g['R'], c));
   fl_rectf(x+1, y+1, w-2, h-2);
   fl_color(shade_color(g['I'], c));
