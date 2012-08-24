@@ -79,7 +79,7 @@ class FL_EXPORT Fl_File_Icon			//// Icon data
     VERTEX			// Followed by scaled X,Y
   };
 
-  Fl_File_Icon(const char *p, int t, int nd = 0, short *d = 0);
+  Fl_File_Icon(const char *p, int t, int nd = 0, const short *d = 0);
   ~Fl_File_Icon();
 
   short		*add(short d);

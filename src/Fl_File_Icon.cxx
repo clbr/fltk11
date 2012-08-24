@@ -87,7 +87,7 @@ Fl_File_Icon	*Fl_File_Icon::first_ = (Fl_File_Icon *)0;
 Fl_File_Icon::Fl_File_Icon(const char *p,	/* I - Filename pattern */
                 	   int        t,	/* I - File type */
 			   int        nd,	/* I - Number of data values */
-			   short      *d)	/* I - Data values */
+			   const short *d)	/* I - Data values */
 {
   // Initialize the pattern and type...
   pattern_ = p;

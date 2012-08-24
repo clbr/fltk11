@@ -603,7 +603,7 @@ Fl_File_Icon::load_system_icons(void) {
 		  "hicolor",
 		  NULL
 		};
-  static short	plain[] = {	// Plain file icon
+  static const short	plain[] = {	// Plain file icon
 		  COLOR, -1, -1, OUTLINEPOLYGON, 0, FL_GRAY,
 		  VERTEX, 2000, 1000, VERTEX, 2000, 9000,
 		  VERTEX, 6000, 9000, VERTEX, 8000, 7000,
@@ -621,7 +621,7 @@ Fl_File_Icon::load_system_icons(void) {
 		  VERTEX, 7000, 2000, END,
 		  END
 		};
-  static short	image[] = {	// Image file icon
+  static const short	image[] = {	// Image file icon
 		  COLOR, -1, -1, OUTLINEPOLYGON, 0, FL_GRAY,
 		  VERTEX, 2000, 1000, VERTEX, 2000, 9000,
 		  VERTEX, 6000, 9000, VERTEX, 8000, 7000,
@@ -648,7 +648,7 @@ Fl_File_Icon::load_system_icons(void) {
 		  VERTEX, 5500, 3500, END,
 		  END
 		};
-  static short	dir[] = {	// Directory icon
+  static const short	dir[] = {	// Directory icon
 		  COLOR, -1, -1, POLYGON, VERTEX, 1000, 1000,
 		  VERTEX, 1000, 7500,  VERTEX, 9000, 7500,
 		  VERTEX, 9000, 1000, END,
