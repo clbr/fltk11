@@ -554,6 +554,9 @@ int Fl_Input_::replace(int b, int e, const char* text, int ilen) {
 
   was_up_down = 0;
 
+  if (!text)
+    ilen = 0;
+
   if (b<0) b = 0;
   if (e<0) e = 0;
   if (b>size_) b = size_;
