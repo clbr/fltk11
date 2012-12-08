@@ -100,7 +100,7 @@ void fl_frame2(const char* s, int x, int y, int w, int h) {
   }
 }
 
-void fl_no_box(int, int, int, int, Fl_Color) {}
+static void fl_no_box(int, int, int, int, Fl_Color) {}
 
 void fl_thin_down_frame(int x, int y, int w, int h, Fl_Color) {
   fl_frame2("WWHH",x,y,w,h);
@@ -160,21 +160,21 @@ void fl_down_box(int x, int y, int w, int h, Fl_Color c) {
   fl_color(c); fl_rectf(x+D1, y+D1, w-D2, h-D2);
 }
 
-void fl_engraved_frame(int x, int y, int w, int h, Fl_Color) {
+static void fl_engraved_frame(int x, int y, int w, int h, Fl_Color) {
   fl_frame("HHWWWWHH",x,y,w,h);
 }
 
-void fl_engraved_box(int x, int y, int w, int h, Fl_Color c) {
+static void fl_engraved_box(int x, int y, int w, int h, Fl_Color c) {
   fl_engraved_frame(x,y,w,h,c);
   fl_color(draw_it_active ? c : fl_inactive(c));
   fl_rectf(x+2, y+2, w-4, h-4);
 }
 
-void fl_embossed_frame(int x, int y, int w, int h, Fl_Color) {
+static void fl_embossed_frame(int x, int y, int w, int h, Fl_Color) {
   fl_frame("WWHHHHWW",x,y,w,h);
 }
 
-void fl_embossed_box(int x, int y, int w, int h, Fl_Color c) {
+static void fl_embossed_box(int x, int y, int w, int h, Fl_Color c) {
   fl_embossed_frame(x,y,w,h,c);
   fl_color(draw_it_active ? c : fl_inactive(c));
   fl_rectf(x+2, y+2, w-4, h-4);
@@ -188,7 +188,7 @@ void fl_rectbound(int x, int y, int w, int h, Fl_Color bgcolor) {
 }
 #define fl_border_box fl_rectbound
 
-void fl_border_frame(int x, int y, int w, int h, Fl_Color c) {
+static void fl_border_frame(int x, int y, int w, int h, Fl_Color c) {
   fl_color(draw_it_active ? c : fl_inactive(c));
   fl_rect(x, y, w, h);
 }
