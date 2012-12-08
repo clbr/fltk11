@@ -52,7 +52,6 @@ int fl_filename_match(const char *s, const char *p) {
       while (*p) {
 	if (*p=='-' && last) {
 	  if (*s <= *++p && *s >= last ) matched = 1;
-	  last = 0;
 	} else {
 	  if (*s == *p) matched = 1;
 	}
