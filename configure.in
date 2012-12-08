@@ -154,7 +154,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.$FL_API_VERSION.dylib"
             GLDSONAME="libfltk_gl.$FL_API_VERSION.dylib"
             IMGDSONAME="libfltk_images.$FL_API_VERSION.dylib"
-	    DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -dynamiclib -lc -o"
+	    DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -dynamiclib -lc -o"
 	    ;;
 
 	SunOS* | UNIX_S*)
@@ -162,7 +162,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-	    DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -h \$@ \$(LDLIBS) -G $DEBUGFLAG -o"
+	    DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -h \$@ \$(LDLIBS) -G $DEBUGFLAG -o"
 	    if test "x$libdir" != "x/usr/lib"; then
 		    DSOLINK="-R$libdir"
             fi
@@ -182,7 +182,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-soname,\$@,-set_version,sgi1.1 \$(LDLIBS) -shared $DEBUGFLAG -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-soname,\$@,-set_version,sgi1.1 \$(LDLIBS) -shared $DEBUGFLAG -o"
 	    if test "x$libdir" != "x/usr/lib" -a "x$libdir" != "x/usr/lib32" -a "x$libdir" != "x/usr/lib64"; then
 		    DSOLINK="-Wl,-rpath,$libdir"
             fi
@@ -192,7 +192,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared $DEBUGFLAG -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared $DEBUGFLAG -o"
 	    if test "x$libdir" != "x/usr/lib" -a "x$libdir" != "x/usr/lib32"; then
 		    DSOLINK="-Wl,-rpath,$libdir"
             fi
@@ -202,7 +202,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared -fPIC $DEBUGFLAG -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared -fPIC $DEBUGFLAG -o"
 	    if test "x$libdir" != "x/usr/lib"; then
 		    DSOLINK="-Wl,-rpath,$libdir"
             fi
@@ -212,7 +212,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms_s.a"
             GLDSONAME="libfltk_gl_s.a"
             IMGDSONAME="libfltk_images_s.a"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-bexpall,-bM:SRE,-bnoentry -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-bexpall,-bM:SRE,-bnoentry -o"
             SHAREDSUFFIX="_s"
             ;;
         CYGWIN* | MINGW*)
@@ -233,7 +233,7 @@ if test x$enable_shared = xyes; then
 	    # appears to be necessary for older binutils versions < 2.16
 	    #-----------------------------------------------------------
             LDFLAGS="$LDFLAGS -Wl,--enable-auto-import -Wl,--enable-runtime-pseudo-reloc"
-	    DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -shared \
+	    DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -shared \
 	    	-Wl,--whole-archive -Wl,--export-all-symbols \
 		-Wl,--enable-runtime-pseudo-reloc -Wl,--enable-auto-import \
 		-Wl,--enable-auto-image-base -o \$@"
@@ -244,7 +244,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared $DEBUGFLAG -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared $DEBUGFLAG -o"
 	    ;;
     esac
 
