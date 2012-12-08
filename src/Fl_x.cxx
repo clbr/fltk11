@@ -890,7 +890,6 @@ int fl_handle(const XEvent& thisevent)
 	// Store ASCII numeric keypad value...
 	keysym = keysym1 | FL_KP;
 	buffer[0] = char(keysym1) & 0x7F;
-	len = 1;
       } else {
 	// Map keypad to special key...
 	static const unsigned short table[15] = {

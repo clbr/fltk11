@@ -1886,7 +1886,7 @@ static void overlayRectInLine( const char *line, char *insLine, int rectStart,
   addPadding( outPtr, outIndent, postRectIndent, tabDist, useTabs,
               nullSubsChar, &len );
   outPtr += len;
-  outIndent = postRectIndent;
+  //outIndent = postRectIndent;
 
   /* copy the text beyond "rectEnd" */
   strcpy( outPtr, linePtr );
