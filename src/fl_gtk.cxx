@@ -168,9 +168,7 @@ static void gtk_thin_down_box(int x, int y, int w, int h, Fl_Color c) {
 // new GTK+ style for round buttons
 #if 1
 
-static void fl_arc_i(int x,int y,int w,int h,double a1,double a2) {
-  fl_arc(x,y,w,h,a1,a2);
-}
+void fl_arc_i(int x,int y,int w,int h,double a1,double a2);
 
 enum {UPPER_LEFT, LOWER_RIGHT, CLOSED, FILL};
 
