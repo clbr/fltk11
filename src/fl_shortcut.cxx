@@ -127,7 +127,7 @@ static Keyname table[] = {
 #endif
 
 const char * fl_shortcut_label(int shortcut) {
-  static char buf[20];
+  static char buf[40];
   char *p = buf;
   if (!shortcut) {*p = 0; return buf;}
   // fix upper case shortcuts
