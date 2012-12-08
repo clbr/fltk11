@@ -107,7 +107,7 @@ extern const char fl_encoding[];
 const char fl_encoding[] = "iso8859-1";
 
 // return true if this matches fl_encoding:
-int fl_correct_encoding(const char* name) {
+static int fl_correct_encoding(const char* name) {
   if (*name != '-') return 0;
   const char* c = fl_font_word(name,13);
   return (*c++ && !strcmp(c,fl_encoding));
