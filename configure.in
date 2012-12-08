@@ -1229,7 +1229,7 @@ else
     echo "                 ZLIB=Builtin"
 fi
 
-if test x$enable_largefile = xyes; then
+if test x$enable_largefile != xno; then
     echo "    Large Files: YES"
 else
     echo "    Large Files: NO"
