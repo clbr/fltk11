@@ -1909,7 +1909,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.$FL_API_VERSION.dylib"
             GLDSONAME="libfltk_gl.$FL_API_VERSION.dylib"
             IMGDSONAME="libfltk_images.$FL_API_VERSION.dylib"
-	    DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -dynamiclib -lc -o"
+	    DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -dynamiclib -lc -o"
 	    ;;
 
 	SunOS* | UNIX_S*)
@@ -1917,7 +1917,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-	    DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -h \$@ \$(LDLIBS) -G $DEBUGFLAG -o"
+	    DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -h \$@ -G $DEBUGFLAG -o"
 	    if test "x$libdir" != "x/usr/lib"; then
 		    DSOLINK="-R$libdir"
             fi
@@ -1937,7 +1937,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-soname,\$@,-set_version,sgi1.1 \$(LDLIBS) -shared $DEBUGFLAG -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-soname,\$@,-set_version,sgi1.1 -shared $DEBUGFLAG -o"
 	    if test "x$libdir" != "x/usr/lib" -a "x$libdir" != "x/usr/lib32" -a "x$libdir" != "x/usr/lib64"; then
 		    DSOLINK="-Wl,-rpath,$libdir"
             fi
@@ -1947,7 +1947,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared $DEBUGFLAG -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-soname,\$@ -shared $DEBUGFLAG -o"
 	    if test "x$libdir" != "x/usr/lib" -a "x$libdir" != "x/usr/lib32"; then
 		    DSOLINK="-Wl,-rpath,$libdir"
             fi
@@ -1957,7 +1957,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared -fPIC $DEBUGFLAG -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-soname,\$@ -shared -fPIC $DEBUGFLAG -o"
 	    if test "x$libdir" != "x/usr/lib"; then
 		    DSOLINK="-Wl,-rpath,$libdir"
             fi
@@ -1967,7 +1967,7 @@ if test x$enable_shared = xyes; then
             FLDSONAME="libfltk_forms_s.a"
             GLDSONAME="libfltk_gl_s.a"
             IMGDSONAME="libfltk_images_s.a"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-bexpall,-bM:SRE,-bnoentry -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-bexpall,-bM:SRE,-bnoentry -o"
             SHAREDSUFFIX="_s"
             ;;
         CYGWIN* | MINGW*)
@@ -1988,7 +1988,7 @@ if test x$enable_shared = xyes; then
 	    # appears to be necessary for older binutils versions < 2.16
 	    #-----------------------------------------------------------
             LDFLAGS="$LDFLAGS -Wl,--enable-auto-import -Wl,--enable-runtime-pseudo-reloc"
-	    DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -shared \
+	    DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -shared \
 	    	-Wl,--whole-archive -Wl,--export-all-symbols \
 		-Wl,--enable-runtime-pseudo-reloc -Wl,--enable-auto-import \
 		-Wl,--enable-auto-image-base -o \$@"
@@ -2000,7 +2000,7 @@ echo "$as_me: WARNING: Shared libraries may not be supported.  Trying -shared op
             FLDSONAME="libfltk_forms.so.$FL_API_VERSION"
             GLDSONAME="libfltk_gl.so.$FL_API_VERSION"
             IMGDSONAME="libfltk_images.so.$FL_API_VERSION"
-            DSOCOMMAND="\$(CXX) \$(DSOFLAGS) -Wl,-soname,\$@ \$(LDLIBS) -shared $DEBUGFLAG -o"
+            DSOCOMMAND="\$(CXX) \$(LDFLAGS) \$(DSOFLAGS) -Wl,-soname,\$@ -shared $DEBUGFLAG -o"
 	    ;;
     esac
 
@@ -4219,7 +4219,7 @@ if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
 else
   ac_cv_header_stdc=no
 fi
-rm -f -r conftest*
+rm -f conftest*
 
 fi
 
@@ -4240,7 +4240,7 @@ if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
 else
   ac_cv_header_stdc=no
 fi
-rm -f -r conftest*
+rm -f conftest*
 
 fi
 
@@ -7636,7 +7636,7 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 ;;
 esac
-rm -f -r conftest*
+rm -f conftest*
   if test $ac_cv_sys_file_offset_bits = unknown; then
     { echo "$as_me:$LINENO: checking for _LARGE_FILES value needed for large files" >&5
 echo $ECHO_N "checking for _LARGE_FILES value needed for large files... $ECHO_C" >&6; }
@@ -7757,7 +7757,7 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 ;;
 esac
-rm -f -r conftest*
+rm -f conftest*
   fi
 fi
 
@@ -9947,7 +9947,7 @@ _ACEOF
       eval "ac_im_$ac_var=\`\${MAKE-make} $ac_var 2>/dev/null | sed -n 's/^$ac_var=//p'\`"
     done
     # Open Windows xmkmf reportedly sets LIBDIR instead of USRLIBDIR.
-    for ac_extension in a so sl dylib la dll; do
+    for ac_extension in a so sl; do
       if test ! -f "$ac_im_usrlibdir/libX11.$ac_extension" &&
 	 test -f "$ac_im_libdir/libX11.$ac_extension"; then
 	ac_im_usrlibdir=$ac_im_libdir; break
@@ -10100,7 +10100,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
 for ac_dir in `echo "$ac_x_includes $ac_x_header_dirs" | sed s/include/lib/g`
 do
   # Don't even attempt the hair of trying to link an X program!
-  for ac_extension in a so sl dylib la dll; do
+  for ac_extension in a so sl; do
     if test -r "$ac_dir/libX11.$ac_extension"; then
       ac_x_libraries=$ac_dir
       break 2
