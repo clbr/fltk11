@@ -35,10 +35,10 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Image.H>
 
-void
+static void
 fl_no_label(const Fl_Label*,int,int,int,int,Fl_Align) {}
 
-void
+static void
 fl_normal_label(const Fl_Label* o, int X, int Y, int W, int H, Fl_Align align)
 {
   fl_font(o->font, o->size);
@@ -46,7 +46,7 @@ fl_normal_label(const Fl_Label* o, int X, int Y, int W, int H, Fl_Align align)
   fl_draw(o->value, X, Y, W, H, align, o->image);
 }
 
-void
+static void
 fl_normal_measure(const Fl_Label* o, int& W, int& H) {
   fl_font(o->font, o->size);
   fl_measure(o->value, W, H);
