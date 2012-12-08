@@ -47,7 +47,7 @@
 
 #define FL_TIMER_BLINKRATE	0.2
 
-void fl_gettime(long* sec, long* usec) {
+static void fl_gettime(long* sec, long* usec) {
 #ifdef WIN32
 # ifdef __MWERKS__
   time_t localTime = time(NULL);
