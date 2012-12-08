@@ -461,6 +461,7 @@ void Fl_Text_Buffer::replace_rectangular( int start, int end, int rectStart,
   int i, nInsertedLines, nDeletedLines, insLen, hint;
   int insertDeleted, insertInserted, deleteInserted;
   int linesPadded = 0;
+  uchar instext_allocated = 0;
 
   /* Make sure start and end refer to complete lines, since the
      columnar delete and insert operations will replace whole lines */
@@ -480,6 +481,7 @@ void Fl_Text_Buffer::replace_rectangular( int start, int end, int rectStart,
   if ( nInsertedLines < nDeletedLines ) {
     insLen = strlen( s );
     insText = (char *)malloc( insLen + nDeletedLines - nInsertedLines + 1 );
+    instext_allocated = 1;
     strcpy( insText, s );
     insPtr = insText + insLen;
     for ( i = 0; i < nDeletedLines - nInsertedLines; i++ )
@@ -504,7 +506,7 @@ void Fl_Text_Buffer::replace_rectangular( int start, int end, int rectStart,
     Fl::error("Fl_Text_Buffer::replace_rectangular(): internal consistency check repl1 failed");
   call_modify_callbacks( start, end - start, insertInserted, 0, deletedText );
   free( (void *) deletedText );
-  if ( nInsertedLines < nDeletedLines )
+  if (instext_allocated)
     free( (void *) insText );
 }
 
