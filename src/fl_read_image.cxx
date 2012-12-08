@@ -278,10 +278,8 @@ fl_read_image(uchar *p,		// I - Pixel buffer or NULL to allocate
 	    line_ptr[2] = cvals[i][2];
 
             if (index_shift > 0) {
-              index_mask >>= 2;
               index_shift -= 2;
             } else {
-              index_mask  = 192;
               index_shift = 6;
               pixel ++;
             }
