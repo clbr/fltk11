@@ -493,7 +493,7 @@ void Fl_RGB_Image::draw(int XP, int YP, int WP, int HP, int cx, int cy) {
       XSetClipMask(fl_display, fl_gc, mask);
       int ox = X-cx; if (ox < 0) ox += w();
       int oy = Y-cy; if (oy < 0) oy += h();
-      XSetClipOrigin(fl_display, fl_gc, X-cx, Y-cy);
+      XSetClipOrigin(fl_display, fl_gc, ox, oy);
     }
 
     fl_copy_offscreen(X, Y, W, H, id, cx, cy);
