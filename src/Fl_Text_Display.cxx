@@ -2925,11 +2925,11 @@ void Fl_Text_Display::draw(void) {
     int W = w(), H = h();
     draw_box(box(), x(), y(), W, H, color());
 
-    if (mHScrollBar->visible())
+/*    if (mHScrollBar->visible())
       W -= scrollbar_width();
     if (mVScrollBar->visible())
       H -= scrollbar_width();
-
+*/
     // left margin
     fl_rectf(text_area.x-LEFT_MARGIN, text_area.y-TOP_MARGIN,
              LEFT_MARGIN, text_area.h+TOP_MARGIN+BOTTOM_MARGIN,

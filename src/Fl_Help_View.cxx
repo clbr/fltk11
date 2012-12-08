@@ -2163,7 +2163,7 @@ Fl_Help_View::format_table(int        *table_width,	// O - Total table width
         if (get_attr(attrs, "SRC", attr, sizeof(attr))) {
 	  img     = get_image(attr, iwidth, iheight);
 	  iwidth  = img->w();
-	  iheight = img->h();
+	  //iheight = img->h();
 	}
 
 	if (iwidth > minwidths[column])
