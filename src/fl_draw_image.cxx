@@ -499,7 +499,7 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
   } else {
     int linesize = ((w*bytes_per_pixel+scanline_add)&scanline_mask)/sizeof(STORETYPE);
     int blocking = h;
-    static STORETYPE *buffer;	// our storage, always word aligned
+    static STORETYPE *buffer = NULL;	// our storage, always word aligned
     static long buffer_size;
     {int size = linesize*h;
     if (size > MAXBUFFER) {
@@ -507,7 +507,8 @@ static void innards(const uchar *buf, int X, int Y, int W, int H,
       blocking = MAXBUFFER/linesize;
     }
     if (size > buffer_size) {
-      delete[] buffer;
+      if (buffer)
+        delete[] buffer;
       buffer_size = size;
       buffer = new STORETYPE[size];
     }}
