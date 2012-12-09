@@ -355,6 +355,10 @@ if test $ac_cv_sizeof_int -eq 8; then
 else
     if test $ac_cv_sizeof_long -eq 8; then
         AC_DEFINE(U64,unsigned long)
+    else
+        if test $ac_cv_sizeof_long_long -eq 8; then
+            AC_DEFINE(U64,unsigned long long)
+        fi
     fi
 fi
 

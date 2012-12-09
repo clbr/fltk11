@@ -5876,6 +5876,13 @@ else
 #define U64 unsigned long
 _ACEOF
 
+    else
+        if test $ac_cv_sizeof_long_long -eq 8; then
+            cat >>confdefs.h <<\_ACEOF
+#define U64 unsigned long long
+_ACEOF
+
+        fi
     fi
 fi
 
