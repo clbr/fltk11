@@ -53,9 +53,9 @@ CC		= @CC@
 MAKEDEPEND	= @MAKEDEPEND@
 
 # flags for C++ compiler:
-CXXVISIB	= -fvisibility-inlines-hidden -fvisibility=hidden
+CXXVISIB	= -fvisibility-inlines-hidden
 ARCHFLAGS	= @ARCHFLAGS@
-OPTIM		= @OPTIM@
+OPTIM		= @OPTIM@ -fvisibility=hidden
 CFLAGS		= $(OPTIM) @LARGEFILE@ @PTHREAD_FLAGS@ @CPPFLAGS@ @CFLAGS@
 CXXFLAGS	= $(OPTIM) @LARGEFILE@ @PTHREAD_FLAGS@ @CPPFLAGS@ @CXXFLAGS@ $(CXXVISIB)
 
