@@ -30,7 +30,7 @@
 #ifndef about_panel_h
 #define about_panel_h
 #include <FL/Fl.H>
-extern void show_help(const char *name); 
+extern void show_help(const char *name);
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *about_panel;
 #include <FL/Fl_Box.H>

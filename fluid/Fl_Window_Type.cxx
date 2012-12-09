@@ -58,7 +58,7 @@ extern const char* i18n_set;
 
 extern Fl_Preferences	fluid_prefs;
 
-inline int fl_min(int a, int b) { return (a < b ? a : b); } 
+inline int fl_min(int a, int b) { return (a < b ? a : b); }
 
 #include "widget_panel.h"
 
@@ -291,7 +291,7 @@ void Overlay_Window::draw() {
   if ((damage()&FL_DAMAGE_ALL) &&
       (!box() || (box()>=4&&!(box()&2)) || box()>=_FL_ROUNDED_BOX)) {
     // if so, draw checkerboard so user can see what areas are clear:
-    for (int Y = 0; Y < h(); Y += CHECKSIZE) 
+    for (int Y = 0; Y < h(); Y += CHECKSIZE)
       for (int X = 0; X < w(); X += CHECKSIZE) {
 	fl_color(((Y/(2*CHECKSIZE))&1) != ((X/(2*CHECKSIZE))&1) ?
 		 FL_WHITE : FL_BLACK);
@@ -466,7 +466,7 @@ void border_cb(Fl_Light_Button* i, void* v) {
 void xclass_cb(Fl_Input* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_window()) {
-      i->hide(); 
+      i->hide();
       i->parent()->hide(); // hides the "X Class:" label as well
       return;
     }
@@ -530,7 +530,7 @@ void Fl_Window_Type::newdx() {
       if (mydx < 0) mydx = 0;
     } else if (dx0 < -snap) {
       if (mydx > 0) mydx = 0;
-    } else 
+    } else
       mydx = 0;
     int dy0 = my-y1;
     int iy = (drag&BOTTOM) ? by : bt;
@@ -539,7 +539,7 @@ void Fl_Window_Type::newdx() {
       if (mydy < 0) mydy = 0;
     } else if (dy0 < -snap) {
       if (mydy > 0) mydy = 0;
-    } else 
+    } else
       mydy = 0;
   }
 
@@ -1117,7 +1117,7 @@ void Fl_Window_Type::moveallchildren()
       i = i->next;
     }
   }
-  for (i=next; i && i->level>level; i=i->next) 
+  for (i=next; i && i->level>level; i=i->next)
     fix_group_size(i);
   o->redraw();
   recalc = 1;

@@ -155,7 +155,7 @@ static Fl_Pixmap	spinner_pixmap(flSpinner_xpm);
 static Fl_Pixmap	widgetclass_pixmap(flWidgetClass_xpm);
 
 Fl_Pixmap *pixmap[] = { 0, &window_pixmap, &button_pixmap, &checkbutton_pixmap, &roundbutton_pixmap, /* 0..4 */
- &box_pixmap, &group_pixmap, &function_pixmap, &code_pixmap, &codeblock_pixmap, &declaration_pixmap, /* 5..10 */ 
+ &box_pixmap, &group_pixmap, &function_pixmap, &code_pixmap, &codeblock_pixmap, &declaration_pixmap, /* 5..10 */
  &declarationblock_pixmap, &class_pixmap, &tabs_pixmap, &input_pixmap, &choice_pixmap,               /* 11..15 */
  &menuitem_pixmap, &menubar_pixmap, &submenu_pixmap, &scroll_pixmap, &tile_pixmap, &wizard_pixmap,   /* 16..21 */
  &pack_pixmap, &returnbutton_pixmap, &lightbutton_pixmap, &repeatbutton_pixmap, &menubutton_pixmap,  /* 22..26 */
@@ -181,7 +181,7 @@ class Widget_Browser : public Fl_Browser_ {
   void item_draw(void *,int,int,int,int) const ;
   int incr_height() const ;
 
-public:	
+public:
 
   int handle(int);
   void callback();
@@ -567,7 +567,7 @@ int storestring(const char *n, const char * & p, int nostrip) {
     if (!nostrip) while (e > n && isspace(*(e-1))) e--;
     length = e-n;
     if (!length) n = 0;
-  }    
+  }
   if (n == p) return 0;
   if (n && p && !strncmp(n,p,length) && !p[length]) return 0;
   if (p) free((void *)p);
@@ -783,7 +783,7 @@ void later_cb(Fl_Widget*,void*) {
 void Fl_Type::write() {
     write_indent(level);
     write_word(type_name());
-    
+
     if (is_class()) {
       const char * p = 	((Fl_Class_Type*)this)->prefix();
       if (p &&	strlen(p))

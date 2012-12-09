@@ -42,7 +42,7 @@ class FL_EXPORT Fl_Bitmap : public Fl_Image {
 #else
   unsigned id; // for internal use
 #endif // __APPLE__ || WIN32
-  
+
   Fl_Bitmap(const uchar *bits, int W, int H) :
     Fl_Image(W,H,0), array(bits), alloc_array(0), id(0) {data((const char **)&array, 1);}
   Fl_Bitmap(const char *bits, int W, int H) :

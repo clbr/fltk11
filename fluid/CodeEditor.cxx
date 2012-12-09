@@ -347,7 +347,7 @@ int CodeEditor::auto_indent(int, CodeEditor* e) {
   char *ptr;
 
   for (ptr = text; isspace(*ptr); ptr ++);
-  *ptr = '\0';  
+  *ptr = '\0';
   if (*text) {
     // use only a single 'insert' call to avoid redraw issues
     int n = strlen(text);
@@ -407,9 +407,9 @@ CodeEditor::~CodeEditor() {
 
 
 CodeViewer::CodeViewer(int X, int Y, int W, int H, const char *L)
-: CodeEditor(X, Y, W, H, L) 
+: CodeEditor(X, Y, W, H, L)
 {
-  default_key_function(kf_ignore);  
+  default_key_function(kf_ignore);
   remove_all_key_bindings(&key_bindings);
   cursor_style(CARET_CURSOR);
 }

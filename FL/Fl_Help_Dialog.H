@@ -38,11 +38,11 @@
 #include <FL/Fl_Help_View.H>
 
 class FL_EXPORT Fl_Help_Dialog {
-  int index_; 
-  int max_; 
-  int line_[100]; 
-  char file_[100][256]; 
-  int find_pos_; 
+  int index_;
+  int max_;
+  int line_[100];
+  char file_[100][256];
+  int find_pos_;
 public:
   Fl_Help_Dialog();
 private:

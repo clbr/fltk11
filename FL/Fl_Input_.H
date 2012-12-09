@@ -138,7 +138,7 @@ public:
                          else type((uchar)(type() & ~FL_INPUT_WRAP)); }
 };
 
-#endif 
+#endif
 
 //
 // End of "$Id: Fl_Input_.H 4288 2005-04-16 00:13:17Z mike $".

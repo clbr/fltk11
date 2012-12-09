@@ -51,14 +51,14 @@ class Fl_Input_Choice : public Fl_Group {
       if (Fl::focus() == this) draw_focus();
     }
   public:
-    InputMenuButton(int x,int y,int w,int h,const char*l=0) : 
+    InputMenuButton(int x,int y,int w,int h,const char*l=0) :
 	Fl_Menu_Button(x,y,w,h,l) { box(FL_UP_BOX); }
   };
 
   Fl_Input *inp_;
   InputMenuButton *menu_;
 
-  static void menu_cb(Fl_Widget*, void *data) { 
+  static void menu_cb(Fl_Widget*, void *data) {
     Fl_Input_Choice *o=(Fl_Input_Choice *)data;
     const Fl_Menu_Item *item = o->menubutton()->mvalue();
     if (item && item->flags & (FL_SUBMENU|FL_SUBMENU_POINTER)) return;	// ignore submenus
@@ -84,7 +84,7 @@ class Fl_Input_Choice : public Fl_Group {
     }
   }
 
-  static void inp_cb(Fl_Widget*, void *data) { 
+  static void inp_cb(Fl_Widget*, void *data) {
     Fl_Input_Choice *o=(Fl_Input_Choice *)data;
     if (o->inp_->changed()) {
       o->Fl_Widget::set_changed();
@@ -129,14 +129,14 @@ public:
   void add(const char *s) {
     menu_->add(s);
   }
-  int changed() const { 
+  int changed() const {
     return inp_->changed() | Fl_Widget::changed();
   }
-  void clear_changed() { 
+  void clear_changed() {
     inp_->clear_changed();
     Fl_Widget::clear_changed();
   }
-  void set_changed() { 
+  void set_changed() {
     inp_->set_changed();
     // no need to call Fl_Widget::set_changed()
   }

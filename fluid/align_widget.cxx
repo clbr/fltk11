@@ -38,7 +38,7 @@
 #define BREAK_ON_FIRST break
 //#define BREAK_ON_FIRST
 
-void align_widget_cb(Fl_Widget*, long how) 
+void align_widget_cb(Fl_Widget*, long how)
 {
   const int max = 32768, min = -32768;
   int left, right, top, bot, wdt, hgt, n;

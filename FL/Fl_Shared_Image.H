@@ -35,7 +35,7 @@
 typedef Fl_Image *(*Fl_Shared_Handler)(const char *name, uchar *header,
                                        int headerlen);
 
-// Shared images class. 
+// Shared images class.
 class FL_EXPORT Fl_Shared_Image : public Fl_Image {
   protected:
 

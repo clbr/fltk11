@@ -249,11 +249,11 @@ void Fl_Menu_Item_Type::write_static() {
       if (c) {
         if (c==m->name()) {
           // assign a menu item address directly to a variable
-          int i; 
+          int i;
           const char* n = ((Fl_Menu_Item_Type *)q)->menu_name(i);
           write_c("Fl_Menu_Item* %s::%s = %s::%s + %d;\n", k, c, k, n, i);
         } else {
-          // if the name is an array, only define the array. 
+          // if the name is an array, only define the array.
           // The actual assignment is in write_code1()
           write_c("Fl_Menu_Item* %s::%s;\n", k, c);
         }
@@ -586,7 +586,7 @@ int Shortcut_Button::handle(int e) {
     return r;
   }
 }
-  
+
 void shortcut_in_cb(Shortcut_Button* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_button()) {i->hide(); return;}

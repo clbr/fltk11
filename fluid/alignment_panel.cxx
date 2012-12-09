@@ -169,8 +169,8 @@ Fl_Double_Window* make_project_window() {
   } // Fl_Double_Window* project_window
   return project_window;
 }
-Fl_Text_Buffer *shell_run_buffer; 
-void scheme_cb(Fl_Choice *, void *); 
+Fl_Text_Buffer *shell_run_buffer;
+void scheme_cb(Fl_Choice *, void *);
 
 Fl_Double_Window *settings_window=(Fl_Double_Window *)0;
 

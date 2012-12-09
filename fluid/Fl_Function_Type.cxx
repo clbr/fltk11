@@ -287,7 +287,7 @@ void Fl_Function_Type::write_code1() {
 	  if (nptr[1] != ':') break;
 	  // Copy extra ":" for "class::member"...
           *sptr++ = *nptr++;
-        }	  
+        }
         *sptr++ = *nptr++;
       }
       *sptr = '\0';
@@ -299,14 +299,14 @@ void Fl_Function_Type::write_code1() {
       for (sptr=s,nptr=(char*)name(); *nptr; nc++,nptr++) {
 	if (!skips && *nptr=='(') plevel++;
 	else if (!skips && *nptr==')') plevel--;
-	if ( *nptr=='"' &&  !(nc &&  *(nptr-1)=='\\') ) 
+	if ( *nptr=='"' &&  !(nc &&  *(nptr-1)=='\\') )
 	  skips = skips ? 0 : 1;
 	else if(!skips && *nptr=='\'' &&  !(nc &&  *(nptr-1)=='\\'))
 	  skipc = skipc ? 0 : 1;
-	if(!skips && !skipc && plevel==1 && *nptr =='=' && 
-	   !(nc && *(nptr-1)=='\'') ) // ignore '=' case 
+	if(!skips && !skipc && plevel==1 && *nptr =='=' &&
+	   !(nc && *(nptr-1)=='\'') ) // ignore '=' case
 	  while(*++nptr  && (skips || skipc || (*nptr!=',' && *nptr!=')' || plevel!=1) )) {
-	    if ( *nptr=='"' &&  *(nptr-1)!='\\' ) 
+	    if ( *nptr=='"' &&  *(nptr-1)!='\\' )
 	      skips = skips ? 0 : 1;
 	    else if(!skips && *nptr=='\'' &&  *(nptr-1)!='\\')
 	      skipc = skipc ? 0 : 1;
@@ -317,7 +317,7 @@ void Fl_Function_Type::write_code1() {
 	if (sptr < (s + sizeof(s) - 1))	*sptr++ = *nptr;
       }
       *sptr = '\0';
- 
+
       write_c("%s::%s {\n", k, s);
     } else {
       if (public_) {
@@ -336,14 +336,14 @@ void Fl_Function_Type::write_code1() {
       for (sptr=s,nptr=(char*)name(); *nptr; nc++,nptr++) {
 	if (!skips && *nptr=='(') plevel++;
 	else if (!skips && *nptr==')') plevel--;
-	if ( *nptr=='"' &&  !(nc &&  *(nptr-1)=='\\') ) 
+	if ( *nptr=='"' &&  !(nc &&  *(nptr-1)=='\\') )
 	  skips = skips ? 0 : 1;
 	else if(!skips && *nptr=='\'' &&  !(nc &&  *(nptr-1)=='\\'))
 	  skipc = skipc ? 0 : 1;
-	if(!skips && !skipc && plevel==1 && *nptr =='=' && 
-	   !(nc && *(nptr-1)=='\'') ) // ignore '=' case 
+	if(!skips && !skipc && plevel==1 && *nptr =='=' &&
+	   !(nc && *(nptr-1)=='\'') ) // ignore '=' case
 	  while(*++nptr  && (skips || skipc || (*nptr!=',' && *nptr!=')' || plevel!=1) )) {
-	    if ( *nptr=='"' &&  *(nptr-1)!='\\' ) 
+	    if ( *nptr=='"' &&  *(nptr-1)!='\\' )
 	      skips = skips ? 0 : 1;
 	    else if(!skips && *nptr=='\'' &&  *(nptr-1)!='\\')
 	      skipc = skipc ? 0 : 1;
@@ -354,7 +354,7 @@ void Fl_Function_Type::write_code1() {
 	if (sptr < (s + sizeof(s) - 1))	*sptr++ = *nptr;
       }
       *sptr = '\0';
- 
+
       write_c("%s%s %s {\n", rtype, star, s);
     }
   }
@@ -382,7 +382,7 @@ void Fl_Function_Type::write_code2() {
 int Fl_Function_Type::has_signature(const char *rtype, const char *sig) const {
   if (rtype && !return_type) return 0;
   if (!name()) return 0;
-  if ( (rtype==0L || strcmp(return_type, rtype)==0) 
+  if ( (rtype==0L || strcmp(return_type, rtype)==0)
       && fl_filename_match(name(), sig)) {
     return 1;
   }
@@ -514,7 +514,7 @@ void Fl_CodeBlock_Type::write_code2() {
 
 ////////////////////////////////////////////////////////////////
 
-int Fl_Decl_Type::is_public() const 
+int Fl_Decl_Type::is_public() const
 {
  Fl_Type *p = parent;
  while (p && !p->is_decl_block()) p = p->parent;
@@ -649,13 +649,13 @@ void Fl_Decl_Type::write_code1() {
     write_h("  %.*s; %s\n", (int)(e-c), c, csc);
   } else {
     if (public_) {
-      if (static_) 
+      if (static_)
         write_h("extern ");
       write_h("%.*s; %s\n", (int)(e-c), c, csc);
       if (static_)
         write_c("%.*s; %s\n", (int)(e-c), c, csc);
     } else {
-      if (static_) 
+      if (static_)
         write_c("static ");
       write_c("%.*s; %s\n", (int)(e-c), c, csc);
     }
@@ -772,7 +772,7 @@ Fl_Type *Fl_Comment_Type::make() {
 
 void Fl_Comment_Type::write_properties() {
   Fl_Type::write_properties();
-  if (in_c_) write_string("in_source"); else write_string("not_in_source"); 
+  if (in_c_) write_string("in_source"); else write_string("not_in_source");
   if (in_h_) write_string("in_header"); else write_string("not_in_header");
 }
 
@@ -843,7 +843,7 @@ void Fl_Comment_Type::open() {
           // add the current comment to the database
           const char *xname = fl_input(
             "Please enter a name to reference the current\ncomment in your database.\n\n"
-            "Use forward slashes '/' to create submenus.", 
+            "Use forward slashes '/' to create submenus.",
             "My Comment");
           if (xname) {
             char *name = strdup(xname);
@@ -884,7 +884,7 @@ void Fl_Comment_Type::open() {
           if (comment_predefined->item_pathname(itempath, 255)==0) {
             if (itempath[0]=='/') memmove(itempath, itempath+1, 255);
             Fl_Preferences db(Fl_Preferences::USER, "fltk.org", "fluid_comments");
-            char *text; 
+            char *text;
             db.get(itempath, text, "(no text found in data base)");
             comment_input->buffer()->text(text);
             free(text);
@@ -926,7 +926,7 @@ void Fl_Comment_Type::open() {
 }
 
 const char *Fl_Comment_Type::title() {
-  const char* n = name(); 
+  const char* n = name();
   if (!n || !*n) return type_name();
   if (title_buf[0]==0) {
     const char *s = n;
@@ -1074,9 +1074,9 @@ void Fl_Class_Type::read_property(const char *c) {
 void Fl_Class_Type::open() {
   if (!class_panel) make_class_panel();
   char fullname[1024]="";
-  if (prefix() && strlen(prefix())) 
+  if (prefix() && strlen(prefix()))
     sprintf(fullname,"%s %s",prefix(),name());
-  else 
+  else
     strcpy(fullname, name());
   c_name_input->static_value(fullname);
   c_subclass_input->static_value(subclass_of);
@@ -1114,7 +1114,7 @@ void Fl_Class_Type::open() {
     if (p<s)                    p++;
     if (is_id(*p) && p<na)      pr=p; // prefix detected
     c = c_subclass_input->value();
-    message = c_check(c); 
+    message = c_check(c);
     if (message) { free((void*)s);continue;}
     name(na);
     prefix(pr);

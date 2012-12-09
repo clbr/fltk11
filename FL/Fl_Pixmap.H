@@ -56,7 +56,7 @@ class FL_EXPORT Fl_Pixmap : public Fl_Image {
   unsigned id; // for internal use
   unsigned mask; // for internal use (mask bitmap)
 #endif // __APPLE__ || WIN32
-  
+
   explicit Fl_Pixmap(char * const * D) : Fl_Image(-1,0,1), alloc_data(0), id(0), mask(0) {set_data((const char*const*)D); measure();}
   explicit Fl_Pixmap(uchar* const * D) : Fl_Image(-1,0,1), alloc_data(0), id(0), mask(0) {set_data((const char*const*)D); measure();}
   explicit Fl_Pixmap(const char * const * D) : Fl_Image(-1,0,1), alloc_data(0), id(0), mask(0) {set_data((const char*const*)D); measure();}

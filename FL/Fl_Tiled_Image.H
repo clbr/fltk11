@@ -31,7 +31,7 @@
 #  include "Fl_Image.H"
 
 
-// Tiled image class. 
+// Tiled image class.
 class FL_EXPORT Fl_Tiled_Image : public Fl_Image {
   protected:
 

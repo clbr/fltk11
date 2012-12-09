@@ -62,7 +62,7 @@ class FL_EXPORT Fl_Image {
   int ld() const {return ld_;}
   int count() const {return count_;}
   const char * const *data() const {return data_;}
-  
+
   Fl_Image(int W, int H, int D) {w_ = W; h_ = H; d_ = D; ld_ = 0; count_ = 0; data_ = 0;}
   virtual ~Fl_Image();
   virtual Fl_Image *copy(int W, int H);

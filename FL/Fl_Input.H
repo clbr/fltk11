@@ -40,7 +40,7 @@ public:
   Fl_Input(int,int,int,int,const char * = 0);
 };
 
-#endif 
+#endif
 
 //
 // End of "$Id: Fl_Input.H 5300 2006-08-14 07:06:45Z matt $".

@@ -58,12 +58,12 @@ inline void XDestroyRegion(Fl_Region r) {
 
 // This object contains all mac-specific stuff about a window:
 // WARNING: this object is highly subject to change!
-class Fl_X 
+class Fl_X
 {
 public:
   Window xid;              // Mac WindowPtr
   GWorldPtr other_xid;     // pointer for offscreen bitmaps (doublebuffer)
-  Fl_Window *w;            // FLTK window for 
+  Fl_Window *w;            // FLTK window for
   Fl_Region region;
   Fl_Region subRegion;     // region for this specific subwindow
   Fl_X *next;              // linked tree to support subwindows
@@ -91,7 +91,7 @@ extern void MacMapWindow(Fl_Window*,WindowPtr);
 extern void MacUnmapWindow(Fl_Window*,WindowPtr);
 extern int MacUnlinkWindow(Fl_X*,Fl_X*start=0L);
 
-inline Window fl_xid(const Fl_Window*w) 
+inline Window fl_xid(const Fl_Window*w)
 {
   return Fl_X::i(w)->xid;
 }

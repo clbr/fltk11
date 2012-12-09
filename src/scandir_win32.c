@@ -58,7 +58,7 @@ int fl_scandir(const char *dirname, struct dirent ***namelist,
   if ((len>1) && (d[-1]=='.') && (d[-2]=='\\')) { d[-1] = '*'; is_dir = 1; }
   if (!is_dir) { /* this file may still be a directory that we need to list */
     DWORD attr = GetFileAttributes(findIn);
-    if (attr&FILE_ATTRIBUTE_DIRECTORY) 
+    if (attr&FILE_ATTRIBUTE_DIRECTORY)
       strcpy(d, "\\*");
   }
   if ((h=FindFirstFile(findIn, &find))==INVALID_HANDLE_VALUE) {
@@ -95,7 +95,7 @@ int fl_scandir(const char *dirname, struct dirent ***namelist,
   ret = GetLastError();
   if (ret != ERROR_NO_MORE_FILES) {
     /* don't return an error code, because the dir list may still be valid
-       up to this point */ 
+       up to this point */
   }
   FindClose(h);
 

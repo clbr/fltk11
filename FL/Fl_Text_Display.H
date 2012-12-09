@@ -109,7 +109,7 @@ class FL_EXPORT Fl_Text_Display: public Fl_Group {
     int word_start(int pos) { return buffer()->word_start(pos); }
     int word_end(int pos) { return buffer()->word_end(pos); }
 
-    
+
     void highlight_data(Fl_Text_Buffer *styleBuffer,
                         const Style_Table_Entry *styleTable,
                         int nStyles, char unfinishedStyle,

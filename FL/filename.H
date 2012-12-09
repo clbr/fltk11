@@ -60,9 +60,9 @@ struct dirent {char d_name[1];};
 #  elif defined(__APPLE__) && defined(__PROJECTBUILDER__)
 
 /* Apple's ProjectBuilder has the nasty habit of including recursively
- * down the file tree. To avoid re-including <FL/dirent.h> we must 
- * directly include the systems math file. (Plus, I could not find a 
- * predefined macro for ProjectBuilder builds, so we have to define it 
+ * down the file tree. To avoid re-including <FL/dirent.h> we must
+ * directly include the systems math file. (Plus, I could not find a
+ * predefined macro for ProjectBuilder builds, so we have to define it
  * in the project)
  */
 #    include <sys/types.h>

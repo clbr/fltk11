@@ -341,7 +341,7 @@ void name_public_member_cb(Fl_Choice* i, void* v) {
       redraw_browser();
     }
   }
-}    
+}
 
 void name_public_cb(Fl_Choice* i, void* v) {
   if (v == LOAD) {
@@ -360,7 +360,7 @@ void name_public_cb(Fl_Choice* i, void* v) {
       redraw_browser();
     }
   }
-}    
+}
 
 static char* oldlabel;
 static unsigned oldlabellen;
@@ -410,7 +410,7 @@ void image_browse_cb(Fl_Button* b, void *v) {
   if (v == LOAD) {
     if (current_widget->is_widget() && !current_widget->is_window())
       b->activate();
-    else 
+    else
       b->deactivate();
   } else {
     int mod = 0;
@@ -450,9 +450,9 @@ void inactive_cb(Fl_Input* i, void *v) {
 
 void inactive_browse_cb(Fl_Button* b, void *v) {
   if (v == LOAD) {
-    if (current_widget->is_widget() && !current_widget->is_window()) 
+    if (current_widget->is_widget() && !current_widget->is_window())
       b->activate();
-    else 
+    else
       b->deactivate();
   } else {
     int mod = 0;
@@ -1463,8 +1463,8 @@ void set_max_size_cb(Fl_Button*, void* v) {
 
 void slider_size_cb(Fl_Value_Input* i, void* v) {
   if (v == LOAD) {
-    if (current_widget->is_window()) 
-      i->parent()->hide(); 
+    if (current_widget->is_window())
+      i->parent()->hide();
     else
       i->parent()->show();
     if (current_widget->is_valuator()<2) {i->deactivate(); return;}
@@ -1597,7 +1597,7 @@ void value_cb(Fl_Value_Input* i, void* v) {
     } else if (current_widget->is_spinner()) {
       i->activate();
       i->value(((Fl_Spinner*)(current_widget->o))->value());
-    } else 
+    } else
       i->deactivate();
   } else {
     int mod = 0;
@@ -1754,7 +1754,7 @@ void live_mode_cb(Fl_Button*o,void *) {
           Fl_Window_Type *w = (Fl_Window_Type*)current_widget;
           int mw = w->sr_min_w; if (mw>0) mw += 20;
           int mh = w->sr_min_h; if (mh>0) mh += 55;
-          int MW = w->sr_max_w; if (MW>0) MW += 20; 
+          int MW = w->sr_max_w; if (MW>0) MW += 20;
           int MH = w->sr_max_h; if (MH>2) MH += 55;
           if (mw || mh || MW || MH)
             live_window->size_range(mw, mh, MW, MH);
@@ -2259,8 +2259,8 @@ void Fl_Widget_Type::write_widget_code() {
     if (i & FL_ALIGN_INSIDE) write_c("|FL_ALIGN_INSIDE");
     write_c(");\n");
   }
-  // avoid the unsupported combination of flegs when user sets 
-  // "when" to "FL_WHEN_NEVER", but keeps the "no change" set. 
+  // avoid the unsupported combination of flegs when user sets
+  // "when" to "FL_WHEN_NEVER", but keeps the "no change" set.
   // FIXME: This could be reflected in the GUI by graying out the button.
   Fl_When ww = o->when();
   if (ww==FL_WHEN_NOT_CHANGED)
@@ -2431,7 +2431,7 @@ void Fl_Widget_Type::read_property(const char *c) {
   } else if (!strcmp(c,"deimage")) {
     inactive_name(read_word());
   } else if (!strcmp(c,"type")) {
-    if (is_spinner()) 
+    if (is_spinner())
       ((Fl_Spinner*)o)->type(item_number(subtypes(), read_word()));
     else
       o->type(item_number(subtypes(), read_word()));
@@ -2570,7 +2570,7 @@ int Fl_Widget_Type::read_fdesign(const char* propname, const char* value) {
 	Fl_Type *p;
 	for (p = parent; p && !p->is_window(); p = p->parent);
 	if (p && p->is_widget()) y = ((Fl_Widget_Type*)p)->o->h()-(y+h);
-      }	  
+      }
       x += pasteoffset;
       y += pasteoffset;
       o->resize(int(x),int(y),int(w),int(h));
@@ -2670,7 +2670,7 @@ void Fl_Widget_Type::leave_live_mode() {
  * copy all properties from the edit widget to the live widget
  */
 void Fl_Widget_Type::copy_properties() {
-  if (!live_widget) 
+  if (!live_widget)
     return;
 
   // copy all attributes common to all widget types
@@ -2716,7 +2716,7 @@ void Fl_Widget_Type::copy_properties() {
     d->step(s->step());
     d->value(s->value());
   }
- 
+
 /* TODO: implement this
   {Fl_Font ff; int fs; Fl_Color fc; if (textstuff(4,ff,fs,fc)) {
     Fl_Font f; int s; Fl_Color c; textstuff(0,f,s,c);
@@ -2725,11 +2725,11 @@ void Fl_Widget_Type::copy_properties() {
     if (c != fc) write_string("textcolor %d", c);
   }}*/
 
-  if (!o->visible()) 
+  if (!o->visible())
     w->hide();
-  if (!o->active()) 
+  if (!o->active())
     w->deactivate();
-  if (resizable() && w->parent()) 
+  if (resizable() && w->parent())
     w->parent()->resizable(o);
 }
 

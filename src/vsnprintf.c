@@ -187,7 +187,7 @@ return vsnprintf(buffer, bufsize, format, ap);
 	    }
 	  }
 	  break;
-	    
+
 	case 'p' : /* Pointer value */
 	  if ((width + 2) > sizeof(temp)) break;
 

@@ -506,7 +506,7 @@ Fl_Double_Window* make_print_panel() {
   } // Fl_Double_Window* print_properties_panel
   return print_properties_panel;
 }
-void print_cb(Fl_Return_Button *, void *); 
+void print_cb(Fl_Return_Button *, void *);
 
 void print_load() {
   FILE *lpstat;

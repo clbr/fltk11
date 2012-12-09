@@ -36,7 +36,7 @@ public:
     : Fl_Input(X, Y, W, H, l) {type(FL_NORMAL_OUTPUT);}
 };
 
-#endif 
+#endif
 
 //
 // End of "$Id: Fl_Output.H 4288 2005-04-16 00:13:17Z mike $".

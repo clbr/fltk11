@@ -39,7 +39,7 @@
 /**
  * Preferences are a data tree containing a root, branches and leafs
  */
-class FL_EXPORT Fl_Preferences 
+class FL_EXPORT Fl_Preferences
 {
 
 public:
@@ -69,7 +69,7 @@ public:
   char set( const char *entry, double value );
   char set( const char *entry, double value, int precision );
   char set( const char *entry, const char *value );
-  char set( const char *entry, const void *value, int size ); 
+  char set( const char *entry, const void *value, int size );
 
   char get( const char *entry, int &value,    int defaultValue );
   char get( const char *entry, float &value,  float defaultValue );
@@ -104,13 +104,13 @@ public:
 private:
 
   // make the following functions unavailable
-  Fl_Preferences(); 
-  Fl_Preferences(const Fl_Preferences&); 
+  Fl_Preferences();
+  Fl_Preferences(const Fl_Preferences&);
   Fl_Preferences &operator=(const Fl_Preferences&);
 
   static char nameBuffer[128];
 
-  class FL_EXPORT Node // a node contains a list to all its entries 
+  class FL_EXPORT Node // a node contains a list to all its entries
   {          // and all means to manage the tree structure
     Node *child_, *next_, *parent_;
     char *path_;
@@ -160,7 +160,7 @@ private:
 
   Node *node;
   RootNode *rootNode;
-  
+
 };
 
 

@@ -301,7 +301,7 @@ static Fl_Type* write_code(Fl_Type* p) {
       }
     }
 
-    // write all code that come after the children 
+    // write all code that come after the children
     p->write_code2();
 
     for (q = p->next; q && q->level > p->level;) {
@@ -318,7 +318,7 @@ static Fl_Type* write_code(Fl_Type* p) {
     current_widget_class = 0L;
   } else {
     for (q = p->next; q && q->level > p->level;) q = write_code(q);
-    // write all code that come after the children 
+    // write all code that come after the children
     p->write_code2();
   }
   if (write_sourceview) {
@@ -334,7 +334,7 @@ extern Fl_Class_Type *current_class;
 
 int write_code(const char *s, const char *t) {
   const char *filemode = "w";
-  if (write_sourceview) 
+  if (write_sourceview)
     filemode = "wb";
   write_number++;
   delete id_root; id_root = 0;
@@ -353,7 +353,7 @@ int write_code(const char *s, const char *t) {
     if (!f) {fclose(code_file); return 0;}
     header_file = f;
   }
-  // if the first entry in the Type tree is a comment, then it is probably 
+  // if the first entry in the Type tree is a comment, then it is probably
   // a copyright notice. We print that before anything else in the file!
   Fl_Type* first_type = Fl_Type::first;
   if (first_type && first_type->is_comment()) {
@@ -383,7 +383,7 @@ int write_code(const char *s, const char *t) {
   *b = 0;
   fprintf(header_file, "#ifndef %s\n", define_name);
   fprintf(header_file, "#define %s\n", define_name);
-  }  
+  }
 
   write_declare("#include <FL/Fl.H>");
   if (i18n_type && i18n_include[0]) {

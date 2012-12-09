@@ -61,7 +61,7 @@ extern Fl_Choice *print_page_size;
 extern Fl_Button *print_output_mode[4];
 Fl_Double_Window* make_print_panel();
 extern Fl_Menu_Item menu_print_page_size[];
-extern void print_cb(Fl_Return_Button *, void *); 
+extern void print_cb(Fl_Return_Button *, void *);
 void print_load();
 void print_update_status();
 #endif
