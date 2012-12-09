@@ -1041,6 +1041,16 @@ if test -n "$GCC"; then
 	AC_MSG_RESULT(no))
     CFLAGS="$OLDCFLAGS"
 
+    # See if ld supports -Bsymbolic-functions...
+    AC_MSG_CHECKING(if ld supports -Bsymbolic-functions)
+    OLDLDFLAGS="$LDFLAGS"
+    LDFLAGS="$LDFLAGS -Wl,-Bsymbolic-functions"
+    AC_TRY_LINK(,,
+	OLDLDFLAGS="$LDFLAGS"
+	AC_MSG_RESULT(yes),
+	AC_MSG_RESULT(no))
+    LDFLAGS="$OLDLDFLAGS"
+
     # See if GCC supports -fno-strict-aliasing...
     AC_MSG_CHECKING(if GCC supports -fno-strict-aliasing)
     OLDCFLAGS="$CFLAGS"
