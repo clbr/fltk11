@@ -92,8 +92,7 @@ static unsigned fl_cmap[256] = {
 #include "fl_cmap.h" // this is a file produced by "cmap.cxx":
 };
 
-Fl_XColor fl_xmap[1][256];
-#    define fl_overlay 0
+static Fl_XColor fl_xmap[256];
 
 ////////////////////////////////////////////////////////////////
 // Get an rgb color.  This is easy for a truecolor visual.  For
@@ -146,7 +145,7 @@ ulong fl_xpixel(Fl_Color i) {
     return fl_xpixel((i >> 24) & 255, (i >> 16) & 255, (i >> 8) & 255);
   }
 
-  Fl_XColor &xmap = fl_xmap[fl_overlay][i];
+  Fl_XColor &xmap = fl_xmap[i];
   if (xmap.mapped) return xmap.pixel;
 
   if (!beenhere) figure_out_visual();
@@ -180,8 +179,8 @@ void fl_color(Fl_Color i) {
 
 void Fl::free_color(Fl_Color i, int overlay) {
   if (overlay) return;
-  if (fl_xmap[overlay][i].mapped) {
-    fl_xmap[overlay][i].mapped = 0;
+  if (fl_xmap[i].mapped) {
+    fl_xmap[i].mapped = 0;
   }
 }
 

@@ -35,7 +35,6 @@ struct Fl_XColor {
   unsigned char mapped;	// true when XAllocColor done
   unsigned long pixel;	// the X pixel to use
 };
-extern Fl_XColor fl_xmap[/*overlay*/][256];
 
 // mask & shifts to produce xcolor for truecolor visuals:
 extern unsigned char fl_redmask, fl_greenmask, fl_bluemask;

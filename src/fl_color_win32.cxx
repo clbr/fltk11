@@ -44,7 +44,7 @@ static unsigned fl_cmap[256] = {
 };
 
 // Translations to win32 data structures:
-Fl_XMap fl_xmap[256];
+static Fl_XMap fl_xmap[256];
 
 Fl_XMap* fl_current_xmap;
 

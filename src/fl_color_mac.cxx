@@ -43,10 +43,6 @@ static unsigned fl_cmap[256] = {
 };
 
 // Translations to mac data structures:
-Fl_XMap fl_xmap[256];
-
-Fl_XMap* fl_current_xmap;
-
 Fl_Color fl_color_;
 
 void fl_color(Fl_Color i) {
