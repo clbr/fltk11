@@ -653,9 +653,6 @@ static int ms2fltk(int vk, int extended) {
   return extended ? extendedlut[vk] : vklut[vk];
 }
 
-#if USE_COLORMAP
-extern HPALETTE fl_select_palette(void); // in fl_color_win32.cxx
-#endif
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -987,22 +984,6 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     }
     break;
 
-#if USE_COLORMAP
-  case WM_QUERYNEWPALETTE :
-    fl_GetDC(hWnd);
-    if (fl_select_palette()) InvalidateRect(hWnd, NULL, FALSE);
-    break;
-
-  case WM_PALETTECHANGED:
-    fl_GetDC(hWnd);
-    if ((HWND)wParam != hWnd && fl_select_palette()) UpdateColors(fl_gc);
-    break;
-
-  case WM_CREATE :
-    fl_GetDC(hWnd);
-    fl_select_palette();
-    break;
-#endif
 
   case WM_DESTROYCLIPBOARD:
     fl_i_own_selection[1] = 0;
@@ -1614,14 +1595,6 @@ HDC fl_GetDC(HWND w) {
 void Fl_Window::make_current() {
   fl_GetDC(fl_xid(this));
 
-#if USE_COLORMAP
-  // Windows maintains a hardware and software color palette; the
-  // SelectPalette() call updates the current soft->hard mapping
-  // for all drawing calls, so we must select it here before any
-  // code does any drawing...
-
-  fl_select_palette();
-#endif // USE_COLORMAP
 
   current_ = this;
   fl_clip_region(0);

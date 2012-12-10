@@ -317,9 +317,6 @@ GLContext fl_create_gl_context(Fl_Window* window, const Fl_Gl_Choice* g, int lay
     hdc = i->private_dc = GetDCEx(i->xid, 0, DCX_CACHE);
     fl_save_dc(i->xid, hdc);
     SetPixelFormat(hdc, g->pixelformat, (PIXELFORMATDESCRIPTOR*)(&g->pfd));
-#    if USE_COLORMAP
-    if (fl_palette) SelectPalette(hdc, fl_palette, FALSE);
-#    endif
   }
   GLContext context =
     layer ? wglCreateLayerContext(hdc, layer) : wglCreateContext(hdc);

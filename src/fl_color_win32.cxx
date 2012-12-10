@@ -102,16 +102,8 @@ void fl_color(Fl_Color i) {
     fl_color_ = i;
     Fl_XMap &xmap = fl_xmap[i];
     if (!xmap.pen) {
-#if USE_COLORMAP
-      if (fl_palette) {
-	set_xmap(xmap, PALETTEINDEX(i));
-      } else {
-#endif
 	unsigned c = fl_cmap[i];
 	set_xmap(xmap, RGB(uchar(c>>24), uchar(c>>16), uchar(c>>8)));
-#if USE_COLORMAP
-      }
-#endif
     }
     fl_current_xmap = &xmap;
     SelectObject(fl_gc, (HGDIOBJ)(xmap.pen));
@@ -203,51 +195,6 @@ void Fl::set_color(Fl_Color i, unsigned c) {
   }
 }
 
-#if USE_COLORMAP
-
-// 'fl_select_palette()' - Make a color palette for 8-bit displays if necessary
-// Thanks to Michael Sweet @ Easy Software Products for this
-
-HPALETTE
-fl_select_palette(void)
-{
-  static char beenhere;
-  if (!beenhere) {
-    beenhere = 1;
-
-    //if (GetDeviceCaps(fl_gc, BITSPIXEL) > 8) return NULL;
-    int nColors = GetDeviceCaps(fl_gc, SIZEPALETTE);
-    if (nColors <= 0 || nColors > 256) return NULL;
-    // this will try to work on < 256 color screens, but will probably
-    // come out quite badly.
-
-    // I lamely try to get this variable-sized object allocated on stack:
-    ulong foo[(sizeof(LOGPALETTE)+256*sizeof(PALETTEENTRY))/sizeof(ulong)+1];
-    LOGPALETTE *pPal = (LOGPALETTE*)foo;
-
-    pPal->palVersion    = 0x300;
-    pPal->palNumEntries = nColors;
-
-    // Build 256 colors from the standard FLTK colormap...
-
-    for (int i = 0; i < nColors; i ++) {
-      pPal->palPalEntry[i].peRed   = (fl_cmap[i] >> 24) & 255;
-      pPal->palPalEntry[i].peGreen = (fl_cmap[i] >> 16) & 255;
-      pPal->palPalEntry[i].peBlue  = (fl_cmap[i] >>  8) & 255;
-      pPal->palPalEntry[i].peFlags = 0;
-    };
-
-    // Create the palette:
-    fl_palette = CreatePalette(pPal);
-  }
-  if (fl_palette) {
-    SelectPalette(fl_gc, fl_palette, FALSE);
-    RealizePalette(fl_gc);
-  }
-  return fl_palette;
-}
-
-#endif
 
 //
 // End of "$Id: fl_color_win32.cxx 5190 2006-06-09 16:16:34Z mike $".

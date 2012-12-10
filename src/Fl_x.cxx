@@ -358,9 +358,7 @@ void fl_open_display(Display* d) {
   fl_visual = XGetVisualInfo(d, VisualIDMask, &templt, &num);
   fl_colormap = DefaultColormap(d, fl_screen);
 
-#if !USE_COLORMAP
   Fl::visual(FL_RGB);
-#endif
 }
 
 void fl_close_display() {

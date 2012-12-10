@@ -52,28 +52,6 @@ void Fl::own_colormap() {}
 
 void Fl::own_colormap() {
   fl_open_display();
-#if USE_COLORMAP
-  switch (fl_visual->c_class) {
-  case GrayScale :
-  case PseudoColor :
-  case DirectColor :
-    break;
-  default:
-    return; // don't do anything for non-colormapped visuals
-  }
-  int i;
-  XColor colors[16];
-  // Get the first 16 colors from the default colormap...
-  for (i = 0; i < 16; i ++) colors[i].pixel = i;
-  XQueryColors(fl_display, fl_colormap, colors, 16);
-  // Create a new colormap...
-  fl_colormap = XCreateColormap(fl_display,
-				RootWindow(fl_display,fl_screen),
-				fl_visual->visual, AllocNone);
-  // Copy those first 16 colors to our own colormap:
-  for (i = 0; i < 16; i ++)
-    XAllocColor(fl_display, fl_colormap, colors + i);
-#endif
 }
 
 #endif

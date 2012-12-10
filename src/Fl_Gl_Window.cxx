@@ -170,13 +170,6 @@ void Fl_Gl_Window::make_current() {
 //  printf("make_current: xywh=[%d %d %d %d]\n", xywh[0], xywh[1], xywh[2], xywh[3]);
 #endif // __APPLE__
 
-#if defined(WIN32) && USE_COLORMAP
-  if (fl_palette) {
-    fl_GetDC(fl_xid(this));
-    SelectPalette(fl_gc, fl_palette, FALSE);
-    RealizePalette(fl_gc);
-  }
-#endif // USE_COLORMAP
   if (mode_ & FL_FAKE_SINGLE) {
     glDrawBuffer(GL_FRONT);
     glReadBuffer(GL_FRONT);

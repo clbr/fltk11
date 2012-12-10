@@ -76,15 +76,6 @@
 #undef HAVE_GLXGETPROCADDRESSARB
 
 /*
- * USE_COLORMAP:
- *
- * Setting this to zero will save a good deal of code (especially for
- * fl_draw_image), but FLTK will only work on TrueColor visuals.
- */
-
-#define USE_COLORMAP 0
-
-/*
  * HAVE_XINERAMA
  *
  * Do we have the Xinerama library to support multi-head displays?

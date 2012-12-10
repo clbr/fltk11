@@ -56,12 +56,7 @@ static uchar beenhere;
 static void figure_out_visual() {
   beenhere = 1;
   if (!fl_visual->red_mask || !fl_visual->green_mask || !fl_visual->blue_mask){
-#  if USE_COLORMAP
-    fl_redmask = 0;
-    return;
-#  else
     Fl::fatal("Requires true color visual");
-#  endif
   }
 
   // get the bit masks into a more useful form:
@@ -117,19 +112,6 @@ Fl_XColor fl_xmap[1][256];
 
 ulong fl_xpixel(uchar r,uchar g,uchar b) {
   if (!beenhere) figure_out_visual();
-#  if USE_COLORMAP
-  if (!fl_redmask) {
-    // find closest entry in the colormap:
-    Fl_Color i =
-      fl_color_cube(r*FL_NUM_RED/256,g*FL_NUM_GREEN/256,b*FL_NUM_BLUE/256);
-    Fl_XColor &xmap = fl_xmap[fl_overlay][i];
-    if (xmap.mapped) return xmap.pixel;
-    // if not black or white, change the entry to be an exact match:
-    if (i != FL_COLOR_CUBE && i != 0xFF)
-      fl_cmap[i] = (r<<24)|(g<<16)|(b<<8);
-    return fl_xpixel(i); // allocate an X color
-  }
-#  endif
   return
     (((r&fl_redmask) << fl_redshift)+
      ((g&fl_greenmask)<<fl_greenshift)+
@@ -180,13 +162,6 @@ ulong fl_xpixel(Fl_Color i) {
   uchar r,g,b;
   {unsigned c = fl_cmap[i]; r=uchar(c>>24); g=uchar(c>>16); b=uchar(c>>8);}
 
-#  if USE_COLORMAP
-  Colormap colormap = fl_colormap;
-#    if HAVE_OVERLAY
-  if (fl_overlay) colormap = fl_overlay_colormap; else
-#    endif
-  if (fl_redmask) {
-#  endif
     // return color for a truecolor visual:
     xmap.mapped = 2; // 2 prevents XFreeColor from being called
     xmap.r = realcolor(r, fl_redmask);
@@ -197,82 +172,6 @@ ulong fl_xpixel(Fl_Color i) {
        ((g&fl_greenmask)<<fl_greenshift)+
        ((b&fl_bluemask)<< fl_blueshift)
        ) >> fl_extrashift;
-#  if USE_COLORMAP
-  }
-#    if HAVE_OVERLAY
-  static XColor* ac[2];
-  XColor*& allcolors = ac[fl_overlay];
-  static int nc[2];
-  int& numcolors = nc[fl_overlay];
-#    else
-  static XColor *allcolors;
-  static int numcolors;
-#    endif
-
-  // I don't try to allocate colors with XAllocColor once it fails
-  // with any color.  It is possible that it will work, since a color
-  // may have been freed, but some servers are extremely slow and this
-  // avoids one round trip:
-  if (!numcolors) { // don't try after a failure
-    XColor xcol;
-    xcol.red = r<<8; xcol.green = g<<8; xcol.blue = b<<8;
-    if (XAllocColor(fl_display, colormap, &xcol)) {
-      xmap.mapped = 1;
-      xmap.r = xcol.red>>8;
-      xmap.g = xcol.green>>8;
-      xmap.b = xcol.blue>>8;
-      return xmap.pixel = xcol.pixel;
-    }
-
-    // I only read the colormap once.  Again this is due to the slowness
-    // of round-trips to the X server, even though other programs may alter
-    // the colormap after this and make decisions here wrong.
-#    if HAVE_OVERLAY
-    if (fl_overlay) numcolors = fl_overlay_visual->colormap_size; else
-#    endif
-      numcolors = fl_visual->colormap_size;
-    if (!allcolors) allcolors = new XColor[numcolors];
-    for (int p = numcolors; p--;) allcolors[p].pixel = p;
-    XQueryColors(fl_display, colormap, allcolors, numcolors);
-  }
-
-  // find least-squares match:
-  int mindist = 0x7FFFFFFF;
-  unsigned int bestmatch = 0;
-  for (unsigned int n = numcolors; n--;) {
-#    if HAVE_OVERLAY
-    if (fl_overlay && n == fl_transparent_pixel) continue;
-#    endif
-    XColor &a = allcolors[n];
-    int d, t;
-    t = int(r)-int(a.red>>8); d = t*t;
-    t = int(g)-int(a.green>>8); d += t*t;
-    t = int(b)-int(a.blue>>8); d += t*t;
-    if (d <= mindist) {bestmatch = n; mindist = d;}
-  }
-  XColor &p = allcolors[bestmatch];
-
-  // It appears to "work" to not call this XAllocColor, which will
-  // avoid another round-trip to the server.  But then X does not
-  // know that this program "owns" this value, and can (and will)
-  // change it when the program that did allocate it exits:
-  if (XAllocColor(fl_display, colormap, &p)) {
-    xmap.mapped = 1;
-    xmap.pixel = p.pixel;
-  } else {
-    // However, if that XAllocColor fails, I have to give up and
-    // assumme the pixel is ok for the duration of the program.  This
-    // is due to bugs (?) in the Solaris X and some X terminals
-    // where XAllocColor *always* fails when the colormap is full,
-    // even if we ask for a color already in it...
-    xmap.mapped = 2; // 2 prevents XFreeColor from being called
-    xmap.pixel = bestmatch;
-  }
-  xmap.r = p.red>>8;
-  xmap.g = p.green>>8;
-  xmap.b = p.blue>>8;
-  return xmap.pixel;
-#  endif
 }
 
 Fl_Color fl_color_;
@@ -293,15 +192,6 @@ void Fl::free_color(Fl_Color i, int overlay) {
   if (overlay) return;
 #  endif
   if (fl_xmap[overlay][i].mapped) {
-#  if USE_COLORMAP
-#    if HAVE_OVERLAY
-    Colormap colormap = overlay ? fl_overlay_colormap : fl_colormap;
-#    else
-    Colormap colormap = fl_colormap;
-#    endif
-    if (fl_xmap[overlay][i].mapped == 1)
-      XFreeColors(fl_display, colormap, &(fl_xmap[overlay][i].pixel), 1, 0);
-#  endif
     fl_xmap[overlay][i].mapped = 0;
   }
 }
