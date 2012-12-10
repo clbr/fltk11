@@ -39,6 +39,7 @@
 #  include <FL/x.H>
 #  include <FL/Fl_Window.H>
 #  include <FL/Fl_Tooltip.H>
+#  include <FL/filename.H>
 #  include <stdio.h>
 #  include <stdlib.h>
 #  include "flstring.h"
