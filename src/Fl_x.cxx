@@ -1078,7 +1078,7 @@ Fl_X* Fl_X::set_xid(Fl_Window* win, Window winxid) {
 
 char fl_show_iconic;	// hack for iconize()
 int fl_background_pixel = -1; // hack to speed up bg box drawing
-int fl_disable_transient_for; // secret method of removing TRANSIENT_FOR
+static int fl_disable_transient_for; // secret method of removing TRANSIENT_FOR
 
 static const int childEventMask = ExposureMask;
 

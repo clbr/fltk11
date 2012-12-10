@@ -93,7 +93,7 @@ WindowRef fl_capture = 0;            // we need this to compensate for a missing
 ulong fl_event_time;                 // the last timestamp from an x event
 char fl_key_vector[32];              // used by Fl::get_key()
 bool fl_show_iconic;                 // true if called from iconize() - shows the next created window in collapsed state
-int fl_disable_transient_for;        // secret method of removing TRANSIENT_FOR
+static int fl_disable_transient_for;        // secret method of removing TRANSIENT_FOR
 const Fl_Window* fl_modal_for;       // parent of modal() window
 Fl_Region fl_window_region = 0;
 Window fl_window;
