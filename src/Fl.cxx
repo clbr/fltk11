@@ -79,7 +79,7 @@ int		Fl::visible_focus_ = 1,
 		Fl::dnd_text_ops_ = 1;
 
 
-Fl_Window *fl_xfocus;	// which window X thinks has focus
+static Fl_Window *fl_xfocus;	// which window X thinks has focus
 Fl_Window *fl_xmousewin;// which window X thinks has FL_ENTER
 Fl_Window *Fl::grab_;	// most recent Fl::grab()
 Fl_Window *Fl::modal_;	// topmost modal() window
