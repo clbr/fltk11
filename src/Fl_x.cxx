@@ -455,11 +455,11 @@ void Fl::paste(Fl_Widget &receiver, int clipboard) {
 		    fl_xid(Fl::first_window()), fl_event_time);
 }
 
-Window fl_dnd_source_window;
-Atom *fl_dnd_source_types; // null-terminated list of data types being supplied
-Atom fl_dnd_type;
-Atom fl_dnd_source_action;
-Atom fl_dnd_action;
+static Window fl_dnd_source_window;
+static Atom *fl_dnd_source_types; // null-terminated list of data types being supplied
+static Atom fl_dnd_type;
+static Atom fl_dnd_source_action;
+static Atom fl_dnd_action;
 
 void fl_sendClientMessage(Window window, Atom message,
                                  unsigned long d0,
