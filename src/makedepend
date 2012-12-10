@@ -397,7 +397,6 @@ fl_oval_box.o: fl_oval_box.cxx ../FL/Fl.H ../FL/Enumerations.H \
 fl_overlay.o: fl_overlay.cxx ../FL/x.H ../FL/Enumerations.H \
   ../FL/Fl_Export.H ../FL/Fl_Window.H ../FL/Fl_Group.H ../FL/Fl_Widget.H \
   ../FL/fl_draw.H
-fl_overlay_visual.o: fl_overlay_visual.cxx ../config.h
 fl_plastic.o: fl_plastic.cxx ../FL/Fl.H ../FL/Enumerations.H \
   ../FL/Fl_Export.H ../FL/fl_draw.H flstring.h ../FL/Fl_Export.H \
   ../config.h

@@ -194,13 +194,7 @@ void Fl_Gl_Window::ortho() {
 
 void Fl_Gl_Window::swap_buffers() {
 #ifdef WIN32
-#  if HAVE_GL_OVERLAY
-  // Do not swap the overlay, to match GLX:
-  BOOL ret = wglSwapLayerBuffers(Fl_X::i(this)->private_dc, WGL_SWAP_MAIN_PLANE);
-  DWORD err = GetLastError();;
-#  else
   SwapBuffers(Fl_X::i(this)->private_dc);
-#  endif
 #elif defined(__APPLE_QD__)
   aglSwapBuffers((AGLContext)context_);
 #elif defined(__APPLE_QUARTZ__)
@@ -211,16 +205,9 @@ void Fl_Gl_Window::swap_buffers() {
 #endif
 }
 
-#if HAVE_GL_OVERLAY && defined(WIN32)
-uchar fl_overlay; // changes how fl_color() works
-int fl_overlay_depth = 0;
-#endif
 
 void Fl_Gl_Window::flush() {
   uchar save_valid = valid_f_ & 1;
-#if HAVE_GL_OVERLAY && defined(WIN32)
-  uchar save_valid_f = valid_f_;
-#endif
 
 #ifdef __APPLE_QD__
   //: clear previous clipping in this shared port
@@ -241,35 +228,6 @@ void Fl_Gl_Window::flush() {
   SetPort( old );
 #endif
 
-#if HAVE_GL_OVERLAY && defined(WIN32)
-
-  bool fixcursor = false; // for fixing the SGI 320 bug
-
-  // Draw into hardware overlay planes if they are damaged:
-  if (overlay && overlay != this
-      && (damage()&(FL_DAMAGE_OVERLAY|FL_DAMAGE_EXPOSE) || !save_valid)) {
-    // SGI 320 messes up overlay with user-defined cursors:
-    if (Fl_X::i(this)->cursor && Fl_X::i(this)->cursor != fl_default_cursor) {
-      fixcursor = true; // make it restore cursor later
-      SetCursor(0);
-    }
-    fl_set_gl_context(this, (GLContext)overlay);
-    if (fl_overlay_depth)
-      wglRealizeLayerPalette(Fl_X::i(this)->private_dc, 1, TRUE);
-    glDisable(GL_SCISSOR_TEST);
-    glClear(GL_COLOR_BUFFER_BIT);
-    fl_overlay = 1;
-    draw_overlay();
-    fl_overlay = 0;
-    valid_f_ = save_valid_f;
-    wglSwapLayerBuffers(Fl_X::i(this)->private_dc, WGL_SWAP_OVERLAY1);
-    // if only the overlay was damaged we are done, leave main layer alone:
-    if (damage() == FL_DAMAGE_OVERLAY) {
-      if (fixcursor) SetCursor(Fl_X::i(this)->cursor);
-      return;
-    }
-  }
-#endif
 
   make_current();
 
@@ -358,9 +316,6 @@ void Fl_Gl_Window::flush() {
 
   }
 
-#if HAVE_GL_OVERLAY && defined(WIN32)
-  if (fixcursor) SetCursor(Fl_X::i(this)->cursor);
-#endif
   valid(1);
   context_valid(1);
 }
@@ -391,12 +346,6 @@ void Fl_Gl_Window::context(void* v, int destroy_flag) {
 
 void Fl_Gl_Window::hide() {
   context(0);
-#if HAVE_GL_OVERLAY && defined(WIN32)
-  if (overlay && overlay != this) {
-    fl_delete_gl_context((GLContext)overlay);
-    overlay = 0;
-  }
-#endif
   Fl_Window::hide();
 }
 

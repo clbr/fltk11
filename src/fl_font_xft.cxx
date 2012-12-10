@@ -371,13 +371,6 @@ XFontStruct* fl_xxfont() {
 }
 #endif // HAVE_GL
 
-#if USE_OVERLAY
-// Currently Xft does not work with colormapped visuals, so this probably
-// does not work unless you have a true-color overlay.
-extern bool fl_overlay;
-extern Colormap fl_overlay_colormap;
-extern XVisualInfo* fl_overlay_visual;
-#endif
 
 // For some reason Xft produces errors if you destroy a window whose id
 // still exists in an XftDraw structure. It would be nice if this is not
@@ -385,34 +378,16 @@ extern XVisualInfo* fl_overlay_visual;
 
 static XftDraw* draw;
 static Window draw_window;
-#if USE_OVERLAY
-static XftDraw* draw_overlay;
-static Window draw_overlay_window;
-#endif
 
 void fl_destroy_xft_draw(Window id) {
   if (id == draw_window)
     XftDrawChange(draw, draw_window = fl_message_window);
-#if USE_OVERLAY
-  if (id == draw_overlay_window)
-    XftDrawChange(draw_overlay, draw_overlay_window = fl_message_window);
-#endif
 }
 
 void fl_draw(const char *str, int n, int x, int y) {
   if ( !current_font ) {
     fl_font(FL_HELVETICA, 14);
   }
-#if USE_OVERLAY
-  XftDraw*& draw = fl_overlay ? draw_overlay : ::draw;
-  if (fl_overlay) {
-    if (!draw)
-      draw = XftDrawCreate(fl_display, draw_overlay_window = fl_window,
-			   fl_overlay_visual->visual, fl_overlay_colormap);
-    else //if (draw_overlay_window != fl_window)
-      XftDrawChange(draw, draw_overlay_window = fl_window);
-  } else
-#endif
   if (!draw)
     draw = XftDrawCreate(fl_display, draw_window = fl_window,
 			 fl_visual->visual, fl_colormap);

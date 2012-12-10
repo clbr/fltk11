@@ -890,23 +890,6 @@ case $uname in
 	        [#include <X11/Xlib.h>])
 	fi
 
-	dnl Check for overlay visuals...
-	AC_PATH_PROG(XPROP, xprop)
-	AC_CACHE_CHECK(for X overlay visuals, ac_cv_have_overlay,
-	    if test "x$XPROP" != x; then
-		if $XPROP -root 2>/dev/null | grep -c "SERVER_OVERLAY_VISUALS" >/dev/null; then
-        	    ac_cv_have_overlay=yes
-		else
-        	    ac_cv_have_overlay=no
-		fi
-	    else
-        	ac_cv_have_overlay=no
-	    fi)
-
-        if test x$ac_cv_have_overlay = xyes; then
-	    AC_DEFINE(HAVE_OVERLAY)
-	fi
-
 	# Make symlinks since UNIX/Linux is case sensitive.
 	if test "x$with_links" = xno; then
 		HLINKS="#"

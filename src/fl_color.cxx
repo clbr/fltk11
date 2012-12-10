@@ -92,16 +92,8 @@ static unsigned fl_cmap[256] = {
 #include "fl_cmap.h" // this is a file produced by "cmap.cxx":
 };
 
-#  if HAVE_OVERLAY
-Fl_XColor fl_xmap[2][256];
-uchar fl_overlay;
-Colormap fl_overlay_colormap;
-XVisualInfo* fl_overlay_visual;
-ulong fl_transparent_pixel;
-#  else
 Fl_XColor fl_xmap[1][256];
 #    define fl_overlay 0
-#  endif
 
 ////////////////////////////////////////////////////////////////
 // Get an rgb color.  This is easy for a truecolor visual.  For
@@ -187,10 +179,7 @@ void fl_color(Fl_Color i) {
 }
 
 void Fl::free_color(Fl_Color i, int overlay) {
-#  if HAVE_OVERLAY
-#  else
   if (overlay) return;
-#  endif
   if (fl_xmap[overlay][i].mapped) {
     fl_xmap[overlay][i].mapped = 0;
   }
@@ -199,9 +188,6 @@ void Fl::free_color(Fl_Color i, int overlay) {
 void Fl::set_color(Fl_Color i, unsigned c) {
   if (fl_cmap[i] != c) {
     free_color(i,0);
-#  if HAVE_OVERLAY
-    free_color(i,1);
-#  endif
     fl_cmap[i] = c;
   }
 }

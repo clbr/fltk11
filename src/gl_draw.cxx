@@ -179,31 +179,8 @@ void gl_rect(int x, int y, int w, int h) {
   glEnd();
 }
 
-#if HAVE_GL_OVERLAY
-extern uchar fl_overlay;
-extern int fl_overlay_depth;
-#endif
 
 void gl_color(Fl_Color i) {
-#if HAVE_GL_OVERLAY
-#ifdef WIN32
-  if (fl_overlay && fl_overlay_depth) {
-    if (fl_overlay_depth < 8) {
-      // only black & white produce the expected colors.  This could
-      // be improved by fixing the colormap set in Fl_Gl_Overlay.cxx
-      int size = 1<<fl_overlay_depth;
-      if (!i) glIndexi(size-2);
-      else if (i >= size-2) glIndexi(size-1);
-      else glIndexi(i);
-    } else {
-      glIndexi(i ? i : FL_GRAY_RAMP);
-    }
-    return;
-  }
-#else
-  if (fl_overlay) {glIndexi(int(fl_xpixel(i))); return;}
-#endif
-#endif
   uchar red, green, blue;
   Fl::get_color(i, red, green, blue);
   glColor3ub(red, green, blue);
