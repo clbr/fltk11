@@ -8,3 +8,5 @@ Makefile
 fltk-config
 makeinclude
 *.so*
+fluid/fluid
+fluid/fluid-shared
