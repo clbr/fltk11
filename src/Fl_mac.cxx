@@ -2267,7 +2267,7 @@ void Fl_X::q_end_image() {
 Fl_Widget *fl_selection_requestor = 0;
 char *fl_selection_buffer[2];
 int fl_selection_length[2];
-int fl_selection_buffer_length[2];
+static int fl_selection_buffer_length[2];
 static ScrapRef myScrap = 0;
 
 /**

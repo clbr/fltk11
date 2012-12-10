@@ -404,7 +404,7 @@ void Fl::get_mouse(int &x, int &y) {
 
 char *fl_selection_buffer[2];
 int fl_selection_length[2];
-int fl_selection_buffer_length[2];
+static int fl_selection_buffer_length[2];
 char fl_i_own_selection[2];
 
 // Convert \n -> \r\n
